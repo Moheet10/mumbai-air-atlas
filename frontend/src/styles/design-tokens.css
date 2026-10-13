@@ -1,0 +1,133 @@
+:root {
+  color-scheme: light;
+  
+  /* Paper and Ink Palette */
+  --paper:   #F4EFE6;  /* page background */
+  --paper-2: #EBE4D6;  /* panels, subtle fills */
+  --ink:     #1B1A17;  /* primary text, chart lines */
+  --ink-2:   #6B665C;  /* secondary text, axis labels */
+  --rule:    #D9D2C3;  /* hairlines, gridlines */
+
+  /* CPCB AQI categories — the ONLY accent colors in the app */
+  --aqi-good:         #4C8C6B;  /*   0–50  */
+  --aqi-satisfactory: #A3B56A;  /*  51–100 */
+  --aqi-moderate:    #E0B341;  /* 101–200 */
+  --aqi-poor:        #D9772B;  /* 201–300 */
+  --aqi-very-poor:   #B53A2D;  /* 301–400 */
+  --aqi-severe:      #6E1F2B;  /* 401–500 */
+
+  /* Typography */
+  --font-editorial: 'Newsreader', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Spacing Scale (8px base) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --space-5: 64px;
+  --space-6: 96px;
+
+  /* Layout */
+  --max-width: 1200px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-editorial);
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Monospace data elements */
+.font-mono,
+code,
+pre,
+.data-num,
+.timestamp,
+.coordinate,
+.station-id,
+.axis-label {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-family: var(--font-editorial);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+/* Hairline dividers */
+hr, .rule-divider {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+/* Links & interactive triggers adhering to design rule:
+   "Interactive elements: ink text with an underline. No filled colored buttons." */
+button.editorial-btn,
+a.editorial-link {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 2px 0;
+  transition: opacity 150ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+button.editorial-btn:hover,
+a.editorial-link:hover {
+  opacity: 0.7;
+}
+
+button.editorial-btn:focus-visible,
+a.editorial-link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Container */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+.station-detail-col {
+  border-left: 1px solid var(--rule);
+  padding-left: 32px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-2);
+  }
+
+  .station-detail-col {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+  }
+}
