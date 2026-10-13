@@ -160,8 +160,33 @@ Visit `http://localhost:5173` to explore the dashboard.
 
 ---
 
-## 6. Testing & Visual Inspection
+## 6. Visual Interface & Screenshot Gallery
 
-- **Backend Unit Tests:** `pytest backend/tests/ -v` verifies schema validity, data provenance tags, and endpoint contracts.
-- **Frontend Typecheck & Build:** `npm run build` verifies zero TypeScript compiler errors.
-- **Headless Browser Screenshot Inspection:** Screenshots captured at `1440px` (desktop) and `390px` (mobile) are persisted in `docs/screenshots/`.
+The interface adheres strictly to the editorial data journalism direction specified in [DESIGN.md](DESIGN.md):
+
+| Desktop Viewport (1440px) | Mobile Viewport — Map (390px) | Mobile Viewport — Directory (390px) |
+| :---: | :---: | :---: |
+| ![Desktop 1440px](docs/screenshots/desktop_1440.png) | ![Mobile Map 390px](docs/screenshots/mobile_390.png) | ![Mobile Directory 390px](docs/screenshots/mobile_directory_390.png) |
+
+---
+
+## 7. REST API Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/health` | Service health status, version, and OpenAQ API key configuration check |
+| `GET` | `/api/stations` | All active Mumbai CAAQMS monitoring stations with coordinates and CPCB agency |
+| `GET` | `/api/current` | Current PM2.5, weather context, diurnal shift, and speciated pollutants (`?station_id=...`) |
+| `GET` | `/api/forecast` | 48-hour timeline with observed measurements, CAMS grid forecast, and Atlas Model |
+| `GET` | `/api/model/metrics` | Live chronological evaluation metrics, baseline comparison, and feature importances |
+| `GET` | `/api/anomalies` | Detected statistical anomaly events with concurring meteorological features |
+| `GET` | `/api/source-status` | Provenance metadata, OpenAQ authentication state, and Open-Meteo licenses |
+
+---
+
+## 8. What I'd Do Next (Research & Engineering Roadmap)
+
+1. **Quantile Regression for Calibrated Uncertainty:** Train Gradient Boosted Decision Trees across multiple loss quantiles ($\alpha = 0.1, 0.5, 0.9$) to provide mathematically calibrated prediction intervals for each forecast horizon.
+2. **Direct CPCB SAMEER Feed Integration:** Integrate real-time XML/JSON scrapers for the Central Pollution Control Board's SAMEER national portal to augment OpenAQ station coverage.
+3. **Satellite Aerosol Optical Depth (AOD) Conformal Fusion:** Ingest MODIS/INSAT-3D thermal infrared and aerosol satellite passes to correct for localized dust transport over the Arabian Sea boundary layer.
+4. **LightGBM ONNX Deployment:** Export trained LightGBM artifacts to ONNX runtime for sub-millisecond edge inferences in cloud serverless environments.
