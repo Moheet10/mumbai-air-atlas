@@ -3,9 +3,10 @@ import React from 'react';
 interface MastheadProps {
   lastUpdated?: string;
   openaqStatus?: string;
+  onOpenFreshness?: () => void;
 }
 
-export const Masthead: React.FC<MastheadProps> = ({ lastUpdated, openaqStatus }) => {
+export const Masthead: React.FC<MastheadProps> = ({ lastUpdated, openaqStatus, onOpenFreshness }) => {
   return (
     <header className="masthead" style={{ borderBottom: '1px solid var(--rule)', padding: '16px 0' }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '12px' }}>
@@ -20,14 +21,23 @@ export const Masthead: React.FC<MastheadProps> = ({ lastUpdated, openaqStatus })
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--ink-2)' }}>
           {openaqStatus === 'missing_key' && (
-            <span style={{ borderBottom: '1px dotted var(--ink-2)' }} title="OpenAQ API key not supplied; showing calibrated baseline station network">
+            <button
+              onClick={onOpenFreshness}
+              className="editorial-btn"
+              style={{ fontSize: '12px', color: 'var(--ink-2)', borderBottom: '1px dotted var(--ink-2)' }}
+              title="Click to inspect telemetry provenance and API status"
+            >
               MODE: BASELINE FIELD STATIONS
-            </span>
+            </button>
           )}
           {openaqStatus === 'connected' && (
-            <span style={{ color: 'var(--aqi-good)', fontWeight: 500 }}>
+            <button
+              onClick={onOpenFreshness}
+              className="editorial-btn"
+              style={{ fontSize: '12px', color: 'var(--aqi-good)', fontWeight: 500, borderBottom: '1px dotted var(--aqi-good)' }}
+            >
               &bull; OPENAQ V3 CONNECTED
-            </span>
+            </button>
           )}
           {lastUpdated && <span>UPDATED: {lastUpdated}</span>}
         </div>

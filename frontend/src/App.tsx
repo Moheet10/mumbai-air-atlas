@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Masthead } from './components/Masthead';
 import { HeroAQI } from './components/HeroAQI';
 import { StationMap } from './components/StationMap';
+import { StationList } from './components/StationList';
 import { ForecastChart } from './components/ForecastChart';
 import { WhatChanged } from './components/WhatChanged';
 import { ModelHonestyBox } from './components/ModelHonestyBox';
+import { DataFreshness } from './components/DataFreshness';
 import { Footer } from './components/Footer';
 import type { CurrentConditionsResponse, ForecastResponse, Station } from './types';
 import { getWindCompass } from './lib/aqi';
@@ -19,6 +21,8 @@ export const App: React.FC = () => {
   const [modelMetrics, setModelMetrics] = useState<any>(null);
   const [anomalies, setAnomalies] = useState<any[]>([]);
   const [selectedStationId, setSelectedStationId] = useState<string>('mpcb-bkc');
+  const [viewMode, setViewMode] = useState<'map' | 'list'>('map');
+  const [isFreshnessOpen, setIsFreshnessOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -97,6 +101,14 @@ export const App: React.FC = () => {
       <Masthead
         lastUpdated={currentData?.generated_at}
         openaqStatus={currentData?.openaq_status}
+        onOpenFreshness={() => setIsFreshnessOpen(true)}
+      />
+
+      <DataFreshness
+        isOpen={isFreshnessOpen}
+        onClose={() => setIsFreshnessOpen(false)}
+        openaqStatus={currentData?.openaq_status}
+        lastUpdated={currentData?.generated_at}
       />
 
       <main style={{ flex: 1 }}>
@@ -131,23 +143,52 @@ export const App: React.FC = () => {
                 alignItems: 'start',
               }}
             >
-              {/* Left Column: Map */}
+              {/* Left Column: Map or Directory List Toggle */}
               <div style={{ minWidth: 0 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
                   <h3 style={{ fontSize: '18px', fontFamily: 'var(--font-editorial)', fontWeight: 500 }}>
                     Monitoring Topography
                   </h3>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--ink-2)' }}>
-                    CLICK TO FOCUS SENSOR
-                  </span>
+
+                  {/* View Mode Toggle */}
+                  <div style={{ display: 'flex', gap: '12px', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
+                    <button
+                      onClick={() => setViewMode('map')}
+                      className="editorial-btn"
+                      style={{
+                        fontWeight: viewMode === 'map' ? 600 : 400,
+                        borderBottom: viewMode === 'map' ? '2px solid var(--ink)' : '1px solid var(--rule)',
+                      }}
+                    >
+                      MAP VIEW
+                    </button>
+                    <button
+                      onClick={() => setViewMode('list')}
+                      className="editorial-btn"
+                      style={{
+                        fontWeight: viewMode === 'list' ? 600 : 400,
+                        borderBottom: viewMode === 'list' ? '2px solid var(--ink)' : '1px solid var(--rule)',
+                      }}
+                    >
+                      DIRECTORY ({stations.length})
+                    </button>
+                  </div>
                 </div>
 
                 <div style={{ border: '1px solid var(--rule)', height: '420px', width: '100%' }}>
-                  <StationMap
-                    stations={stations}
-                    selectedStationId={selectedStationId}
-                    onSelectStation={handleSelectStation}
-                  />
+                  {viewMode === 'map' ? (
+                    <StationMap
+                      stations={stations}
+                      selectedStationId={selectedStationId}
+                      onSelectStation={handleSelectStation}
+                    />
+                  ) : (
+                    <StationList
+                      stations={stations}
+                      selectedStationId={selectedStationId}
+                      onSelectStation={handleSelectStation}
+                    />
+                  )}
                 </div>
 
                 {/* Station Quick Selector Bar */}
