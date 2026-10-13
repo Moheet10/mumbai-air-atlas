@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  mumbai-air-atlas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mumbai-air-atlas
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - HOST=0.0.0.0
+      - OPENAQ_API_KEY=${OPENAQ_API_KEY:-}
+    volumes:
+      - ./backend/data:/app/backend/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

@@ -32,14 +32,23 @@ app.add_middleware(
 app.include_router(router)
 
 
-@app.get("/")
-def read_root():
-    return {
-        "project": "Mumbai Air Atlas",
-        "tagline": "The city's air, in motion.",
-        "documentation": "/docs",
-        "health": "/health",
-    }
+# Mount static frontend build if present
+frontend_dist = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "dist"))
+if not os.path.exists(frontend_dist):
+    frontend_dist = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "dist"))
+
+if os.path.exists(frontend_dist):
+    from fastapi.staticfiles import StaticFiles
+    app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="static")
+else:
+    @app.get("/")
+    def read_root():
+        return {
+            "project": "Mumbai Air Atlas",
+            "tagline": "The city's air, in motion.",
+            "documentation": "/docs",
+            "health": "/health",
+        }
 
 
 if __name__ == "__main__":
