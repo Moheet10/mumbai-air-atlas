@@ -43,6 +43,16 @@ async def get_forecast(
     return await data_service.get_forecast(station_id=station_id)
 
 
+@router.get("/api/model/metrics")
+async def get_model_metrics():
+    return data_service.get_model_metrics()
+
+
+@router.get("/api/anomalies")
+async def get_anomalies():
+    return data_service.get_anomalies()
+
+
 @router.get("/api/source-status")
 async def get_source_status():
     return {

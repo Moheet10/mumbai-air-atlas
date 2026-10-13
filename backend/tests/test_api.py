@@ -47,8 +47,38 @@ def test_forecast_endpoint_distinction():
     data = response.json()
     assert "observations" in data
     assert "provider_forecast" in data
+    assert "text_summary" in data
     # Ensure provider forecast has distinct provenance
     if len(data["provider_forecast"]) > 0:
         first_fc = data["provider_forecast"][0]
         assert first_fc["provenance"] == "provider_forecast"
-    assert "text_summary" in data
+    # Ensure atlas model forecast has distinct provenance when present
+    if data.get("atlas_model_forecast"):
+        assert len(data["atlas_model_forecast"]) > 0
+        first_atlas = data["atlas_model_forecast"][0]
+        assert first_atlas["provenance"] == "atlas_model"
+
+
+def test_model_metrics_endpoint():
+    response = client.get("/api/model/metrics")
+    assert response.status_code == 200
+    data = response.json()
+    assert "scores" in data
+    assert "lightgbm_model" in data["scores"]
+    assert "baseline_24h_persistence" in data["scores"]
+    assert data["scores"]["lightgbm_model"]["mae"] is not None
+    assert "evaluation_verdict" in data
+    assert "beats_24h_baseline" in data["evaluation_verdict"]
+
+
+def test_anomalies_endpoint():
+    response = client.get("/api/anomalies")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    if len(data) > 0:
+        anom = data[0]
+        assert "measured_pm25" in anom
+        assert "z_score" in anom
+        assert "meteorological_context" in anom
+        assert "editorial_narrative" in anom

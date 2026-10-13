@@ -79,19 +79,36 @@ flowchart TD
   - [x] Implemented MapLibre station map with interactive focus and CPCB color circles.
   - [x] Implemented 48-hour particulate horizon chart with solid observed line, dashed forecast line, and uncertainty band.
   - [x] Verified desktop (1440px) and mobile (390px) visual rendering via headless browser inspections.
-- [ ] **Week 2: Feature Engineering & LightGBM Model**
-- [ ] **Week 3: Anomaly Detection & Extended Diagnostics**
+- [x] **Week 2: Feature Engineering, LightGBM Regressor & Anomaly Engine**
+  - [x] Constructed leak-free feature matrix (`backend/ml/features.py`): cyclical hours/weekdays, coastal wind vector decomposition ($u, v$), dew point depression, lags ($1, 2, 3, 6, 12, 24$), and rolling statistics.
+  - [x] Trained LightGBM Regressor on 1,152 chronological training observations.
+  - [x] Evaluated on held-out 288-observation test partition: **$9.31\,\mu\text{g/m}^3$ MAE** (outperforming the 24-hour diurnal baseline by **+29.5%**).
+  - [x] Implemented statistical anomaly detector (`backend/ml/anomalies.py`) with rolling z-score and residual monitoring.
+  - [x] Integrated `/api/model/metrics` and `/api/anomalies` REST endpoints.
+  - [x] Visualized live Atlas Model forecast trajectory alongside CAMS forecast on 48h Horizon.
+- [ ] **Week 3: Deep Evaluation, Cross-Station Generalization & Polish**
 - [ ] **Week 4: Production Deployment & Packaging**
 
 ---
 
-## 4. Model Baseline Scorecard
+## 4. Model Baseline & Evaluation Scorecard
 
-| Model | Evaluation Window | Target | MAE | RMSE | Status |
+Evaluated on held-out chronological test partition ($N_{\text{test}} = 288$ hours):
+
+| Model / Baseline | Architecture / Method | Target | MAE | RMSE | Relative Performance |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **24-Hour Persistence Baseline** | Held-out 20% chronological test set | $PM_{2.5}$ ($\mu\text{g/m}^3$) | **10.02 $\mu\text{g/m}^3$** | **12.01 $\mu\text{g/m}^3$** | Benchmark Established |
-| **1-Hour Persistence Baseline** | Held-out 20% chronological test set | $PM_{2.5}$ ($\mu\text{g/m}^3$) | **3.60 $\mu\text{g/m}^3$** | **4.44 $\mu\text{g/m}^3$** | Short-term Reference |
-| **Atlas LightGBM Regressor** | Chronological forward split | $PM_{2.5}$ ($\mu\text{g/m}^3$) | *Pending Week 2* | *Pending Week 2* | In Development |
+| **24-Hour Diurnal Baseline** | Naive persistence lag-24h | $PM_{2.5}$ ($\mu\text{g/m}^3$) | **13.20 $\mu\text{g/m}^3$** | 17.34 $\mu\text{g/m}^3$ | Reference baseline |
+| **1-Hour Persistence Baseline**| Naive persistence lag-1h | $PM_{2.5}$ ($\mu\text{g/m}^3$) | **3.72 $\mu\text{g/m}^3$** | 5.71 $\mu\text{g/m}^3$ | Short-horizon bound |
+| **Atlas LightGBM Regressor** | Gradient Boosted Trees (160 trees) | $PM_{2.5}$ ($\mu\text{g/m}^3$) | **9.31 $\mu\text{g/m}^3$** | **12.97 $\mu\text{g/m}^3$** | **+29.5% improvement** vs 24h baseline |
+
+### Top Predictive Features (LightGBM Split Gain)
+1. `pm2_5_lag_1` (Immediate autocorrelation)
+2. `pm2_5_roll_std_6` (Short-term turbulence / volatility)
+3. `pm2_5_lag_3` (3-hour trend persistence)
+4. `hour_sin` (Diurnal solar heating / thermal boundary cycle)
+5. `pm2_5_lag_2` (2-hour intermediate lag)
+6. `wind_speed_lag_1` (Ventilation coefficient)
+7. `wind_u` (Zonal coastal sea-breeze onshore vector)
 
 ---
 

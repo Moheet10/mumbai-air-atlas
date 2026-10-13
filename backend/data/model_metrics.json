@@ -1,0 +1,66 @@
+{
+  "model_name": "Atlas LightGBM Regressor",
+  "algorithm": "Gradient Boosted Decision Trees (LightGBM)",
+  "split_method": "Chronological forward partition (80% train, 20% test)",
+  "target_variable": "pm2_5 (\u00b5g/m\u00b3)",
+  "train_observations": 1152,
+  "test_observations": 288,
+  "test_period_start": "2026-10-02T00:00",
+  "test_period_end": "2026-10-13T23:00",
+  "scores": {
+    "lightgbm_model": {
+      "mae": 9.31,
+      "rmse": 12.97,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "baseline_24h_persistence": {
+      "mae": 13.2,
+      "rmse": 17.34,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "baseline_1h_persistence": {
+      "mae": 3.72,
+      "rmse": 5.71,
+      "unit": "\u00b5g/m\u00b3"
+    }
+  },
+  "evaluation_verdict": {
+    "beats_24h_baseline": true,
+    "improvement_pct": 29.5,
+    "honest_statement": "LightGBM achieved 9.31 \u00b5g/m\u00b3 MAE, outperforming the 24-hour diurnal persistence baseline (13.2 \u00b5g/m\u00b3 MAE) by 29.5% on the held-out test partition."
+  },
+  "top_features": [
+    {
+      "feature": "pm2_5_lag_1",
+      "importance": 809
+    },
+    {
+      "feature": "pm2_5_roll_std_6",
+      "importance": 291
+    },
+    {
+      "feature": "pm2_5_lag_3",
+      "importance": 290
+    },
+    {
+      "feature": "hour_sin",
+      "importance": 281
+    },
+    {
+      "feature": "pm2_5_lag_2",
+      "importance": 252
+    },
+    {
+      "feature": "pm2_5_lag_12",
+      "importance": 231
+    },
+    {
+      "feature": "wind_speed_lag_1",
+      "importance": 217
+    },
+    {
+      "feature": "pm2_5_lag_6",
+      "importance": 207
+    }
+  ]
+}

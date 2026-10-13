@@ -1,0 +1,162 @@
+[
+  {
+    "timestamp_utc": "2026-10-09T09:30:00+00:00",
+    "timestamp_local": "2026-10-09T15:00",
+    "measured_pm25": 116.9,
+    "rolling_mean_24h": 69.8,
+    "z_score": 2.07,
+    "anomaly_type": "positive_spike",
+    "meteorological_context": {
+      "wind_speed_kmh": 8.8,
+      "wind_direction_deg": 285.0,
+      "wind_compass": "WNW",
+      "temperature_c": 36.3,
+      "relative_humidity_pct": 35.0
+    },
+    "editorial_narrative": "PM2.5 registered 116.9 \u00b5g/m\u00b3 (+47.1 \u00b5g/m\u00b3 vs 24h rolling mean), observed concurrently with 8.8 km/h winds from 285\u00b0 WNW, temperature of 36.3\u00b0C, and relative humidity of 35%."
+  },
+  {
+    "timestamp_utc": "2026-10-09T10:30:00+00:00",
+    "timestamp_local": "2026-10-09T16:00",
+    "measured_pm25": 115.3,
+    "rolling_mean_24h": 70.2,
+    "z_score": 1.92,
+    "anomaly_type": "positive_spike",
+    "meteorological_context": {
+      "wind_speed_kmh": 11.2,
+      "wind_direction_deg": 270.0,
+      "wind_compass": "W",
+      "temperature_c": 34.9,
+      "relative_humidity_pct": 43.0
+    },
+    "editorial_narrative": "PM2.5 registered 115.3 \u00b5g/m\u00b3 (+45.1 \u00b5g/m\u00b3 vs 24h rolling mean), observed concurrently with 11.2 km/h winds from 270\u00b0 W, temperature of 34.9\u00b0C, and relative humidity of 43%."
+  },
+  {
+    "timestamp_utc": "2026-10-09T15:30:00+00:00",
+    "timestamp_local": "2026-10-09T21:00",
+    "measured_pm25": 45.4,
+    "rolling_mean_24h": 65.2,
+    "z_score": -0.93,
+    "anomaly_type": "negative_drop",
+    "meteorological_context": {
+      "wind_speed_kmh": 8.8,
+      "wind_direction_deg": 358.0,
+      "wind_compass": "N",
+      "temperature_c": 31.1,
+      "relative_humidity_pct": 64.0
+    },
+    "editorial_narrative": "PM2.5 registered 45.4 \u00b5g/m\u00b3 (-19.8 \u00b5g/m\u00b3 vs 24h rolling mean), observed concurrently with 8.8 km/h winds from 358\u00b0 N, temperature of 31.1\u00b0C, and relative humidity of 64%."
+  },
+  {
+    "timestamp_utc": "2026-10-09T16:30:00+00:00",
+    "timestamp_local": "2026-10-09T22:00",
+    "measured_pm25": 43.7,
+    "rolling_mean_24h": 64.3,
+    "z_score": -0.94,
+    "anomaly_type": "negative_drop",
+    "meteorological_context": {
+      "wind_speed_kmh": 7.3,
+      "wind_direction_deg": 20.0,
+      "wind_compass": "NNE",
+      "temperature_c": 30.7,
+      "relative_humidity_pct": 59.0
+    },
+    "editorial_narrative": "PM2.5 registered 43.7 \u00b5g/m\u00b3 (-20.6 \u00b5g/m\u00b3 vs 24h rolling mean), observed concurrently with 7.3 km/h winds from 20\u00b0 NNE, temperature of 30.7\u00b0C, and relative humidity of 59%."
+  },
+  {
+    "timestamp_utc": "2026-10-11T08:30:00+00:00",
+    "timestamp_local": "2026-10-11T14:00",
+    "measured_pm25": 59.1,
+    "rolling_mean_24h": 36.2,
+    "z_score": 2.22,
+    "anomaly_type": "positive_spike",
+    "meteorological_context": {
+      "wind_speed_kmh": 1.1,
+      "wind_direction_deg": 279.0,
+      "wind_compass": "W",
+      "temperature_c": 36.7,
+      "relative_humidity_pct": 30.0
+    },
+    "editorial_narrative": "PM2.5 registered 59.1 \u00b5g/m\u00b3 (+22.9 \u00b5g/m\u00b3 vs 24h rolling mean), observed concurrently with 1.1 km/h winds from 279\u00b0 W, temperature of 36.7\u00b0C, and relative humidity of 30%."
+  },
+  {
+    "timestamp_utc": "2026-10-11T09:30:00+00:00",
+    "timestamp_local": "2026-10-11T15:00",
+    "measured_pm25": 63.8,
+    "rolling_mean_24h": 36.7,
+    "z_score": 2.39,
+    "anomaly_type": "positive_spike",
+    "meteorological_context": {
+      "wind_speed_kmh": 6.9,
+      "wind_direction_deg": 330.0,
+      "wind_compass": "NNW",
+      "temperature_c": 36.4,
+      "relative_humidity_pct": 30.0
+    },
+    "editorial_narrative": "PM2.5 registered 63.8 \u00b5g/m\u00b3 (+27.1 \u00b5g/m\u00b3 vs 24h rolling mean), observed concurrently with 6.9 km/h winds from 330\u00b0 NNW, temperature of 36.4\u00b0C, and relative humidity of 30%."
+  },
+  {
+    "timestamp_utc": "2026-10-11T10:30:00+00:00",
+    "timestamp_local": "2026-10-11T16:00",
+    "measured_pm25": 66.1,
+    "rolling_mean_24h": 37.4,
+    "z_score": 2.29,
+    "anomaly_type": "positive_spike",
+    "meteorological_context": {
+      "wind_speed_kmh": 6.9,
+      "wind_direction_deg": 327.0,
+      "wind_compass": "NNW",
+      "temperature_c": 36.1,
+      "relative_humidity_pct": 31.0
+    },
+    "editorial_narrative": "PM2.5 registered 66.1 \u00b5g/m\u00b3 (+28.7 \u00b5g/m\u00b3 vs 24h rolling mean), observed concurrently with 6.9 km/h winds from 327\u00b0 NNW, temperature of 36.1\u00b0C, and relative humidity of 31%."
+  },
+  {
+    "timestamp_utc": "2026-10-11T11:30:00+00:00",
+    "timestamp_local": "2026-10-11T17:00",
+    "measured_pm25": 80.8,
+    "rolling_mean_24h": 38.7,
+    "z_score": 2.78,
+    "anomaly_type": "positive_spike",
+    "meteorological_context": {
+      "wind_speed_kmh": 10.4,
+      "wind_direction_deg": 318.0,
+      "wind_compass": "NW",
+      "temperature_c": 34.7,
+      "relative_humidity_pct": 48.0
+    },
+    "editorial_narrative": "PM2.5 registered 80.8 \u00b5g/m\u00b3 (+42.1 \u00b5g/m\u00b3 vs 24h rolling mean), observed concurrently with 10.4 km/h winds from 318\u00b0 NW, temperature of 34.7\u00b0C, and relative humidity of 48%."
+  },
+  {
+    "timestamp_utc": "2026-10-12T23:30:00+00:00",
+    "timestamp_local": "2026-10-13T05:00",
+    "measured_pm25": 29.1,
+    "rolling_mean_24h": 48.6,
+    "z_score": -2.0,
+    "anomaly_type": "negative_drop",
+    "meteorological_context": {
+      "wind_speed_kmh": 7.3,
+      "wind_direction_deg": 36.0,
+      "wind_compass": "NE",
+      "temperature_c": 28.0,
+      "relative_humidity_pct": 54.0
+    },
+    "editorial_narrative": "PM2.5 registered 29.1 \u00b5g/m\u00b3 (-19.5 \u00b5g/m\u00b3 vs 24h rolling mean), observed concurrently with 7.3 km/h winds from 36\u00b0 NE, temperature of 28.0\u00b0C, and relative humidity of 54%."
+  },
+  {
+    "timestamp_utc": "2026-10-13T00:30:00+00:00",
+    "timestamp_local": "2026-10-13T06:00",
+    "measured_pm25": 27.6,
+    "rolling_mean_24h": 48.3,
+    "z_score": -2.03,
+    "anomaly_type": "negative_drop",
+    "meteorological_context": {
+      "wind_speed_kmh": 7.8,
+      "wind_direction_deg": 44.0,
+      "wind_compass": "NE",
+      "temperature_c": 27.4,
+      "relative_humidity_pct": 54.0
+    },
+    "editorial_narrative": "PM2.5 registered 27.6 \u00b5g/m\u00b3 (-20.7 \u00b5g/m\u00b3 vs 24h rolling mean), observed concurrently with 7.8 km/h winds from 44\u00b0 NE, temperature of 27.4\u00b0C, and relative humidity of 54%."
+  }
+]

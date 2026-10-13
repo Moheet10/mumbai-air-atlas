@@ -4,7 +4,13 @@ Evaluates a 24-hour lag persistence baseline: PM2.5(t) = PM2.5(t - 24h).
 Uses a chronological train/test split (no random split) to prevent data leakage.
 """
 
+import sys
 import os
+
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
+
 import json
 import sqlite3
 import pandas as pd

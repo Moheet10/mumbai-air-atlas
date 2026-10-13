@@ -16,6 +16,8 @@ export const App: React.FC = () => {
   const [currentData, setCurrentData] = useState<CurrentConditionsResponse | null>(null);
   const [forecastData, setForecastData] = useState<ForecastResponse | null>(null);
   const [stations, setStations] = useState<Station[]>([]);
+  const [modelMetrics, setModelMetrics] = useState<any>(null);
+  const [anomalies, setAnomalies] = useState<any[]>([]);
   const [selectedStationId, setSelectedStationId] = useState<string>('mpcb-bkc');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -42,6 +44,18 @@ export const App: React.FC = () => {
         if (!fcRes.ok) throw new Error(`HTTP ${fcRes.status}`);
         const fcData = await fcRes.json();
         setForecastData(fcData);
+
+        // 4. Fetch model metrics & anomalies
+        try {
+          const [mRes, aRes] = await Promise.all([
+            fetch(`${API_BASE}/api/model/metrics`),
+            fetch(`${API_BASE}/api/anomalies`),
+          ]);
+          if (mRes.ok) setModelMetrics(await mRes.json());
+          if (aRes.ok) setAnomalies(await aRes.json());
+        } catch (e) {
+          console.warn('Metrics or anomaly endpoint error', e);
+        }
 
         setError(null);
       } catch (err: any) {
@@ -242,6 +256,7 @@ export const App: React.FC = () => {
             <ForecastChart
               observations={forecastData?.observations || []}
               providerForecast={forecastData?.provider_forecast || []}
+              atlasModelForecast={forecastData?.atlas_model_forecast}
               textSummary={
                 forecastData?.text_summary ||
                 'Diurnal inversion models suggest steady nocturnal accumulation followed by marine dispersion.'
@@ -252,12 +267,12 @@ export const App: React.FC = () => {
 
         {/* 4. What Changed (Anomaly / Diurnal Analysis) */}
         <section className="container">
-          <WhatChanged data={currentData} />
+          <WhatChanged data={currentData} anomalies={anomalies} />
         </section>
 
         {/* 5. Model Honesty Box */}
         <section className="container">
-          <ModelHonestyBox />
+          <ModelHonestyBox metrics={modelMetrics} />
         </section>
       </main>
 
