@@ -104,6 +104,22 @@ def _find_anomalies_path() -> Optional[str]:
     return None
 
 
+def _find_precomputed_forecasts_path() -> Optional[str]:
+    candidates = [
+        os.path.join(BASE_DIR, "data", "snapshot", "precomputed_forecasts.json"),
+        os.path.join(BASE_DIR, "backend", "data", "snapshot", "precomputed_forecasts.json"),
+        os.path.join(os.path.dirname(BASE_DIR), "backend", "data", "snapshot", "precomputed_forecasts.json"),
+        os.path.join(os.path.dirname(BASE_DIR), "data", "snapshot", "precomputed_forecasts.json"),
+        os.path.abspath("backend/data/snapshot/precomputed_forecasts.json"),
+        os.path.abspath("data/snapshot/precomputed_forecasts.json"),
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return None
+
+
+
 class DataService:
     def __init__(self):
         openaq_key = os.getenv("OPENAQ_API_KEY")
@@ -799,9 +815,56 @@ class DataService:
             atlas_model_points = []
             atlas_model_lower = []
             atlas_model_upper = []
-            station_model_path = _find_model_path()
 
-            if station_model_path and os.path.exists(station_model_path):
+            # Check for precomputed snapshot forecasts first (zero external C++ dependencies, instant response)
+            precomputed_path = _find_precomputed_forecasts_path()
+            if precomputed_path and os.path.exists(precomputed_path):
+                try:
+                    with open(precomputed_path, "r", encoding="utf-8") as pf:
+                        precomputed_data = json.load(pf)
+                    st_id_str = str(selected_station.id) if selected_station else ""
+                    if st_id_str in precomputed_data:
+                        st_fc = precomputed_data[st_id_str]
+                        lead_hours = [1, 6, 12, 24, 48]
+                        atlas_model_points = [
+                            TimelinePoint(
+                                timestamp_utc=p["timestamp_utc"],
+                                timestamp_local=p["timestamp_local"],
+                                value=p["value"],
+                                unit="µg/m³",
+                                provenance=ProvenanceType.ATLAS_MODEL,
+                                source_name=f"Station Model (+{lh}h)",
+                            )
+                            for p, lh in zip(st_fc.get("points", []), lead_hours)
+                        ]
+                        atlas_model_lower = [
+                            TimelinePoint(
+                                timestamp_utc=p["timestamp_utc"],
+                                timestamp_local=p["timestamp_local"],
+                                value=p["value"],
+                                unit="µg/m³",
+                                provenance=ProvenanceType.ATLAS_MODEL,
+                                source_name=f"Station Model Quantile 0.1 (+{lh}h)",
+                            )
+                            for p, lh in zip(st_fc.get("lower", []), lead_hours)
+                        ]
+                        atlas_model_upper = [
+                            TimelinePoint(
+                                timestamp_utc=p["timestamp_utc"],
+                                timestamp_local=p["timestamp_local"],
+                                value=p["value"],
+                                unit="µg/m³",
+                                provenance=ProvenanceType.ATLAS_MODEL,
+                                source_name=f"Station Model Quantile 0.9 (+{lh}h)",
+                            )
+                            for p, lh in zip(st_fc.get("upper", []), lead_hours)
+                        ]
+                except Exception as pe:
+                    import logging
+                    logging.warning(f"Error loading precomputed forecasts: {pe}")
+
+            station_model_path = _find_model_path()
+            if not atlas_model_points and station_model_path and os.path.exists(station_model_path):
                 try:
                     import joblib
                     artifact = joblib.load(station_model_path)

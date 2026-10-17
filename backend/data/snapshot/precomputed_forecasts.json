@@ -1,0 +1,422 @@
+{
+  "3409482": {
+    "station_name": "Bandra Kurla Complex, Mumbai - MPCB",
+    "points": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 61.2
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 58.2
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 51.4
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 51.5
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 51.3
+      }
+    ],
+    "lower": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 53.7
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 37.6
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 36.9
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 35.5
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 33.3
+      }
+    ],
+    "upper": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 68.9
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 80.9
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 69.0
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 81.7
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 86.6
+      }
+    ]
+  },
+  "11606": {
+    "station_name": "Borivali East, Mumbai - IITM",
+    "points": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 63.1
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 52.8
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 49.7
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 51.9
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 50.3
+      }
+    ],
+    "lower": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 55.6
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 33.7
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 35.0
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 40.4
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 37.8
+      }
+    ],
+    "upper": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 72.9
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 82.1
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 70.1
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 82.3
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 79.2
+      }
+    ]
+  },
+  "11611": {
+    "station_name": "Malad West, Mumbai - IITM",
+    "points": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 55.9
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 48.0
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 43.3
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 48.1
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 45.3
+      }
+    ],
+    "lower": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 48.7
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 31.2
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 27.1
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 33.9
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 31.2
+      }
+    ],
+    "upper": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 63.6
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 70.4
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 62.6
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 72.8
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 71.4
+      }
+    ]
+  },
+  "6959": {
+    "station_name": "Siddharth Nagar-Worli, Mumbai - IITM",
+    "points": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 45.4
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 42.0
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 38.9
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 41.3
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 41.1
+      }
+    ],
+    "lower": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 38.4
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 27.6
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 25.0
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 27.3
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 25.0
+      }
+    ],
+    "upper": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 52.4
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 62.5
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 56.3
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 58.6
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 61.9
+      }
+    ]
+  },
+  "3409483": {
+    "station_name": "Chembur, Mumbai - MPCB",
+    "points": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 50.7
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 49.6
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 45.3
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 46.5
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 44.7
+      }
+    ],
+    "lower": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 45.4
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 36.3
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 34.4
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 34.3
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 32.6
+      }
+    ],
+    "upper": [
+      {
+        "timestamp_utc": "2026-10-13T19:30:00+00:00",
+        "timestamp_local": "14 Oct 01:00",
+        "value": 56.2
+      },
+      {
+        "timestamp_utc": "2026-10-14T00:30:00+00:00",
+        "timestamp_local": "14 Oct 06:00",
+        "value": 63.3
+      },
+      {
+        "timestamp_utc": "2026-10-14T06:30:00+00:00",
+        "timestamp_local": "14 Oct 12:00",
+        "value": 60.5
+      },
+      {
+        "timestamp_utc": "2026-10-14T18:30:00+00:00",
+        "timestamp_local": "15 Oct 00:00",
+        "value": 63.0
+      },
+      {
+        "timestamp_utc": "2026-10-15T18:30:00+00:00",
+        "timestamp_local": "16 Oct 00:00",
+        "value": 62.3
+      }
+    ]
+  }
+}

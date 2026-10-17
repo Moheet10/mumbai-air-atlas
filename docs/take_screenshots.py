@@ -20,9 +20,19 @@ def take_shots():
 
     driver = webdriver.Chrome(options=opts)
     
+    target_url = os.environ.get('TARGET_URL')
+    if not target_url:
+        import urllib.request
+        try:
+            urllib.request.urlopen('http://127.0.0.1:5173', timeout=1)
+            target_url = 'http://127.0.0.1:5173'
+        except Exception:
+            target_url = 'https://mumbai-air-atlas.vercel.app'
+    print(f"Capturing screenshots from: {target_url}")
+
     try:
         # 1. Desktop Day Edition
-        driver.get('http://127.0.0.1:5173')
+        driver.get(target_url)
         time.sleep(1)
         driver.execute_script("localStorage.setItem('mumbai-air-theme', 'light');")
         driver.refresh()
@@ -41,6 +51,19 @@ def take_shots():
         print('Captured docs/screenshots/hero_night.png')
 
         # 3. Component screenshots (Night theme)
+        # Hide sticky header & top banner during individual component captures so they never obscure cards
+        driver.execute_script("""
+            const header = document.querySelector('header');
+            if (header) header.style.display = 'none';
+            const banners = document.querySelectorAll('div');
+            banners.forEach(b => {
+                if (b.innerText && b.innerText.includes('SNAPSHOT:')) {
+                    b.style.display = 'none';
+                }
+            });
+        """)
+        time.sleep(1)
+
         sections = driver.find_elements(By.TAG_NAME, 'section')
         print(f'Found {len(sections)} sections on page.')
 
