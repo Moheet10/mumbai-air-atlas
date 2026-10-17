@@ -17,6 +17,7 @@ import { SplashScreen } from './components/SplashScreen';
 import { ClickSpark } from './components/ClickSpark';
 import { WindRoseWidget } from './components/WindRoseWidget';
 import { CursorSpotlight } from './components/CursorSpotlight';
+import { calculatePM25AQI } from './lib/aqi';
 import './styles/design-tokens.css';
 
 const API_BASE = '';
@@ -145,6 +146,13 @@ export const App: React.FC = () => {
   const isSample = currentData?.data_mode === 'sample';
   const snapshotDate = currentData?.snapshot_as_of || '14 Oct 2026';
 
+  // Compute atmospheric glow color matching hero AQI category (e.g. golden amber for Moderate)
+  const pm25Value = currentData?.primary_pm25?.value ?? 62.1;
+  const { category: currentCategory } = calculatePM25AQI(pm25Value);
+  const aqiGlowColor = theme === 'dark' && currentCategory.label === 'Moderate'
+    ? '#ECC254'
+    : currentCategory.colorHex;
+
   return (
     <ClickSpark
       sparkColor={
@@ -160,8 +168,8 @@ export const App: React.FC = () => {
       ring={true}
     >
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
-        {/* Dynamic Interactive Cursor Mover: Highlights & Lightens in Night, Darkens & Shades in Day */}
-        <CursorSpotlight theme={theme} />
+        {/* Dynamic Interactive Cursor Mover: Matches the exact atmospheric golden/AQI glow */}
+        <CursorSpotlight theme={theme} glowColor={aqiGlowColor} />
 
         {/* Editorial Air Atlas Splash Screen */}
         <SplashScreen isReady={!loading && currentData !== null} />

@@ -4,7 +4,6 @@ import { calculatePM25AQI, getWindCompass } from '../lib/aqi';
 import { CountUp } from './CountUp';
 import { BlurText } from './BlurText';
 import { Thermometer, Droplets, Wind } from 'lucide-react';
-import { MumbaiSilhouette } from './MumbaiSilhouette';
 
 interface HeroAQIProps {
   data: CurrentConditionsResponse | null;
@@ -54,28 +53,58 @@ export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading, theme = 'light'
         overflow: 'hidden',
       }}
     >
-      {/* Subtle Atmospheric Radial Aura: richer depth in Day mode, luminous glow in Night mode */}
+      {/* 1. Primary Atmospheric Radial Bloom (Rich golden amber aura matching the photo) */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
-          top: '-120px',
-          right: '5%',
-          width: '580px',
-          height: '440px',
+          top: '-160px',
+          right: '-80px',
+          width: '880px',
+          height: '640px',
           borderRadius: '50%',
           background: theme === 'dark'
-            ? `radial-gradient(circle, ${category.colorHex} 0%, transparent 68%)`
-            : `radial-gradient(circle, ${category.colorHex} 0%, transparent 64%)`,
-          opacity: theme === 'dark' ? 0.25 : 0.22,
-          filter: theme === 'dark' ? 'blur(64px)' : 'blur(50px)',
+            ? `radial-gradient(ellipse at 65% 35%, ${category.colorHex} 0%, ${category.colorHex}99 38%, transparent 72%)`
+            : `radial-gradient(ellipse at 65% 35%, ${category.colorHex} 0%, ${category.colorHex}88 35%, transparent 68%)`,
+          opacity: theme === 'dark' ? 0.40 : 0.30,
+          filter: theme === 'dark' ? 'blur(75px)' : 'blur(60px)',
           pointerEvents: 'none',
           zIndex: 0,
         }}
       />
 
-      {/* Mumbai Coastal Silhouette Background: Bandra-Worli Sea Link & Skyline */}
-      <MumbaiSilhouette theme={theme} />
+      {/* 2. Secondary Ambient Volumetric Diffusion (Soft warm air glow spanning the hero stage) */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: '15%',
+          left: '-100px',
+          width: '760px',
+          height: '480px',
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${category.colorHex} 0%, transparent 68%)`,
+          opacity: theme === 'dark' ? 0.20 : 0.15,
+          filter: theme === 'dark' ? 'blur(88px)' : 'blur(70px)',
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}
+      />
+
+      {/* 3. Baseline Atmospheric Wash along bottom border */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '140px',
+          background: `linear-gradient(to top, ${category.colorHex}18 0%, transparent 100%)`,
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}
+      />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Editorial Sub-label & Provenance Bar */}

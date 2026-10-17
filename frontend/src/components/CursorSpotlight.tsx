@@ -2,20 +2,36 @@ import React, { useEffect, useRef, useState } from 'react';
 
 interface CursorSpotlightProps {
   theme?: 'light' | 'dark';
+  glowColor?: string;
   className?: string;
 }
 
+const hexToRgb = (hex: string): [number, number, number] => {
+  const clean = hex.replace('#', '');
+  if (clean.length === 6) {
+    const r = parseInt(clean.substring(0, 2), 16);
+    const g = parseInt(clean.substring(2, 4), 16);
+    const b = parseInt(clean.substring(4, 6), 16);
+    if (!isNaN(r) && !isNaN(g) && !isNaN(b)) {
+      return [r, g, b];
+    }
+  }
+  return [236, 194, 84]; // default golden amber (#ECC254)
+};
+
 /**
- * Editorial Cursor Spotlight Mover
+ * Editorial Atmospheric Cursor Spotlight Mover
  * 
- * Dynamic cursor follower layer that:
- * - In Night mode: Lightens & highlights the atmosphere near the cursor like a navigator's lantern.
- * - In Day mode: Darkens & shades the paper near the cursor like a focusing optic/lens.
+ * Dynamically casts an interactive halo that matches the exact golden/ambient
+ * atmospheric gradient from the AQI hero aura:
+ * - In Night mode: Lightens & highlights near the cursor with a warm luminous golden glow.
+ * - In Day mode: Shimmers near the cursor with a warm amber atmospheric tone.
  * 
- * Implemented with zero-dependency lerped requestAnimationFrame loop and pointer-events: none.
+ * Zero-drag requestAnimationFrame lerp loop with pointer-events: none.
  */
 export const CursorSpotlight: React.FC<CursorSpotlightProps> = ({
   theme = 'light',
+  glowColor = '#ECC254',
   className = '',
 }) => {
   const isDark = theme === 'dark';
@@ -34,6 +50,8 @@ export const CursorSpotlight: React.FC<CursorSpotlightProps> = ({
     let currentY = -1000;
     let animId: number;
     let isMoving = false;
+
+    const [r, g, b] = hexToRgb(glowColor);
 
     const handleMouseMove = (e: MouseEvent) => {
       targetX = e.clientX;
@@ -63,15 +81,15 @@ export const CursorSpotlight: React.FC<CursorSpotlightProps> = ({
         currentY += (targetY - currentY) * 0.14;
 
         if (isDark) {
-          // Night mode: Lightens and highlights near the cursor with a warm luminous halo
+          // Night mode: Lightens & highlights with the exact warm golden atmospheric color
           spotlightRef.current.style.background = `
-            radial-gradient(520px circle at ${currentX}px ${currentY}px, rgba(255, 245, 215, 0.13) 0%, rgba(255, 240, 200, 0.04) 45%, transparent 75%),
-            radial-gradient(220px circle at ${currentX}px ${currentY}px, rgba(255, 250, 235, 0.08) 0%, transparent 80%)
+            radial-gradient(540px circle at ${currentX}px ${currentY}px, rgba(${r}, ${g}, ${b}, 0.22) 0%, rgba(${r}, ${g}, ${b}, 0.07) 45%, transparent 75%),
+            radial-gradient(220px circle at ${currentX}px ${currentY}px, rgba(${Math.min(255, r + 20)}, ${Math.min(255, g + 20)}, ${Math.min(255, b + 40)}, 0.14) 0%, transparent 80%)
           `;
         } else {
-          // Day mode: Darkens and shades near the cursor with a rich tactile parchment burnish
+          // Day mode: Shimmers with warm amber-terracotta atmospheric tone
           spotlightRef.current.style.background = `
-            radial-gradient(460px circle at ${currentX}px ${currentY}px, rgba(27, 26, 23, 0.08) 0%, rgba(27, 26, 23, 0.025) 45%, transparent 75%)
+            radial-gradient(460px circle at ${currentX}px ${currentY}px, rgba(${r}, ${g}, ${b}, 0.16) 0%, rgba(${r}, ${g}, ${b}, 0.05) 45%, transparent 75%)
           `;
         }
       }
@@ -86,7 +104,7 @@ export const CursorSpotlight: React.FC<CursorSpotlightProps> = ({
       document.removeEventListener('mouseenter', handleMouseEnter);
       cancelAnimationFrame(animId);
     };
-  }, [isDark]);
+  }, [isDark, glowColor]);
 
   return (
     <div
