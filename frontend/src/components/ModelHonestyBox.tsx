@@ -36,7 +36,7 @@ export const ModelHonestyBox: React.FC<ModelHonestyBoxProps> = ({ metrics }) => 
     <SpotlightCard
       style={{
         padding: '28px',
-        margin: '32px 0 48px',
+        margin: '0 0 16px',
         backgroundColor: 'var(--paper-2)',
       }}
     >

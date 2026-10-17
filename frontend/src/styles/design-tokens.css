@@ -3,7 +3,8 @@
   
   /* Paper and Ink Palette (Day Edition) */
   --paper:   #F4EFE6;  /* page background */
-  --paper-2: #EBE4D6;  /* panels, subtle fills */
+  --paper-2: rgba(235, 228, 214, 0.88);  /* semi-translucent frosted parchment */
+  --paper-2-solid: #EBE4D6;  /* solid fallback */
   --ink:     #1B1A17;  /* primary text, chart lines */
   --ink-2:   #6B665C;  /* secondary text, axis labels */
   --rule:    #D2C7B4;  /* hairlines, gridlines - enhanced definition */
@@ -51,7 +52,8 @@
 
   /* Paper and Ink Palette (Night Edition) */
   --paper:   #14130F;  /* dark page background */
-  --paper-2: #211E18;  /* panels, subtle fills - lightened for contrast against background */
+  --paper-2: rgba(33, 30, 24, 0.84);  /* semi-translucent frosted dark slate */
+  --paper-2-solid: #211E18;  /* solid fallback */
   --ink:     #EDE7DA;  /* primary text, chart lines */
   --ink-2:   #9A9487;  /* secondary text, axis labels */
   --rule:    #423E34;  /* hairlines, gridlines - lightened for clarity */
@@ -216,14 +218,17 @@ a.editorial-link:focus-visible {
 /* Atmospheric Aesthetic Enhancements */
 .atlas-card {
   background-color: var(--paper-2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--rule);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .atlas-card:hover {
   border-color: var(--ink-2);
+  box-shadow: var(--shadow-md);
 }
 
 .atlas-pill {

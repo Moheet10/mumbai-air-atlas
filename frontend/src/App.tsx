@@ -17,6 +17,7 @@ import { SplashScreen } from './components/SplashScreen';
 import { ClickSpark } from './components/ClickSpark';
 import { WindRoseWidget } from './components/WindRoseWidget';
 import { CursorSpotlight } from './components/CursorSpotlight';
+import { AtmosphericAura } from './components/AtmosphericAura';
 import { calculatePM25AQI } from './lib/aqi';
 import './styles/design-tokens.css';
 
@@ -254,8 +255,14 @@ export const App: React.FC = () => {
         </div>
 
         {/* 2. Main Asymmetrical Stage: Map & Station Detail */}
-        <section style={{ padding: '48px 0 32px' }}>
-          <div className="container">
+        <section style={{ position: 'relative', padding: '48px 0 36px', overflow: 'hidden' }}>
+          <AtmosphericAura
+            color={aqiGlowColor}
+            theme={theme}
+            position="top-left"
+            secondaryPosition="bottom-right"
+          />
+          <div className="container" style={{ position: 'relative', zIndex: 1 }}>
             <div
               style={{
                 display: 'grid',
@@ -361,6 +368,7 @@ export const App: React.FC = () => {
                 {currentData && (
                   <SpotlightCard
                     theme={theme}
+                    spotlightColor={aqiGlowColor}
                     style={{
                       marginBottom: '20px',
                       padding: '16px 20px',
@@ -389,7 +397,7 @@ export const App: React.FC = () => {
                 )}
 
                 {/* Measured Pollutant Table inside SpotlightCard */}
-                <SpotlightCard theme={theme} style={{ padding: '16px 20px', backgroundColor: 'var(--paper-2)' }}>
+                <SpotlightCard theme={theme} spotlightColor={aqiGlowColor} style={{ padding: '16px 20px', backgroundColor: 'var(--paper-2)' }}>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '10px', letterSpacing: '0.04em' }}>
                     <span style={{ textTransform: 'uppercase' }}>SPECIATED POLLUTANT DENSITY</span> (µg/m³)
                   </div>
@@ -430,8 +438,14 @@ export const App: React.FC = () => {
         </section>
 
         {/* 3. 48-Hour Forecast Horizon */}
-        <section style={{ padding: '32px 0 40px', borderTop: '1px solid var(--rule)' }}>
-          <div className="container">
+        <section style={{ position: 'relative', padding: '36px 0 44px', borderTop: '1px solid var(--rule)', overflow: 'hidden' }}>
+          <AtmosphericAura
+            color={aqiGlowColor}
+            theme={theme}
+            position="top-right"
+            secondaryPosition="bottom-left"
+          />
+          <div className="container" style={{ position: 'relative', zIndex: 1 }}>
             <FadeContent>
               <ForecastChart
                 observations={forecastData?.observations || []}
@@ -452,8 +466,14 @@ export const App: React.FC = () => {
         </section>
 
         {/* 3.5 Chronological Topography (60-Day Calendar Heatmap) */}
-        <section style={{ padding: '32px 0 40px', borderTop: '1px solid var(--rule)' }}>
-          <div className="container">
+        <section style={{ position: 'relative', padding: '36px 0 44px', borderTop: '1px solid var(--rule)', overflow: 'hidden' }}>
+          <AtmosphericAura
+            color={aqiGlowColor}
+            theme={theme}
+            position="center-left"
+            secondaryPosition="bottom-right"
+          />
+          <div className="container" style={{ position: 'relative', zIndex: 1 }}>
             <FadeContent>
               <CalendarHeatmap
                 stationId={selectedStationId}
@@ -465,19 +485,36 @@ export const App: React.FC = () => {
         </section>
 
         {/* 4. What Changed (Anomaly / Diurnal Analysis) */}
-        <section className="container">
-          <WhatChanged data={currentData} anomalies={anomalies} />
+        <section style={{ position: 'relative', padding: '36px 0 32px', borderTop: '1px solid var(--rule)', overflow: 'hidden' }}>
+          <AtmosphericAura
+            color={aqiGlowColor}
+            theme={theme}
+            position="top-right"
+            secondaryPosition="bottom-left"
+          />
+          <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+            <WhatChanged data={currentData} anomalies={anomalies} />
+          </div>
         </section>
 
         {/* 5. Model Honesty Box */}
-        <section className="container">
-          <FadeContent>
-            <ModelHonestyBox metrics={modelMetrics} />
-          </FadeContent>
+        <section style={{ position: 'relative', padding: '32px 0 52px', borderTop: '1px solid var(--rule)', overflow: 'hidden' }}>
+          <AtmosphericAura
+            color={aqiGlowColor}
+            theme={theme}
+            position="center-right"
+            secondaryPosition="bottom-left"
+            hasWash={true}
+          />
+          <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+            <FadeContent>
+              <ModelHonestyBox metrics={modelMetrics} />
+            </FadeContent>
+          </div>
         </section>
       </main>
 
-      <Footer />
+      <Footer theme={theme} glowColor={aqiGlowColor} />
       </div>
     </ClickSpark>
   );

@@ -47,7 +47,7 @@ export const WhatChanged: React.FC<WhatChangedProps> = ({ data, anomalies }) => 
       : null;
 
   return (
-    <div style={{ padding: '32px 0 20px', borderTop: '1px solid var(--rule)' }}>
+    <div>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginBottom: '14px' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
           <h3 style={{ fontSize: '22px', fontFamily: 'var(--font-editorial)', fontWeight: 500 }}>

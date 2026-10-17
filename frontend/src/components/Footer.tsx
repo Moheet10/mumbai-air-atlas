@@ -1,9 +1,16 @@
 import React from 'react';
+import { AtmosphericAura } from './AtmosphericAura';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  theme?: 'light' | 'dark';
+  glowColor?: string;
+}
+
+export const Footer: React.FC<FooterProps> = ({ theme = 'light', glowColor = '#ECC254' }) => {
   return (
-    <footer style={{ borderTop: '1px solid var(--rule)', padding: '36px 0 56px' }}>
-      <div className="container">
+    <footer style={{ position: 'relative', borderTop: '1px solid var(--rule)', padding: '36px 0 56px', overflow: 'hidden' }}>
+      <AtmosphericAura color={glowColor} theme={theme} position="bottom-right" hasWash={true} />
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px', marginBottom: '28px' }}>
           <div>
             <h4 style={{ fontSize: '16px', fontFamily: 'var(--font-editorial)', fontWeight: 500, marginBottom: '8px' }}>

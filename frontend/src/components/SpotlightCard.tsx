@@ -8,6 +8,19 @@ export interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement>
   style?: React.CSSProperties;
 }
 
+const hexToRgba = (hex: string, alpha: number): string => {
+  const clean = hex.replace('#', '');
+  if (clean.length === 6) {
+    const r = parseInt(clean.substring(0, 2), 16);
+    const g = parseInt(clean.substring(2, 4), 16);
+    const b = parseInt(clean.substring(4, 6), 16);
+    if (!isNaN(r) && !isNaN(g) && !isNaN(b)) {
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+  }
+  return hex;
+};
+
 export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   spotlightColor,
   theme = 'light',
@@ -20,12 +33,13 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState<number>(0);
 
-  // Calibrated spotlight glow: darkened warm burnish in Day mode, luminous radiant halo in Night mode
-  const activeSpotlight =
-    spotlightColor ||
-    (theme === 'dark'
-      ? 'rgba(255, 245, 220, 0.20)'
-      : 'rgba(130, 105, 75, 0.22)');
+  const isDark = theme === 'dark';
+  // Calibrated spotlight glow matching golden atmospheric aura or custom color
+  const activeSpotlight = spotlightColor
+    ? (spotlightColor.startsWith('#') ? hexToRgba(spotlightColor, isDark ? 0.24 : 0.18) : spotlightColor)
+    : (isDark
+      ? 'rgba(236, 194, 84, 0.22)'
+      : 'rgba(224, 179, 65, 0.18)');
 
   useEffect(() => {
     const card = cardRef.current;
