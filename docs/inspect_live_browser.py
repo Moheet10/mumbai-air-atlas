@@ -25,9 +25,19 @@ try:
     print(f'Splash screen active at 0.3s: {len(splash_text) > 0}')
     driver.save_screenshot('docs/screenshots/live_step1_splash.png')
     
-    # Wait for splash screen to complete its 1.4s animation + 0.5s fadeout
-    print('Waiting 2.5s for splash screen exit transition...')
-    time.sleep(2.5)
+    # Wait for splash screen to complete its animation + fadeout and data to resolve
+    print('Waiting for splash screen exit and API telemetry to settle...')
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+
+    # Wait up to 10s for station telemetry to load into DOM
+    try:
+        WebDriverWait(driver, 10).until(lambda d: 'Bandra Kurla Complex' in d.page_source)
+        print('Live station telemetry loaded into DOM successfully.')
+    except Exception as e:
+        print('Wait timed out:', e)
+    
+    time.sleep(1.0)
     
     # Check if splash screen has unmounted
     splash_remains = [h.text for h in driver.find_elements(By.TAG_NAME, 'h1') if 'AIR ATLAS' in h.text]
