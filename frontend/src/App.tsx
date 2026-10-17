@@ -16,6 +16,7 @@ import { SpotlightCard } from './components/SpotlightCard';
 import { SplashScreen } from './components/SplashScreen';
 import { ClickSpark } from './components/ClickSpark';
 import { WindRoseWidget } from './components/WindRoseWidget';
+import { CursorSpotlight } from './components/CursorSpotlight';
 import './styles/design-tokens.css';
 
 const API_BASE = '';
@@ -158,7 +159,10 @@ export const App: React.FC = () => {
       glow={theme === 'dark' ? 0.75 : 0.15}
       ring={true}
     >
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+        {/* Dynamic Interactive Cursor Mover: Highlights & Lightens in Night, Darkens & Shades in Day */}
+        <CursorSpotlight theme={theme} />
+
         {/* Editorial Air Atlas Splash Screen */}
         <SplashScreen isReady={!loading && currentData !== null} />
 

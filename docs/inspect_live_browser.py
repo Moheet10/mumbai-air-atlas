@@ -82,5 +82,12 @@ try:
     driver.save_screenshot('docs/screenshots/live_step3_day_theme.png')
     print('Captured docs/screenshots/live_step3_day_theme.png (Day Edition)')
 
+    # 5. Mobile viewport verification (390 x 844 iPhone 14 dimensions)
+    print('\n5. Testing mobile screen rendering (390x844)...')
+    driver.set_window_size(390, 844)
+    time.sleep(0.5)
+    driver.save_screenshot('docs/screenshots/live_mobile_hero_verified.png')
+    print('Captured docs/screenshots/live_mobile_hero_verified.png')
+
 finally:
     driver.quit()

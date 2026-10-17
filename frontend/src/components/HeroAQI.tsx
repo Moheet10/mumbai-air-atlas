@@ -4,6 +4,7 @@ import { calculatePM25AQI, getWindCompass } from '../lib/aqi';
 import { CountUp } from './CountUp';
 import { BlurText } from './BlurText';
 import { Thermometer, Droplets, Wind } from 'lucide-react';
+import { MumbaiSilhouette } from './MumbaiSilhouette';
 
 interface HeroAQIProps {
   data: CurrentConditionsResponse | null;
@@ -72,6 +73,9 @@ export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading, theme = 'light'
           zIndex: 0,
         }}
       />
+
+      {/* Mumbai Coastal Silhouette Background: Bandra-Worli Sea Link & Skyline */}
+      <MumbaiSilhouette theme={theme} />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Editorial Sub-label & Provenance Bar */}

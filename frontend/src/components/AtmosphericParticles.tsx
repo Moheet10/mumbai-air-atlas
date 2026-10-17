@@ -23,7 +23,7 @@ interface Particle {
 }
 
 export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
-  particleCount = 42,
+  particleCount = 26,
   color,
   theme = 'light',
   windSpeedKmh = 10,
@@ -60,21 +60,21 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
     const baseVx = Math.sin(windRad) * windSpeedFactor;
     const baseVy = -Math.cos(windRad) * windSpeedFactor;
 
-    // Particulate color: Dark & distinct in Day mode, Luminous & radiant in Night mode
+    // Particulate color: 50% reverted subtle balance
     const isDark = theme === 'dark';
     const defaultParticleColor =
-      color || (isDark ? 'rgba(255, 248, 230, 0.95)' : 'rgba(20, 18, 14, 0.85)');
+      color || (isDark ? 'rgba(255, 248, 230, 0.65)' : 'rgba(27, 26, 23, 0.50)');
 
-    // Generate particulate array with boosted contrast and presence
+    // Generate particulate array (delicate 1.0-2.4px PM2.5 specks, reduced count & density)
     const particles: Particle[] = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: baseVx + (Math.random() - 0.5) * 0.25,
-      vy: baseVy + (Math.random() - 0.5) * 0.25,
-      size: isDark ? (1.2 + Math.random() * 2.6) : (1.4 + Math.random() * 2.8), // PM2.5 atmospheric specks
-      baseAlpha: isDark ? (0.45 + Math.random() * 0.45) : (0.40 + Math.random() * 0.45),
-      alpha: 0.5,
-      pulseSpeed: 0.012 + Math.random() * 0.02,
+      vx: baseVx + (Math.random() - 0.5) * 0.22,
+      vy: baseVy + (Math.random() - 0.5) * 0.22,
+      size: 0.9 + Math.random() * 1.5,
+      baseAlpha: isDark ? (0.22 + Math.random() * 0.24) : (0.18 + Math.random() * 0.22),
+      alpha: 0.25,
+      pulseSpeed: 0.01 + Math.random() * 0.018,
       pulsePhase: Math.random() * Math.PI * 2,
     }));
 
@@ -103,16 +103,16 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
           p.x += p.vx;
           p.y += p.vy;
           p.pulsePhase += p.pulseSpeed;
-          p.alpha = p.baseAlpha + Math.sin(p.pulsePhase) * 0.12;
+          p.alpha = p.baseAlpha + Math.sin(p.pulsePhase) * 0.08;
 
           // Mouse gentle repel
           const dx = p.x - mouseX;
           const dy = p.y - mouseY;
           const dist = Math.hypot(dx, dy);
-          if (dist < 100 && dist > 0) {
-            const force = (100 - dist) / 100;
-            p.x += (dx / dist) * force * 1.2;
-            p.y += (dy / dist) * force * 1.2;
+          if (dist < 90 && dist > 0) {
+            const force = (90 - dist) / 90;
+            p.x += (dx / dist) * force * 1.0;
+            p.y += (dy / dist) * force * 1.0;
           }
 
           // Wrap edges
@@ -123,10 +123,10 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
         }
 
         ctx.fillStyle = defaultParticleColor;
-        ctx.globalAlpha = Math.max(0.15, Math.min(0.95, p.alpha));
+        ctx.globalAlpha = Math.max(0.08, Math.min(0.55, p.alpha));
         if (isDark) {
-          ctx.shadowColor = 'rgba(255, 235, 175, 0.4)';
-          ctx.shadowBlur = 3;
+          ctx.shadowColor = 'rgba(255, 235, 175, 0.25)';
+          ctx.shadowBlur = 1.5;
         } else {
           ctx.shadowBlur = 0;
         }
