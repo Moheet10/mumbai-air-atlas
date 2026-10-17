@@ -124,53 +124,79 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
     ? stationPoints.map((sp, i) => `${i === 0 ? 'M' : 'L'} ${sp.x} ${sp.y}`).join(' ')
     : '';
 
+  // 80% Prediction interval confidence envelope ribbon
+  const ribbonD = stationPoints.length > 1
+    ? [
+        ...stationPoints.map((sp, i) => `${i === 0 ? 'M' : 'L'} ${sp.x} ${sp.yUpper}`),
+        ...stationPoints.slice().reverse().map((sp) => `L ${sp.x} ${sp.yLower}`),
+        'Z',
+      ].join(' ')
+    : '';
+
   // Y-axis ticks
   const yTicks = [0, 25, 50, 75, 100].filter((v) => v <= maxVal);
   if (!yTicks.includes(maxVal)) yTicks.push(maxVal);
 
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
+    <div
+      className="atlas-card"
+      style={{
+        position: 'relative',
+        width: '100%',
+        padding: '24px',
+        backgroundColor: 'var(--paper-2)',
+      }}
+    >
       {/* Chart Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'baseline',
+          marginBottom: '20px',
+          flexWrap: 'wrap',
+          gap: '12px',
+        }}
+      >
         <div>
-          <h3 style={{ fontSize: '20px', fontFamily: 'var(--font-editorial)', fontWeight: 500 }}>
+          <h3 style={{ fontSize: '22px', fontFamily: 'var(--font-editorial)', fontWeight: 500 }}>
             {isStationMode && stationName
               ? `${stationName.split(',')[0]} Forecast Horizon`
               : 'Station Forecast Horizon'}
           </h3>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--ink-2)', marginTop: '2px' }}>
-            {`STATION MODEL FORECAST AT +1, +6, +12, +24, +48H WITH 80% INTERVALS · DASHED: REGIONAL CAMS GRID FORECAST`}
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginTop: '3px', letterSpacing: '0.04em' }}>
+            STATION MODEL FORECAST AT +1, +6, +12, +24, +48H &middot; 80% ERROR INTERVALS &middot; REGIONAL CAMS REFERENCE
           </div>
         </div>
 
         {/* Legend */}
-        <div style={{ display: 'flex', gap: '16px', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '14px', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', flexWrap: 'wrap', alignItems: 'center' }}>
           {stationReading != null && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#D32F2F', border: '1px solid var(--ink)' }} />
-              <span style={{ color: '#D32F2F', fontWeight: 600 }}>STATION READING ({stationReading.toFixed(1)} µg/m³)</span>
+              <span style={{ display: 'inline-block', width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#D32F2F', border: '1.5px solid var(--paper)' }} />
+              <span style={{ color: '#D32F2F', fontWeight: 600 }}>STATION ({stationReading.toFixed(1)} µg/m³)</span>
             </div>
           )}
           {observations.length > 0 && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ display: 'inline-block', width: '18px', height: '2px', backgroundColor: 'var(--ink)' }} />
+              <span style={{ display: 'inline-block', width: '16px', height: '2px', backgroundColor: 'var(--ink)' }} />
               <span>OBSERVED</span>
             </div>
           )}
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ display: 'inline-block', width: '18px', height: '2px', borderTop: '2px dashed var(--ink)' }} />
-            <span>CAMS GRID FORECAST</span>
+            <span style={{ display: 'inline-block', width: '16px', height: '2px', borderTop: '2px dashed var(--ink-2)' }} />
+            <span>CAMS GRID</span>
           </div>
           {stationPoints.length > 0 && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ display: 'inline-block', width: '18px', height: '1.5px', backgroundColor: 'var(--ink)' }} />
-              <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', border: '1.5px solid var(--ink)', backgroundColor: 'var(--paper)', marginLeft: '-12px' }} />
-              <span style={{ fontWeight: 600, color: 'var(--ink)', marginLeft: '6px' }}>FORECAST (+1, +6, +12, +24, +48h)</span>
+              <span style={{ display: 'inline-block', width: '16px', height: '2px', backgroundColor: 'var(--ink)' }} />
+              <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', border: '1.5px solid var(--ink)', backgroundColor: 'var(--paper)', marginLeft: '-11px' }} />
+              <span style={{ fontWeight: 600, color: 'var(--ink)', marginLeft: '5px' }}>FORECAST (+1h...48h)</span>
             </div>
           )}
           {stationPoints.length > 0 && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ display: 'inline-block', width: '8px', height: '12px', borderLeft: '1.5px solid var(--ink)', borderRight: '1.5px solid var(--ink)', opacity: 0.7 }} />
+              <span style={{ display: 'inline-block', width: '12px', height: '10px', backgroundColor: 'var(--ink)', opacity: 0.12, borderRadius: '2px', border: '1px solid var(--rule)' }} />
               <span>80% INTERVAL (q10–q90)</span>
             </div>
           )}
@@ -233,6 +259,16 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
             strokeLinejoin="round"
           />
 
+          {/* Station Model Forecast Ribbon (80% Prediction Interval Band) */}
+          {ribbonD && (
+            <path
+              d={ribbonD}
+              fill="var(--ink)"
+              fillOpacity="0.08"
+              stroke="none"
+            />
+          )}
+
           {/* Station Model Forecast Line (Thin connecting line, NO smoothing) */}
           {stationLineD && (
             <path
@@ -287,15 +323,25 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
                 stroke="var(--ink)"
                 strokeWidth="2"
               />
-              {/* Lead hour badge */}
+              {/* Lead hour badge with background pill */}
+              <rect
+                x={sp.x - 14}
+                y={sp.yUpper - 18}
+                width="28"
+                height="14"
+                rx="3"
+                fill="var(--paper-2)"
+                stroke="var(--rule)"
+                strokeWidth="1"
+              />
               <text
                 x={sp.x}
-                y={sp.yUpper - 6}
+                y={sp.yUpper - 8}
                 textAnchor="middle"
                 className="font-mono"
                 fontSize="9"
                 fontWeight="600"
-                fill="var(--ink-2)"
+                fill="var(--ink)"
               >
                 +{sp.leadHour}h
               </text>
@@ -317,7 +363,6 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
             textAnchor="middle"
             className="font-mono"
             fontSize="10"
-
             fill="var(--ink)"
             fontWeight="600"
           >
@@ -344,16 +389,42 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
                 strokeWidth="1.2"
                 strokeDasharray="2 2"
               />
-              <text
-                x={nowX + 12}
-                y={getY(stationReading) + 4}
-                className="font-mono"
-                fontSize="11"
-                fontWeight="700"
-                fill="#D32F2F"
-              >
-                {stationReading.toFixed(1)} µg/m³ ({stationName ? stationName.split(',')[0] : 'Station'})
-              </text>
+              {nowX > paddingLeft + 120 ? (
+                <g>
+                  <rect
+                    x={nowX - 145}
+                    y={getY(stationReading) - 10}
+                    width="135"
+                    height="20"
+                    rx="3"
+                    fill="var(--paper)"
+                    stroke="#D32F2F"
+                    strokeWidth="1"
+                  />
+                  <text
+                    x={nowX - 8}
+                    y={getY(stationReading) + 4}
+                    textAnchor="end"
+                    className="font-mono"
+                    fontSize="10"
+                    fontWeight="700"
+                    fill="#D32F2F"
+                  >
+                    {stationReading.toFixed(1)} µg/m³ (Station)
+                  </text>
+                </g>
+              ) : (
+                <text
+                  x={nowX + 12}
+                  y={getY(stationReading) + 4}
+                  className="font-mono"
+                  fontSize="10"
+                  fontWeight="700"
+                  fill="#D32F2F"
+                >
+                  {stationReading.toFixed(1)} µg/m³
+                </text>
+              )}
             </g>
           )}
 

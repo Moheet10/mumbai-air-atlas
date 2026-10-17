@@ -110,12 +110,32 @@ export const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({
       )}
 
       {!loading && dates.length > 0 && (
-        <div style={{ overflowX: 'auto', border: '1px solid var(--rule)', padding: '16px', backgroundColor: 'var(--paper)' }}>
+        <div
+          className="atlas-card"
+          style={{
+            overflowX: 'auto',
+            padding: '20px',
+            backgroundColor: 'var(--paper-2)',
+          }}
+        >
           {/* Heatmap Grid */}
           <div style={{ display: 'inline-block', minWidth: '100%' }}>
             <div style={{ display: 'flex' }}>
               {/* Y-axis labels (Hours 00, 04, 08, 12, 16, 20) */}
-              <div style={{ width: '40px', flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '240px', paddingRight: '8px', textAlign: 'right', fontSize: '10px', color: 'var(--ink-2)' }}>
+              <div
+                style={{
+                  width: '42px',
+                  flexShrink: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  height: '240px',
+                  paddingRight: '10px',
+                  textAlign: 'right',
+                  fontSize: '10px',
+                  color: 'var(--ink-2)',
+                }}
+              >
                 <span>00:00</span>
                 <span>04:00</span>
                 <span>08:00</span>
@@ -161,8 +181,10 @@ export const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({
                               height: '8px',
                               width: '100%',
                               backgroundColor: bg,
+                              borderRadius: '1.5px',
                               border: val === null ? '1px dotted var(--rule)' : 'none',
                               cursor: 'crosshair',
+                              transition: 'transform 0.15s ease',
                             }}
                           />
                         );
@@ -174,7 +196,16 @@ export const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({
             </div>
 
             {/* X-axis date labels */}
-            <div style={{ display: 'flex', marginLeft: '40px', marginTop: '8px', justifyContent: 'space-between', fontSize: '10px', color: 'var(--ink-2)' }}>
+            <div
+              style={{
+                display: 'flex',
+                marginLeft: '42px',
+                marginTop: '10px',
+                justifyContent: 'space-between',
+                fontSize: '10px',
+                color: 'var(--ink-2)',
+              }}
+            >
               <span>{dates[0]}</span>
               {dates.length > 20 && <span>{dates[Math.floor(dates.length / 2)]}</span>}
               <span>{dates[dates.length - 1]}</span>
@@ -185,16 +216,19 @@ export const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({
           <div
             style={{
               marginTop: '16px',
-              paddingTop: '12px',
+              paddingTop: '14px',
               borderTop: '1px solid var(--rule)',
               display: 'flex',
               flexWrap: 'wrap',
-              gap: '16px',
+              gap: '14px',
               fontSize: '11px',
+              alignItems: 'center',
               color: 'var(--ink)',
             }}
           >
-            <span style={{ color: 'var(--ink-2)', marginRight: '4px' }}>CPCB BREAKPOINTS:</span>
+            <span style={{ color: 'var(--ink-2)', fontSize: '10px', letterSpacing: '0.04em' }}>
+              CPCB AQI BREAKPOINTS:
+            </span>
             {[
               { label: 'Good (0–30)', color: 'var(--aqi-good)' },
               { label: 'Satisfactory (31–60)', color: 'var(--aqi-sat)' },
@@ -203,9 +237,27 @@ export const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({
               { label: 'Very Poor (121–250)', color: 'var(--aqi-vpoor)' },
               { label: 'Severe (>250)', color: 'var(--aqi-severe)' },
             ].map((cat) => (
-              <div key={cat.label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <div style={{ width: '10px', height: '10px', backgroundColor: cat.color, border: '1px solid var(--ink)' }} />
-                <span>{cat.label}</span>
+              <div
+                key={cat.label}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: 'var(--paper)',
+                  padding: '2px 8px',
+                  borderRadius: 'var(--radius-sm)',
+                  border: '1px solid var(--rule)',
+                }}
+              >
+                <div
+                  style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '2px',
+                    backgroundColor: cat.color,
+                  }}
+                />
+                <span style={{ fontSize: '11px' }}>{cat.label}</span>
               </div>
             ))}
           </div>
@@ -218,27 +270,40 @@ export const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({
           style={{
             position: 'fixed',
             left: `${hoveredCell.x}px`,
-            top: `${hoveredCell.y - 12}px`,
+            top: `${hoveredCell.y - 10}px`,
             transform: 'translate(-50%, -100%)',
             backgroundColor: 'var(--paper)',
             border: '1px solid var(--ink)',
-            padding: '6px 10px',
+            borderRadius: 'var(--radius-sm)',
+            boxShadow: 'var(--shadow-md)',
+            padding: '8px 12px',
             fontSize: '11px',
             color: 'var(--ink)',
             pointerEvents: 'none',
             zIndex: 9999,
             whiteSpace: 'nowrap',
-            boxShadow: 'none',
+            backdropFilter: 'blur(8px)',
           }}
         >
-          <div style={{ fontWeight: 600 }}>
+          <div style={{ fontWeight: 600, marginBottom: '2px' }}>
             {hoveredCell.date} &middot; {String(hoveredCell.hour).padStart(2, '0')}:00 IST
           </div>
           <div>
-            PM2.5: {hoveredCell.val !== null ? `${hoveredCell.val.toFixed(1)} µg/m³` : 'N/A'}
+            PM2.5: <strong style={{ color: 'var(--ink)' }}>{hoveredCell.val !== null ? `${hoveredCell.val.toFixed(1)} µg/m³` : 'N/A'}</strong>
             {hoveredCell.val !== null && (
-              <span style={{ color: 'var(--ink-2)', marginLeft: '6px' }}>
-                ({calculatePM25AQI(hoveredCell.val).category.label})
+              <span
+                style={{
+                  display: 'inline-block',
+                  marginLeft: '8px',
+                  padding: '1px 6px',
+                  borderRadius: '3px',
+                  backgroundColor: getColor(hoveredCell.val),
+                  color: 'var(--paper)',
+                  fontSize: '10px',
+                  fontWeight: 600,
+                }}
+              >
+                {calculatePM25AQI(hoveredCell.val).category.label}
               </span>
             )}
           </div>

@@ -12,6 +12,8 @@ import { FadeContent } from './components/FadeContent';
 import { Footer } from './components/Footer';
 import type { CurrentConditionsResponse, ForecastResponse, Station } from './types';
 import { getWindCompass } from './lib/aqi';
+import { AtmosphericParticles } from './components/AtmosphericParticles';
+import { SpotlightCard } from './components/SpotlightCard';
 import './styles/design-tokens.css';
 
 const API_BASE = '';
@@ -211,8 +213,11 @@ export const App: React.FC = () => {
           </div>
         )}
 
-        {/* 1. Hero AQI Section */}
-        <HeroAQI data={currentData} loading={loading} />
+        {/* 1. Hero AQI Section with subtle atmospheric particulate layer */}
+        <div style={{ position: 'relative' }}>
+          <AtmosphericParticles theme={theme} />
+          <HeroAQI data={currentData} loading={loading} />
+        </div>
 
         {/* 2. Main Asymmetrical Stage: Map & Station Detail */}
         <section style={{ padding: '48px 0 32px' }}>
@@ -227,37 +232,36 @@ export const App: React.FC = () => {
             >
               {/* Left Column: Map or Directory List Toggle */}
               <div style={{ minWidth: 0 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
-                  <h3 style={{ fontSize: '18px', fontFamily: 'var(--font-editorial)', fontWeight: 500 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
+                  <h3 style={{ fontSize: '20px', fontFamily: 'var(--font-editorial)', fontWeight: 500 }}>
                     Monitoring Topography
                   </h3>
 
-                  {/* View Mode Toggle */}
-                  <div style={{ display: 'flex', gap: '12px', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
+                  {/* View Mode Segmented Control */}
+                  <div className="segmented-group">
                     <button
                       onClick={() => setViewMode('map')}
-                      className="editorial-btn"
-                      style={{
-                        fontWeight: viewMode === 'map' ? 600 : 400,
-                        borderBottom: viewMode === 'map' ? '2px solid var(--ink)' : '1px solid var(--rule)',
-                      }}
+                      className={`segmented-btn ${viewMode === 'map' ? 'active' : ''}`}
                     >
                       MAP VIEW
                     </button>
                     <button
                       onClick={() => setViewMode('list')}
-                      className="editorial-btn"
-                      style={{
-                        fontWeight: viewMode === 'list' ? 600 : 400,
-                        borderBottom: viewMode === 'list' ? '2px solid var(--ink)' : '1px solid var(--rule)',
-                      }}
+                      className={`segmented-btn ${viewMode === 'list' ? 'active' : ''}`}
                     >
                       DIRECTORY ({stations.length})
                     </button>
                   </div>
                 </div>
 
-                <div style={{ border: '1px solid var(--rule)', height: '420px', width: '100%' }}>
+                <div
+                  className="atlas-card"
+                  style={{
+                    height: '420px',
+                    width: '100%',
+                    overflow: 'hidden',
+                  }}
+                >
                   {viewMode === 'map' ? (
                     <StationMap
                       stations={stations}
@@ -275,19 +279,16 @@ export const App: React.FC = () => {
                   )}
                 </div>
 
-                {/* Station Quick Selector Bar */}
+                {/* Station Quick Selector Bar as interactive pills */}
                 <div style={{ marginTop: '12px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                  {stations.slice(0, 5).map((s) => (
+                  {stations.slice(0, 6).map((s) => (
                     <button
                       key={s.id}
                       onClick={() => handleSelectStation(s.id)}
-                      className="editorial-btn"
-                      style={{
-                        fontWeight: s.id === selectedStationId ? 600 : 400,
-                        borderBottom: s.id === selectedStationId ? '2px solid var(--ink)' : '1px solid var(--rule)',
-                      }}
+                      className={`atlas-pill ${s.id === selectedStationId ? 'active' : ''}`}
+                      style={{ cursor: 'pointer' }}
                     >
-                      {s.area}
+                      <span>{s.area}</span>
                     </button>
                   ))}
                 </div>
@@ -302,47 +303,53 @@ export const App: React.FC = () => {
                   <h2 style={{ fontSize: '28px', fontFamily: 'var(--font-editorial)', margin: '4px 0 6px' }}>
                     {selectedStation?.name || 'Monitoring Station'}
                   </h2>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--ink-2)' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--ink-2)' }}>
                     {selectedStation?.agency} &middot; {selectedStation?.coordinates.latitude.toFixed(4)}°N,{' '}
                     {selectedStation?.coordinates.longitude.toFixed(4)}°E
                   </div>
                 </div>
 
-                {/* Surface Meteorology Summary */}
+                {/* Surface Meteorology Summary using SpotlightCard */}
                 {currentData && (
-                  <div style={{ marginBottom: '24px', backgroundColor: 'var(--paper-2)', padding: '16px', border: '1px solid var(--rule)' }}>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                  <SpotlightCard
+                    style={{
+                      marginBottom: '24px',
+                      padding: '16px 20px',
+                      backgroundColor: 'var(--paper-2)',
+                    }}
+                  >
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                       SURFACE METEOROLOGY (OPEN-METEO)
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', fontFamily: 'var(--font-mono)' }}>
                       <div>
-                        <div style={{ fontSize: '11px', color: 'var(--ink-2)' }}>TEMP</div>
-                        <div style={{ fontSize: '18px', fontWeight: 600 }}>{currentData.weather.temperature_c.toFixed(1)}°C</div>
+                        <div style={{ fontSize: '10px', color: 'var(--ink-2)' }}>TEMP</div>
+                        <div style={{ fontSize: '20px', fontWeight: 600 }}>{currentData.weather.temperature_c.toFixed(1)}°C</div>
                       </div>
                       <div>
-                        <div style={{ fontSize: '11px', color: 'var(--ink-2)' }}>HUMIDITY</div>
-                        <div style={{ fontSize: '18px', fontWeight: 600 }}>{currentData.weather.relative_humidity_pct.toFixed(0)}%</div>
+                        <div style={{ fontSize: '10px', color: 'var(--ink-2)' }}>HUMIDITY</div>
+                        <div style={{ fontSize: '20px', fontWeight: 600 }}>{currentData.weather.relative_humidity_pct.toFixed(0)}%</div>
                       </div>
                       <div>
-                        <div style={{ fontSize: '11px', color: 'var(--ink-2)' }}>WIND</div>
-                        <div style={{ fontSize: '18px', fontWeight: 600 }}>
+                        <div style={{ fontSize: '10px', color: 'var(--ink-2)' }}>WIND</div>
+                        <div style={{ fontSize: '20px', fontWeight: 600 }}>
                           {currentData.weather.wind_speed_kmh.toFixed(1)}{' '}
-                          <span style={{ fontSize: '11px', fontWeight: 400 }}>km/h {getWindCompass(currentData.weather.wind_direction_deg)}</span>
+                          <span style={{ fontSize: '11px', fontWeight: 400, color: 'var(--ink-2)' }}>{getWindCompass(currentData.weather.wind_direction_deg)}</span>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </SpotlightCard>
                 )}
 
-                {/* Measured Pollutant Table */}
-                <div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '8px' }}>
+                {/* Measured Pollutant Table inside atlas-card */}
+                <div className="atlas-card" style={{ padding: '16px 20px', backgroundColor: 'var(--paper-2)' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '10px', letterSpacing: '0.04em' }}>
                     <span style={{ textTransform: 'uppercase' }}>SPECIATED POLLUTANT DENSITY</span> (µg/m³)
                   </div>
 
-                  <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-mono)', fontSize: '13px' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
                     <thead>
-                      <tr style={{ borderBottom: '1px solid var(--ink)', textAlign: 'left', color: 'var(--ink-2)', fontSize: '11px' }}>
+                      <tr style={{ borderBottom: '1px solid var(--ink)', textAlign: 'left', color: 'var(--ink-2)', fontSize: '10px' }}>
                         <th style={{ padding: '6px 0' }}>POLLUTANT</th>
                         <th style={{ padding: '6px 0', textAlign: 'right' }}>VALUE</th>
                         <th style={{ padding: '6px 0', textAlign: 'right' }}>PROVENANCE</th>
@@ -350,20 +357,20 @@ export const App: React.FC = () => {
                     </thead>
                     <tbody>
                       <tr style={{ borderBottom: '1px solid var(--rule)' }}>
-                        <td style={{ padding: '8px 0', fontWeight: 500 }}>PM2.5 (Fine)</td>
-                        <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 600 }}>
+                        <td style={{ padding: '8px 0', fontWeight: 600 }}>PM2.5 (Fine)</td>
+                        <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 700, color: 'var(--ink)' }}>
                           {currentData?.primary_pm25.value?.toFixed(1) ?? '—'}
                         </td>
-                        <td style={{ padding: '8px 0', textAlign: 'right', fontSize: '11px', color: 'var(--ink-2)' }}>
-                          {isSnapshot ? 'Archived Station Sensor' : isSample ? 'Synthetic Baseline' : 'Sensor Observed'}
+                        <td style={{ padding: '8px 0', textAlign: 'right', fontSize: '10px', color: 'var(--ink-2)' }}>
+                          {isSnapshot ? 'Archived Sensor' : isSample ? 'Synthetic Baseline' : 'Sensor Observed'}
                         </td>
                       </tr>
                       {currentData?.other_pollutants.map((p) => (
                         <tr key={p.parameter} style={{ borderBottom: '1px solid var(--rule)' }}>
                           <td style={{ padding: '8px 0' }}>{p.display_name.split(' (')[0]}</td>
-                          <td style={{ padding: '8px 0', textAlign: 'right' }}>{p.value?.toFixed(1) ?? '—'}</td>
-                          <td style={{ padding: '8px 0', textAlign: 'right', fontSize: '11px', color: 'var(--ink-2)' }}>
-                            {p.provenance === 'provider_forecast' ? 'CAMS Grid' : isSnapshot ? 'Archived Station Sensor' : isSample ? 'Synthetic Baseline' : 'Sensor Observed'}
+                          <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 500 }}>{p.value?.toFixed(1) ?? '—'}</td>
+                          <td style={{ padding: '8px 0', textAlign: 'right', fontSize: '10px', color: 'var(--ink-2)' }}>
+                            {p.provenance === 'provider_forecast' ? 'CAMS Grid' : isSnapshot ? 'Archived Sensor' : isSample ? 'Synthetic Baseline' : 'Sensor Observed'}
                           </td>
                         </tr>
                       ))}

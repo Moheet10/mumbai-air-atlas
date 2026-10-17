@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { ModelMetricsData, PooledForwardChainingRow, SpatialHoldoutRow } from '../types';
+import { SpotlightCard } from './SpotlightCard';
 
 interface ModelHonestyBoxProps {
   metrics?: ModelMetricsData | null;
@@ -32,53 +33,41 @@ export const ModelHonestyBox: React.FC<ModelHonestyBoxProps> = ({ metrics }) => 
     'The station model beats persistence and CAMS+bias across all horizons (1h to 48h) in forward chaining across 4 chronological folds and maintains skill on strictly held-out spatial sites (BKC, Worli, Deonar). In the top-10% pollution tail, error increases to 32–39 µg/m³ and interval coverage drops to 51–58%, reflecting the fundamental difficulty of extreme episodic spikes.';
 
   return (
-    <div
+    <SpotlightCard
       style={{
-        border: '1px solid var(--rule)',
-        backgroundColor: 'var(--paper-2)',
-        padding: '24px',
+        padding: '28px',
         margin: '32px 0 48px',
+        backgroundColor: 'var(--paper-2)',
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '20px' }}>
         <div>
-          <h3 style={{ fontSize: '18px', fontFamily: 'var(--font-editorial)', fontWeight: 500 }}>
+          <h3 style={{ fontSize: '22px', fontFamily: 'var(--font-editorial)', fontWeight: 500 }}>
             Station Model Benchmark Scorecard
           </h3>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--ink-2)', marginTop: '2px' }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginTop: '3px', letterSpacing: '0.04em' }}>
             24 PHYSICAL CAAQMS GROUND STATIONS &middot; WHOLE-CALENDAR-DAY BLOCK BOOTSTRAP &middot; 80% PREDICTION INTERVALS
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '8px', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
+        {/* Modern Segmented Tab Bar */}
+        <div className="segmented-group">
           <button
             onClick={() => setActiveTab('pooled')}
-            className="editorial-btn"
-            style={{
-              fontWeight: activeTab === 'pooled' ? 600 : 400,
-              borderBottom: activeTab === 'pooled' ? '2px solid var(--ink)' : '1px solid var(--rule)',
-            }}
+            className={`segmented-btn ${activeTab === 'pooled' ? 'active' : ''}`}
           >
             POOLED FORWARD CHAINING
           </button>
           <button
             onClick={() => setActiveTab('spatial')}
-            className="editorial-btn"
-            style={{
-              fontWeight: activeTab === 'spatial' ? 600 : 400,
-              borderBottom: activeTab === 'spatial' ? '2px solid var(--ink)' : '1px solid var(--rule)',
-            }}
+            className={`segmented-btn ${activeTab === 'spatial' ? 'active' : ''}`}
           >
             CLEAN SPATIAL HOLDOUT
           </button>
           <button
             onClick={() => setActiveTab('live')}
-            className="editorial-btn"
-            style={{
-              fontWeight: activeTab === 'live' ? 600 : 400,
-              borderBottom: activeTab === 'live' ? '2px solid var(--ink)' : '1px solid var(--rule)',
-            }}
+            className={`segmented-btn ${activeTab === 'live' ? 'active' : ''}`}
           >
             LIVE LOGGED RECORD
           </button>
@@ -251,7 +240,7 @@ export const ModelHonestyBox: React.FC<ModelHonestyBoxProps> = ({ metrics }) => 
           <strong style={{ color: 'var(--ink)', fontWeight: 500 }}>Data Limitations:</strong> Due to a CPCB/MPCB historical data hiatus in OpenAQ between Nov 1, 2022 and Feb 17, 2025, exactly ONE continuous winter (2025–2026) exists for multi-station evaluation. At inference time, weather covariates are drawn from operational NWP forecasts (Open-Meteo) rather than reanalysis.
         </p>
       </div>
-    </div>
+    </SpotlightCard>
   );
 };
 
