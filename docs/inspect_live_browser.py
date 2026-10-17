@@ -81,16 +81,48 @@ try:
     scroll_height = driver.execute_script("return document.body.scrollHeight;")
     print(f'\n4. Document scroll height: {scroll_height}px')
     
-    # Capture full page view screenshot
+    # Capture hero view screenshot
     driver.save_screenshot('docs/screenshots/live_step2_dashboard.png')
-    print('Captured docs/screenshots/live_step2_dashboard.png')
+    print('Captured docs/screenshots/live_step2_dashboard.png (Hero)')
 
-    # Test toggling to Day Edition
+    # Capture section 2: Topography
+    driver.execute_script("window.scrollTo(0, 600);")
+    time.sleep(0.5)
+    driver.save_screenshot('docs/screenshots/live_scroll_topography.png')
+    print('Captured docs/screenshots/live_scroll_topography.png')
+
+    # Capture section 3: Forecast Horizon
+    driver.execute_script("window.scrollTo(0, 1300);")
+    time.sleep(0.5)
+    driver.save_screenshot('docs/screenshots/live_scroll_forecast.png')
+    print('Captured docs/screenshots/live_scroll_forecast.png')
+
+    # Capture section 4: Heatmap
+    driver.execute_script("window.scrollTo(0, 2000);")
+    time.sleep(0.5)
+    driver.save_screenshot('docs/screenshots/live_scroll_heatmap.png')
+    print('Captured docs/screenshots/live_scroll_heatmap.png')
+
+    # Capture section 5: What Changed & Model Honesty
+    driver.execute_script("window.scrollTo(0, 2750);")
+    time.sleep(0.5)
+    driver.save_screenshot('docs/screenshots/live_scroll_honesty.png')
+    print('Captured docs/screenshots/live_scroll_honesty.png')
+
+    # Scroll back to top and test toggling to Day Edition
+    driver.execute_script("window.scrollTo(0, 0);")
+    time.sleep(0.5)
     toggle_btn = driver.find_element(By.CSS_SELECTOR, "button[aria-label='Toggle Day / Night edition']")
     toggle_btn.click()
     time.sleep(1)
     driver.save_screenshot('docs/screenshots/live_step3_day_theme.png')
     print('Captured docs/screenshots/live_step3_day_theme.png (Day Edition)')
+
+    # Capture Day Edition scroll down to forecast & heatmap
+    driver.execute_script("window.scrollTo(0, 1300);")
+    time.sleep(0.5)
+    driver.save_screenshot('docs/screenshots/live_day_scroll_forecast.png')
+    print('Captured docs/screenshots/live_day_scroll_forecast.png')
 
     # 5. Mobile viewport verification (390 x 844 iPhone 14 dimensions)
     print('\n5. Testing mobile screen rendering (390x844)...')
