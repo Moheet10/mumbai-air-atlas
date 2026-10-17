@@ -11,10 +11,11 @@ import { DataFreshness } from './components/DataFreshness';
 import { FadeContent } from './components/FadeContent';
 import { Footer } from './components/Footer';
 import type { CurrentConditionsResponse, ForecastResponse, Station } from './types';
-import { getWindCompass } from './lib/aqi';
 import { AtmosphericParticles } from './components/AtmosphericParticles';
 import { SpotlightCard } from './components/SpotlightCard';
 import { SplashScreen } from './components/SplashScreen';
+import { ClickSpark } from './components/ClickSpark';
+import { WindRoseWidget } from './components/WindRoseWidget';
 import './styles/design-tokens.css';
 
 const API_BASE = '';
@@ -144,9 +145,17 @@ export const App: React.FC = () => {
   const snapshotDate = currentData?.snapshot_as_of || '14 Oct 2026';
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Editorial Air Atlas Splash Screen */}
-      <SplashScreen isReady={!loading && currentData !== null} />
+    <ClickSpark
+      sparkColor={theme === 'dark' ? '#E0B341' : '#D9772B'}
+      sparkCount={7}
+      sparkSize={11}
+      sparkRadius={26}
+      glow={0.3}
+      ring={true}
+    >
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        {/* Editorial Air Atlas Splash Screen */}
+        <SplashScreen isReady={!loading && currentData !== null} />
 
       {/* Persistent Snapshot Banner */}
       {isSnapshot && (
@@ -219,7 +228,11 @@ export const App: React.FC = () => {
 
         {/* 1. Hero AQI Section with subtle atmospheric particulate layer */}
         <div style={{ position: 'relative' }}>
-          <AtmosphericParticles theme={theme} />
+          <AtmosphericParticles
+            theme={theme}
+            windSpeedKmh={currentData?.weather.wind_speed_kmh}
+            windDirectionDeg={currentData?.weather.wind_direction_deg}
+          />
           <HeroAQI data={currentData} loading={loading} />
         </div>
 
@@ -290,8 +303,20 @@ export const App: React.FC = () => {
                       key={s.id}
                       onClick={() => handleSelectStation(s.id)}
                       className={`atlas-pill ${s.id === selectedStationId ? 'active' : ''}`}
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                     >
+                      {s.id === selectedStationId && (
+                        <span
+                          style={{
+                            width: '6px',
+                            height: '6px',
+                            borderRadius: '50%',
+                            backgroundColor: '#4C8C6B',
+                            boxShadow: '0 0 6px #4C8C6B',
+                            display: 'inline-block',
+                          }}
+                        />
+                      )}
                       <span>{s.area}</span>
                     </button>
                   ))}
@@ -317,36 +342,34 @@ export const App: React.FC = () => {
                 {currentData && (
                   <SpotlightCard
                     style={{
-                      marginBottom: '24px',
+                      marginBottom: '20px',
                       padding: '16px 20px',
                       backgroundColor: 'var(--paper-2)',
                     }}
                   >
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                       SURFACE METEOROLOGY (OPEN-METEO)
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', fontFamily: 'var(--font-mono)' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px', fontFamily: 'var(--font-mono)', marginBottom: '14px' }}>
                       <div>
-                        <div style={{ fontSize: '10px', color: 'var(--ink-2)' }}>TEMP</div>
-                        <div style={{ fontSize: '20px', fontWeight: 600 }}>{currentData.weather.temperature_c.toFixed(1)}°C</div>
+                        <div style={{ fontSize: '10px', color: 'var(--ink-2)' }}>AIR TEMPERATURE</div>
+                        <div style={{ fontSize: '22px', fontWeight: 600 }}>{currentData.weather.temperature_c.toFixed(1)}°C</div>
                       </div>
                       <div>
-                        <div style={{ fontSize: '10px', color: 'var(--ink-2)' }}>HUMIDITY</div>
-                        <div style={{ fontSize: '20px', fontWeight: 600 }}>{currentData.weather.relative_humidity_pct.toFixed(0)}%</div>
-                      </div>
-                      <div>
-                        <div style={{ fontSize: '10px', color: 'var(--ink-2)' }}>WIND</div>
-                        <div style={{ fontSize: '20px', fontWeight: 600 }}>
-                          {currentData.weather.wind_speed_kmh.toFixed(1)}{' '}
-                          <span style={{ fontSize: '11px', fontWeight: 400, color: 'var(--ink-2)' }}>{getWindCompass(currentData.weather.wind_direction_deg)}</span>
-                        </div>
+                        <div style={{ fontSize: '10px', color: 'var(--ink-2)' }}>RELATIVE HUMIDITY</div>
+                        <div style={{ fontSize: '22px', fontWeight: 600 }}>{currentData.weather.relative_humidity_pct.toFixed(0)}%</div>
                       </div>
                     </div>
+                    {/* Live Navigational Wind Rose Compass Widget */}
+                    <WindRoseWidget
+                      speedKmh={currentData.weather.wind_speed_kmh}
+                      directionDeg={currentData.weather.wind_direction_deg}
+                    />
                   </SpotlightCard>
                 )}
 
-                {/* Measured Pollutant Table inside atlas-card */}
-                <div className="atlas-card" style={{ padding: '16px 20px', backgroundColor: 'var(--paper-2)' }}>
+                {/* Measured Pollutant Table inside SpotlightCard */}
+                <SpotlightCard style={{ padding: '16px 20px', backgroundColor: 'var(--paper-2)' }}>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '10px', letterSpacing: '0.04em' }}>
                     <span style={{ textTransform: 'uppercase' }}>SPECIATED POLLUTANT DENSITY</span> (µg/m³)
                   </div>
@@ -380,7 +403,7 @@ export const App: React.FC = () => {
                       ))}
                     </tbody>
                   </table>
-                </div>
+                </SpotlightCard>
               </div>
             </div>
           </div>
@@ -435,7 +458,8 @@ export const App: React.FC = () => {
       </main>
 
       <Footer />
-    </div>
+      </div>
+    </ClickSpark>
   );
 };
 

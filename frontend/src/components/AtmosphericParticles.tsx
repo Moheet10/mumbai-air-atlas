@@ -4,6 +4,8 @@ interface AtmosphericParticlesProps {
   particleCount?: number;
   color?: string;
   theme?: 'light' | 'dark';
+  windSpeedKmh?: number;
+  windDirectionDeg?: number;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -24,6 +26,8 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
   particleCount = 42,
   color,
   theme = 'light',
+  windSpeedKmh = 10,
+  windDirectionDeg = 340,
   className = '',
   style = {},
 }) => {
@@ -50,6 +54,12 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
 
     const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
+    // Physical wind drift vector (wind blows FROM windDirectionDeg, particles drift TOWARDS opposite)
+    const windRad = (((windDirectionDeg + 180) % 360) * Math.PI) / 180;
+    const windSpeedFactor = 0.08 + Math.min(0.55, (windSpeedKmh / 30.0) * 0.45);
+    const baseVx = Math.sin(windRad) * windSpeedFactor;
+    const baseVy = -Math.cos(windRad) * windSpeedFactor;
+
     // Default particulate color
     const defaultParticleColor =
       color || (theme === 'dark' ? 'rgba(237, 231, 218, 0.35)' : 'rgba(27, 26, 23, 0.22)');
@@ -58,8 +68,8 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
     const particles: Particle[] = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: -0.15 - Math.random() * 0.35, // slow upward atmospheric drift
+      vx: baseVx + (Math.random() - 0.5) * 0.25,
+      vy: baseVy + (Math.random() - 0.5) * 0.25,
       size: 1 + Math.random() * 2.4, // tiny 1-3px particulate specks (PM2.5)
       baseAlpha: 0.12 + Math.random() * 0.32,
       alpha: 0.2,
@@ -106,6 +116,7 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
 
           // Wrap edges
           if (p.y < -10) p.y = height + 10;
+          if (p.y > height + 10) p.y = -10;
           if (p.x < -10) p.x = width + 10;
           if (p.x > width + 10) p.x = -10;
         }
@@ -131,7 +142,7 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
       document.removeEventListener('mouseleave', handleMouseLeave);
       cancelAnimationFrame(animId);
     };
-  }, [particleCount, color, theme]);
+  }, [particleCount, color, theme, windSpeedKmh, windDirectionDeg]);
 
   return (
     <canvas
