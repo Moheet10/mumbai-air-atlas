@@ -18,24 +18,45 @@ import numpy as np
 import pandas as pd
 from backend.ml.features import build_features
 
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "mumbai_air.db")
-MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "lgbm_model.pkl")
+def _find_anomaly_db() -> str:
+    candidates = [
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "mumbai_air.db"),
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "snapshot", "snapshot.db"),
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return candidates[0]
+
+DB_PATH = _find_anomaly_db()
+MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "station_models.pkl")
 ANOMALIES_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "anomalies.json")
 
 
-def detect_anomalies(db_path: str = DB_PATH, z_threshold: float = 2.5) -> list:
-    conn = sqlite3.connect(db_path)
-    df = pd.read_sql_query(
-        """
-        SELECT timestamp_utc, timestamp_local, pm2_5, pm10,
-               temperature_2m, relative_humidity_2m, precipitation,
-               wind_speed_10m, wind_direction_10m
-        FROM hourly_records
-        ORDER BY timestamp_utc ASC
-        """,
-        conn,
-    )
-    conn.close()
+def detect_anomalies(db_path: str = None, z_threshold: float = 2.5) -> list:
+    if db_path is None or not os.path.exists(db_path):
+        db_path = _find_anomaly_db()
+
+    if not os.path.exists(db_path):
+        return []
+
+    try:
+        from pathlib import Path
+        uri = Path(db_path).resolve().as_uri() + "?mode=ro"
+        conn = sqlite3.connect(uri, uri=True, timeout=30.0)
+        df = pd.read_sql_query(
+            """
+            SELECT timestamp_utc, timestamp_local, pm2_5, pm10,
+                   temperature_2m, relative_humidity_2m, precipitation,
+                   wind_speed_10m, wind_direction_10m
+            FROM hourly_records
+            ORDER BY timestamp_utc ASC
+            """,
+            conn,
+        )
+        conn.close()
+    except Exception:
+        return []
 
     if df.empty or len(df) < 50:
         return []
