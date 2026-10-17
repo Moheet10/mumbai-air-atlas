@@ -41,10 +41,24 @@ frontend/dist/
 
 # SQLite / Local storage
 *.db
+*.db-journal
+*.db-wal
+*.db-shm
 *.sqlite
 *.sqlite3
+backend/data/*.db*
+backend/data/station_cache/
+station_cache/
+
+# Whitelist committed snapshot and evaluation artifacts
+backend/data/*.pkl
+!backend/data/snapshot/**
+!backend/data/station_models.pkl
+!backend/data/station_model_evaluation.json
+!backend/data/forecast_log.csv
 
 # Logs & OS artifacts
 *.log
 .DS_Store
 Thumbs.db
+

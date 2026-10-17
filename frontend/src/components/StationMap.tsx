@@ -1,51 +1,44 @@
 import React, { useEffect, useRef } from 'react';
 import * as maplibregl from 'maplibre-gl';
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import type { Station } from '../types';
 import { calculatePM25AQI } from '../lib/aqi';
+
+// Configure MapLibre GL worker for Vite bundler
+maplibregl.setWorkerUrl(workerUrl);
 
 interface StationMapProps {
   stations: Station[];
   selectedStationId?: string;
   onSelectStation: (stationId: string) => void;
+  theme?: 'light' | 'dark';
+  isSample?: boolean;
 }
 
 export const StationMap: React.FC<StationMapProps> = ({
   stations,
   selectedStationId,
   onSelectStation,
+  theme = 'light',
+  isSample = true,
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const markersRef = useRef<{ [key: string]: maplibregl.Marker }>({});
 
+  const getStyleUrl = (currentTheme: 'light' | 'dark') => {
+    return currentTheme === 'dark'
+      ? 'https://tiles.openfreemap.org/styles/dark'
+      : 'https://tiles.openfreemap.org/styles/positron';
+  };
+
   useEffect(() => {
     if (!mapContainer.current || mapRef.current) return;
 
-    // Use OpenStreetMap tiles with archival paper filter
+    // High-performance vector tiles via OpenFreeMap (no API key required, no watermarks, full vector fidelity)
     const map = new maplibregl.Map({
       container: mapContainer.current,
-      style: {
-        version: 8,
-        sources: {
-          'osm-tiles': {
-            type: 'raster',
-            tiles: [
-              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            ],
-            tileSize: 256,
-            attribution: '© OpenStreetMap contributors',
-          },
-        },
-        layers: [
-          {
-            id: 'osm-tiles-layer',
-            type: 'raster',
-            source: 'osm-tiles',
-            minzoom: 0,
-            maxzoom: 19,
-          },
-        ],
-      },
+      style: getStyleUrl(theme),
       center: [72.8777, 19.0760], // Greater Mumbai
       zoom: 10.4,
       maxZoom: 15,
@@ -61,6 +54,13 @@ export const StationMap: React.FC<StationMapProps> = ({
       mapRef.current = null;
     };
   }, []);
+
+  // Update map style when theme changes
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    map.setStyle(getStyleUrl(theme));
+  }, [theme]);
 
   // Update markers when stations or selection changes
   useEffect(() => {
@@ -81,10 +81,10 @@ export const StationMap: React.FC<StationMapProps> = ({
       el.style.width = isSelected ? '18px' : '12px';
       el.style.height = isSelected ? '18px' : '12px';
       el.style.backgroundColor = category.colorHex;
-      el.style.border = isSelected ? '2px solid #1B1A17' : '1px solid #1B1A17';
+      el.style.border = isSelected ? '2px solid var(--ink)' : '1px solid var(--ink)';
       el.style.borderRadius = '50%';
       el.style.cursor = 'pointer';
-      el.style.boxShadow = isSelected ? '0 0 0 3px rgba(27, 26, 23, 0.25)' : 'none';
+      el.style.boxShadow = isSelected ? '0 0 0 3px color-mix(in srgb, var(--ink) 25%, transparent)' : 'none';
       el.style.transition = 'all 160ms ease';
 
       el.addEventListener('click', () => {
@@ -92,9 +92,9 @@ export const StationMap: React.FC<StationMapProps> = ({
       });
 
       const popup = new maplibregl.Popup({ offset: 12, closeButton: false }).setHTML(`
-        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px; color: #1B1A17;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px; color: var(--ink);">
           <div style="font-weight: 600; margin-bottom: 2px;">${station.name}</div>
-          <div style="color: #6B665C;">${station.agency} &middot; ${station.area}</div>
+          <div style="color: var(--ink-2);">${station.agency} &middot; ${station.area}</div>
           <div style="margin-top: 4px; font-size: 12px; font-weight: 500;">PM2.5: ${pm25.toFixed(1)} µg/m³ (${category.label})</div>
         </div>
       `);
@@ -110,12 +110,12 @@ export const StationMap: React.FC<StationMapProps> = ({
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: '380px', backgroundColor: 'var(--paper-2)' }}>
+      {/* Clean native vector cartography without CSS filter hacks or watermarks */}
       <div
         ref={mapContainer}
         style={{
           width: '100%',
           height: '100%',
-          filter: 'sepia(0.18) contrast(0.96) brightness(0.98)',
         }}
       />
 
@@ -125,7 +125,7 @@ export const StationMap: React.FC<StationMapProps> = ({
           position: 'absolute',
           top: '12px',
           left: '12px',
-          backgroundColor: 'rgba(244, 239, 230, 0.92)',
+          backgroundColor: 'var(--paper-2)',
           border: '1px solid var(--rule)',
           padding: '8px 12px',
           fontFamily: 'var(--font-mono)',
@@ -138,9 +138,12 @@ export const StationMap: React.FC<StationMapProps> = ({
           MUMBAI MONITORING GRID
         </div>
         <div style={{ color: 'var(--ink-2)' }}>
-          {stations.length} CAAQMS STATIONS ACTIVE
+          {isSample
+            ? `${stations.length} SAMPLE FIELD NODES`
+            : `${stations.length} ACTIVE STATIONS`}
         </div>
       </div>
     </div>
   );
 };
+

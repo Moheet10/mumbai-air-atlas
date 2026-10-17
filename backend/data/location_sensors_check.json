@@ -1,0 +1,551 @@
+{
+  "11606": {
+    "location_name": "Borivali East, Mumbai - IITM",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12236418,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      },
+      {
+        "sensor_id": 39428,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "11611": {
+    "location_name": "Malad West, Mumbai - IITM",
+    "pm25_sensors": [
+      {
+        "sensor_id": 39454,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      },
+      {
+        "sensor_id": 12236426,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409479": {
+    "location_name": "Mindspace-Malad West, Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238348,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409469": {
+    "location_name": "Kasarvadavali, Thane - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238258,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409472": {
+    "location_name": "Upvan Fort, Thane - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238285,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409477": {
+    "location_name": "Kopripada-Vashi, Navi Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238330,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409487": {
+    "location_name": "Sanpada, Navi Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12243949,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409471": {
+    "location_name": "Sector-2E Kalamboli, Navi Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238276,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "6943": {
+    "location_name": "Mahape, Navi Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12235905,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      },
+      {
+        "sensor_id": 20046,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409514": {
+    "location_name": "Ghatkopar, Mumbai - BMC",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238603,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409511": {
+    "location_name": "Shivaji Nagar, Mumbai - BMC",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238576,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409483": {
+    "location_name": "Chembur, Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238384,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409510": {
+    "location_name": "Byculla, Mumbai - BMC",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238567,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409482": {
+    "location_name": "Bandra Kurla Complex, Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238375,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "12024": {
+    "location_name": "Chakala-Andheri East, Mumbai - IITM",
+    "pm25_sensors": [
+      {
+        "sensor_id": 40571,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      },
+      {
+        "sensor_id": 12442196,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409478": {
+    "location_name": "Bhayandar West, Mira-Bhayandar - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238339,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "6959": {
+    "location_name": "Siddharth Nagar-Worli, Mumbai - IITM",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12236435,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      },
+      {
+        "sensor_id": 20033,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409323": {
+    "location_name": "Worli, Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12235914,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409329": {
+    "location_name": "Deonar, Mumbai - IITM",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12236385,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "3409512": {
+    "location_name": "Kandivali West, Mumbai - BMC",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12238585,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "12040": {
+    "location_name": "Mulund West, Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12236481,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      },
+      {
+        "sensor_id": 40641,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "6945": {
+    "location_name": "Kurla, Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12235834,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      },
+      {
+        "sensor_id": 19978,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "6948": {
+    "location_name": "Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12235860,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      },
+      {
+        "sensor_id": 19981,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  },
+  "6967": {
+    "location_name": "Sion, Mumbai - MPCB",
+    "pm25_sensors": [
+      {
+        "sensor_id": 12243930,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      },
+      {
+        "sensor_id": 20096,
+        "name": "pm25 \u00b5g/m\u00b3",
+        "parameter": {
+          "id": 2,
+          "name": "pm25",
+          "units": "\u00b5g/m\u00b3",
+          "displayName": "PM2.5"
+        },
+        "datetimeFirst": null,
+        "datetimeLast": null,
+        "coverage": null
+      }
+    ]
+  }
+}

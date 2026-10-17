@@ -1,0 +1,1644 @@
+{
+  "execution_timestamp_utc": "2026-10-14T10:31:53.172845+00:00",
+  "git_commit_hash": "af86026d775fd6205b64b038563a5e65536fe232",
+  "audit_summary": {
+    "n_stations_audited": 5,
+    "station_results": {
+      "11606": {
+        "station_id": "11606",
+        "station_name": "Borivali East, Mumbai - IITM",
+        "total_station_hours": 13068,
+        "first_ts": "2025-02-18T20:30:00Z",
+        "last_ts": "2026-10-13T18:30:00Z",
+        "overlap_direct_key": {
+          "n_hours": 13068,
+          "station_mean": 33.0,
+          "cams_mean": 31.88,
+          "mean_bias": -1.12,
+          "mae": 11.16,
+          "correlation": 0.6627,
+          "q90_threshold": 63.8,
+          "top_decile_n": 1308,
+          "top_decile_bias": -20.56,
+          "top_decile_mae": 29.55
+        },
+        "overlap_hour_beginning": {
+          "n_hours": 13068,
+          "station_mean": 33.0,
+          "cams_mean": 31.89,
+          "mean_bias": -1.11,
+          "mae": 11.16,
+          "correlation": 0.661,
+          "q90_threshold": 63.8,
+          "top_decile_n": 1308,
+          "top_decile_bias": -20.65,
+          "top_decile_mae": 29.5
+        },
+        "seasonal": {
+          "Winter": {
+            "n_hours": 2034,
+            "station_mean": 50.51,
+            "cams_mean": 58.79,
+            "mean_bias": 8.28,
+            "mae": 18.18,
+            "correlation": 0.4439,
+            "q90_threshold": 71.77,
+            "top_decile_n": 204,
+            "top_decile_bias": -15.36,
+            "top_decile_mae": 30.61
+          },
+          "Pre-Monsoon": {
+            "n_hours": 4090,
+            "station_mean": 36.58,
+            "cams_mean": 30.74,
+            "mean_bias": -5.84,
+            "mae": 12.8,
+            "correlation": 0.5816,
+            "q90_threshold": 66.51,
+            "top_decile_n": 409,
+            "top_decile_bias": -37.44,
+            "top_decile_mae": 41.74
+          },
+          "Monsoon": {
+            "n_hours": 5340,
+            "station_mean": 18.94,
+            "cams_mean": 18.45,
+            "mean_bias": -0.49,
+            "mae": 6.44,
+            "correlation": 0.1959,
+            "q90_threshold": 28.1,
+            "top_decile_n": 536,
+            "top_decile_bias": -11.22,
+            "top_decile_mae": 12.63
+          },
+          "Post-Monsoon": {
+            "n_hours": 1604,
+            "station_mean": 48.45,
+            "cams_mean": 45.37,
+            "mean_bias": -3.08,
+            "mae": 13.8,
+            "correlation": 0.6889,
+            "q90_threshold": 83.17,
+            "top_decile_n": 161,
+            "top_decile_bias": -25.63,
+            "top_decile_mae": 27.52
+          }
+        },
+        "shift_correlations_3h": {
+          "-3h": 0.6522,
+          "-2h": 0.657,
+          "-1h": 0.6613,
+          "+0h": 0.6627,
+          "+1h": 0.6617,
+          "+2h": 0.6589,
+          "+3h": 0.6538
+        }
+      },
+      "11611": {
+        "station_id": "11611",
+        "station_name": "Malad West, Mumbai - IITM",
+        "total_station_hours": 12985,
+        "first_ts": "2025-02-18T20:30:00Z",
+        "last_ts": "2026-10-13T18:30:00Z",
+        "overlap_direct_key": {
+          "n_hours": 12985,
+          "station_mean": 25.27,
+          "cams_mean": 31.99,
+          "mean_bias": 6.72,
+          "mae": 14.21,
+          "correlation": 0.62,
+          "q90_threshold": 60.7,
+          "top_decile_n": 1304,
+          "top_decile_bias": -19.25,
+          "top_decile_mae": 30.55
+        },
+        "overlap_hour_beginning": {
+          "n_hours": 12985,
+          "station_mean": 25.27,
+          "cams_mean": 32.0,
+          "mean_bias": 6.73,
+          "mae": 14.23,
+          "correlation": 0.6178,
+          "q90_threshold": 60.7,
+          "top_decile_n": 1304,
+          "top_decile_bias": -19.35,
+          "top_decile_mae": 30.44
+        },
+        "seasonal": {
+          "Winter": {
+            "n_hours": 1967,
+            "station_mean": 47.67,
+            "cams_mean": 58.67,
+            "mean_bias": 11.0,
+            "mae": 20.46,
+            "correlation": 0.4381,
+            "q90_threshold": 72.4,
+            "top_decile_n": 200,
+            "top_decile_bias": -11.36,
+            "top_decile_mae": 27.58
+          },
+          "Pre-Monsoon": {
+            "n_hours": 4010,
+            "station_mean": 24.1,
+            "cams_mean": 31.01,
+            "mean_bias": 6.92,
+            "mae": 13.58,
+            "correlation": 0.5047,
+            "q90_threshold": 46.0,
+            "top_decile_n": 404,
+            "top_decile_bias": -16.15,
+            "top_decile_mae": 26.42
+          },
+          "Monsoon": {
+            "n_hours": 5330,
+            "station_mean": 10.35,
+            "cams_mean": 18.46,
+            "mean_bias": 8.1,
+            "mae": 10.25,
+            "correlation": 0.1868,
+            "q90_threshold": 20.3,
+            "top_decile_n": 537,
+            "top_decile_bias": -7.16,
+            "top_decile_mae": 11.07
+          },
+          "Post-Monsoon": {
+            "n_hours": 1678,
+            "station_mean": 49.17,
+            "cams_mean": 46.01,
+            "mean_bias": -3.16,
+            "mae": 20.99,
+            "correlation": 0.48,
+            "q90_threshold": 93.85,
+            "top_decile_n": 168,
+            "top_decile_bias": -63.42,
+            "top_decile_mae": 64.03
+          }
+        },
+        "shift_correlations_3h": {
+          "-3h": 0.6129,
+          "-2h": 0.6128,
+          "-1h": 0.6153,
+          "+0h": 0.62,
+          "+1h": 0.6222,
+          "+2h": 0.6222,
+          "+3h": 0.6215
+        }
+      },
+      "3409469": {
+        "station_id": "3409469",
+        "station_name": "Kasarvadavali, Thane - MPCB",
+        "total_station_hours": 12964,
+        "first_ts": "2025-02-18T20:30:00Z",
+        "last_ts": "2026-10-13T18:30:00Z",
+        "overlap_direct_key": {
+          "n_hours": 12964,
+          "station_mean": 31.28,
+          "cams_mean": 31.9,
+          "mean_bias": 0.61,
+          "mae": 14.54,
+          "correlation": 0.4214,
+          "q90_threshold": 52.7,
+          "top_decile_n": 1303,
+          "top_decile_bias": -18.32,
+          "top_decile_mae": 27.06
+        },
+        "overlap_hour_beginning": {
+          "n_hours": 12964,
+          "station_mean": 31.28,
+          "cams_mean": 31.91,
+          "mean_bias": 0.63,
+          "mae": 14.59,
+          "correlation": 0.4166,
+          "q90_threshold": 52.7,
+          "top_decile_n": 1303,
+          "top_decile_bias": -18.46,
+          "top_decile_mae": 27.14
+        },
+        "seasonal": {
+          "Winter": {
+            "n_hours": 2004,
+            "station_mean": 43.24,
+            "cams_mean": 58.26,
+            "mean_bias": 15.02,
+            "mae": 28.11,
+            "correlation": -0.0461,
+            "q90_threshold": 68.6,
+            "top_decile_n": 202,
+            "top_decile_bias": -32.33,
+            "top_decile_mae": 35.64
+          },
+          "Pre-Monsoon": {
+            "n_hours": 4039,
+            "station_mean": 35.26,
+            "cams_mean": 30.73,
+            "mean_bias": -4.53,
+            "mae": 13.16,
+            "correlation": 0.3492,
+            "q90_threshold": 54.12,
+            "top_decile_n": 404,
+            "top_decile_bias": -24.49,
+            "top_decile_mae": 30.85
+          },
+          "Monsoon": {
+            "n_hours": 5365,
+            "station_mean": 21.98,
+            "cams_mean": 18.41,
+            "mean_bias": -3.58,
+            "mae": 8.67,
+            "correlation": 0.1756,
+            "q90_threshold": 34.4,
+            "top_decile_n": 541,
+            "top_decile_bias": -19.08,
+            "top_decile_mae": 19.68
+          },
+          "Post-Monsoon": {
+            "n_hours": 1556,
+            "station_mean": 37.63,
+            "cams_mean": 47.48,
+            "mean_bias": 9.85,
+            "mae": 20.86,
+            "correlation": 0.3328,
+            "q90_threshold": 67.4,
+            "top_decile_n": 156,
+            "top_decile_bias": -28.73,
+            "top_decile_mae": 32.05
+          }
+        },
+        "shift_correlations_3h": {
+          "-3h": 0.4068,
+          "-2h": 0.4119,
+          "-1h": 0.4168,
+          "+0h": 0.4214,
+          "+1h": 0.4259,
+          "+2h": 0.4289,
+          "+3h": 0.4289
+        }
+      },
+      "3409472": {
+        "station_id": "3409472",
+        "station_name": "Upvan Fort, Thane - MPCB",
+        "total_station_hours": 12884,
+        "first_ts": "2025-02-18T20:30:00Z",
+        "last_ts": "2026-10-13T18:30:00Z",
+        "overlap_direct_key": {
+          "n_hours": 12884,
+          "station_mean": 28.3,
+          "cams_mean": 31.89,
+          "mean_bias": 3.59,
+          "mae": 12.4,
+          "correlation": 0.4359,
+          "q90_threshold": 54.1,
+          "top_decile_n": 1293,
+          "top_decile_bias": -11.53,
+          "top_decile_mae": 30.59
+        },
+        "overlap_hour_beginning": {
+          "n_hours": 12884,
+          "station_mean": 28.3,
+          "cams_mean": 31.92,
+          "mean_bias": 3.62,
+          "mae": 12.49,
+          "correlation": 0.4341,
+          "q90_threshold": 54.1,
+          "top_decile_n": 1293,
+          "top_decile_bias": -12.19,
+          "top_decile_mae": 30.63
+        },
+        "seasonal": {
+          "Winter": {
+            "n_hours": 2009,
+            "station_mean": 45.23,
+            "cams_mean": 58.71,
+            "mean_bias": 13.48,
+            "mae": 19.06,
+            "correlation": 0.5477,
+            "q90_threshold": 67.6,
+            "top_decile_n": 203,
+            "top_decile_bias": 9.0,
+            "top_decile_mae": 21.45
+          },
+          "Pre-Monsoon": {
+            "n_hours": 3938,
+            "station_mean": 30.68,
+            "cams_mean": 30.75,
+            "mean_bias": 0.07,
+            "mae": 12.15,
+            "correlation": 0.3751,
+            "q90_threshold": 51.9,
+            "top_decile_n": 395,
+            "top_decile_bias": -22.93,
+            "top_decile_mae": 32.78
+          },
+          "Monsoon": {
+            "n_hours": 5360,
+            "station_mean": 15.72,
+            "cams_mean": 18.43,
+            "mean_bias": 2.71,
+            "mae": 6.93,
+            "correlation": 0.3538,
+            "q90_threshold": 26.9,
+            "top_decile_n": 539,
+            "top_decile_bias": -9.48,
+            "top_decile_mae": 10.39
+          },
+          "Post-Monsoon": {
+            "n_hours": 1577,
+            "station_mean": 43.55,
+            "cams_mean": 46.35,
+            "mean_bias": 2.8,
+            "mae": 23.13,
+            "correlation": 0.1759,
+            "q90_threshold": 65.0,
+            "top_decile_n": 159,
+            "top_decile_bias": -72.32,
+            "top_decile_mae": 78.76
+          }
+        },
+        "shift_correlations_3h": {
+          "-3h": 0.4283,
+          "-2h": 0.4331,
+          "-1h": 0.4362,
+          "+0h": 0.4359,
+          "+1h": 0.4349,
+          "+2h": 0.4305,
+          "+3h": 0.4246
+        }
+      },
+      "3409482": {
+        "station_id": "3409482",
+        "station_name": "Bandra Kurla Complex, Mumbai - MPCB",
+        "total_station_hours": 12348,
+        "first_ts": "2025-02-18T20:30:00Z",
+        "last_ts": "2026-10-13T18:30:00Z",
+        "overlap_direct_key": {
+          "n_hours": 12348,
+          "station_mean": 35.2,
+          "cams_mean": 31.95,
+          "mean_bias": -3.25,
+          "mae": 14.87,
+          "correlation": 0.4629,
+          "q90_threshold": 68.1,
+          "top_decile_n": 1237,
+          "top_decile_bias": -39.53,
+          "top_decile_mae": 46.12
+        },
+        "overlap_hour_beginning": {
+          "n_hours": 12348,
+          "station_mean": 35.2,
+          "cams_mean": 31.95,
+          "mean_bias": -3.25,
+          "mae": 14.87,
+          "correlation": 0.4613,
+          "q90_threshold": 68.1,
+          "top_decile_n": 1237,
+          "top_decile_bias": -39.93,
+          "top_decile_mae": 46.15
+        },
+        "seasonal": {
+          "Winter": {
+            "n_hours": 1899,
+            "station_mean": 57.49,
+            "cams_mean": 58.1,
+            "mean_bias": 0.61,
+            "mae": 27.17,
+            "correlation": 0.1302,
+            "q90_threshold": 92.6,
+            "top_decile_n": 191,
+            "top_decile_bias": -68.84,
+            "top_decile_mae": 69.05
+          },
+          "Pre-Monsoon": {
+            "n_hours": 3811,
+            "station_mean": 37.74,
+            "cams_mean": 30.98,
+            "mean_bias": -6.76,
+            "mae": 17.27,
+            "correlation": 0.2452,
+            "q90_threshold": 64.1,
+            "top_decile_n": 382,
+            "top_decile_bias": -53.57,
+            "top_decile_mae": 57.8
+          },
+          "Monsoon": {
+            "n_hours": 5007,
+            "station_mean": 20.4,
+            "cams_mean": 18.21,
+            "mean_bias": -2.2,
+            "mae": 7.39,
+            "correlation": 0.2657,
+            "q90_threshold": 33.5,
+            "top_decile_n": 506,
+            "top_decile_bias": -22.31,
+            "top_decile_mae": 22.76
+          },
+          "Post-Monsoon": {
+            "n_hours": 1631,
+            "station_mean": 48.72,
+            "cams_mean": 45.95,
+            "mean_bias": -2.77,
+            "mae": 17.89,
+            "correlation": 0.3844,
+            "q90_threshold": 78.1,
+            "top_decile_n": 164,
+            "top_decile_bias": -46.33,
+            "top_decile_mae": 47.62
+          }
+        },
+        "shift_correlations_3h": {
+          "-3h": 0.4563,
+          "-2h": 0.4591,
+          "-1h": 0.4616,
+          "+0h": 0.4629,
+          "+1h": 0.4646,
+          "+2h": 0.4671,
+          "+3h": 0.4694
+        }
+      }
+    }
+  },
+  "bkc_last_7d_summary": {
+    "n_hours": 168,
+    "start_utc": "2026-10-06T12:30:00Z",
+    "end_utc": "2026-10-13T18:30:00Z",
+    "station_mean_7d": 46.45,
+    "cams_mean_7d": 53.11,
+    "hourly_table": [
+      {
+        "timestamp_utc": "2026-10-06T12:30:00Z",
+        "timestamp_local": "2026-10-06T18:00:00+05:30",
+        "station_pm25": 42.4,
+        "cams_pm25": 46.1,
+        "bias_cams_minus_station": 3.7
+      },
+      {
+        "timestamp_utc": "2026-10-06T13:30:00Z",
+        "timestamp_local": "2026-10-06T19:00:00+05:30",
+        "station_pm25": 36.5,
+        "cams_pm25": 46.3,
+        "bias_cams_minus_station": 9.8
+      },
+      {
+        "timestamp_utc": "2026-10-06T14:30:00Z",
+        "timestamp_local": "2026-10-06T20:00:00+05:30",
+        "station_pm25": 39.1,
+        "cams_pm25": 46.7,
+        "bias_cams_minus_station": 7.6
+      },
+      {
+        "timestamp_utc": "2026-10-06T15:30:00Z",
+        "timestamp_local": "2026-10-06T21:00:00+05:30",
+        "station_pm25": 42.4,
+        "cams_pm25": 47.0,
+        "bias_cams_minus_station": 4.6
+      },
+      {
+        "timestamp_utc": "2026-10-06T16:30:00Z",
+        "timestamp_local": "2026-10-06T22:00:00+05:30",
+        "station_pm25": 44.5,
+        "cams_pm25": 47.3,
+        "bias_cams_minus_station": 2.8
+      },
+      {
+        "timestamp_utc": "2026-10-06T17:30:00Z",
+        "timestamp_local": "2026-10-06T23:00:00+05:30",
+        "station_pm25": 43.2,
+        "cams_pm25": 47.0,
+        "bias_cams_minus_station": 3.8
+      },
+      {
+        "timestamp_utc": "2026-10-06T18:30:00Z",
+        "timestamp_local": "2026-10-07T00:00:00+05:30",
+        "station_pm25": 44.2,
+        "cams_pm25": 46.2,
+        "bias_cams_minus_station": 2.0
+      },
+      {
+        "timestamp_utc": "2026-10-06T19:30:00Z",
+        "timestamp_local": "2026-10-07T01:00:00+05:30",
+        "station_pm25": 42.7,
+        "cams_pm25": 45.8,
+        "bias_cams_minus_station": 3.1
+      },
+      {
+        "timestamp_utc": "2026-10-06T23:30:00Z",
+        "timestamp_local": "2026-10-07T05:00:00+05:30",
+        "station_pm25": 47.6,
+        "cams_pm25": 45.9,
+        "bias_cams_minus_station": -1.7
+      },
+      {
+        "timestamp_utc": "2026-10-07T00:30:00Z",
+        "timestamp_local": "2026-10-07T06:00:00+05:30",
+        "station_pm25": 48.9,
+        "cams_pm25": 46.2,
+        "bias_cams_minus_station": -2.7
+      },
+      {
+        "timestamp_utc": "2026-10-07T01:30:00Z",
+        "timestamp_local": "2026-10-07T07:00:00+05:30",
+        "station_pm25": 51.2,
+        "cams_pm25": 47.4,
+        "bias_cams_minus_station": -3.8
+      },
+      {
+        "timestamp_utc": "2026-10-07T02:30:00Z",
+        "timestamp_local": "2026-10-07T08:00:00+05:30",
+        "station_pm25": 55.1,
+        "cams_pm25": 49.5,
+        "bias_cams_minus_station": -5.6
+      },
+      {
+        "timestamp_utc": "2026-10-07T03:30:00Z",
+        "timestamp_local": "2026-10-07T09:00:00+05:30",
+        "station_pm25": 58.7,
+        "cams_pm25": 51.8,
+        "bias_cams_minus_station": -6.9
+      },
+      {
+        "timestamp_utc": "2026-10-07T05:30:00Z",
+        "timestamp_local": "2026-10-07T11:00:00+05:30",
+        "station_pm25": 70.4,
+        "cams_pm25": 58.4,
+        "bias_cams_minus_station": -12.0
+      },
+      {
+        "timestamp_utc": "2026-10-07T06:30:00Z",
+        "timestamp_local": "2026-10-07T12:00:00+05:30",
+        "station_pm25": 56.7,
+        "cams_pm25": 61.7,
+        "bias_cams_minus_station": 5.0
+      },
+      {
+        "timestamp_utc": "2026-10-07T07:30:00Z",
+        "timestamp_local": "2026-10-07T13:00:00+05:30",
+        "station_pm25": 61.1,
+        "cams_pm25": 62.9,
+        "bias_cams_minus_station": 1.8
+      },
+      {
+        "timestamp_utc": "2026-10-07T08:30:00Z",
+        "timestamp_local": "2026-10-07T14:00:00+05:30",
+        "station_pm25": 77.9,
+        "cams_pm25": 66.4,
+        "bias_cams_minus_station": -11.5
+      },
+      {
+        "timestamp_utc": "2026-10-07T09:30:00Z",
+        "timestamp_local": "2026-10-07T15:00:00+05:30",
+        "station_pm25": 78.3,
+        "cams_pm25": 64.5,
+        "bias_cams_minus_station": -13.8
+      },
+      {
+        "timestamp_utc": "2026-10-07T10:30:00Z",
+        "timestamp_local": "2026-10-07T16:00:00+05:30",
+        "station_pm25": 64.3,
+        "cams_pm25": 60.3,
+        "bias_cams_minus_station": -4.0
+      },
+      {
+        "timestamp_utc": "2026-10-07T11:30:00Z",
+        "timestamp_local": "2026-10-07T17:00:00+05:30",
+        "station_pm25": 54.8,
+        "cams_pm25": 75.2,
+        "bias_cams_minus_station": 20.4
+      },
+      {
+        "timestamp_utc": "2026-10-07T12:30:00Z",
+        "timestamp_local": "2026-10-07T18:00:00+05:30",
+        "station_pm25": 57.7,
+        "cams_pm25": 67.5,
+        "bias_cams_minus_station": 9.8
+      },
+      {
+        "timestamp_utc": "2026-10-07T13:30:00Z",
+        "timestamp_local": "2026-10-07T19:00:00+05:30",
+        "station_pm25": 57.6,
+        "cams_pm25": 61.5,
+        "bias_cams_minus_station": 3.9
+      },
+      {
+        "timestamp_utc": "2026-10-07T14:30:00Z",
+        "timestamp_local": "2026-10-07T20:00:00+05:30",
+        "station_pm25": 57.3,
+        "cams_pm25": 58.0,
+        "bias_cams_minus_station": 0.7
+      },
+      {
+        "timestamp_utc": "2026-10-07T18:30:00Z",
+        "timestamp_local": "2026-10-08T00:00:00+05:30",
+        "station_pm25": 73.4,
+        "cams_pm25": 74.7,
+        "bias_cams_minus_station": 1.3
+      },
+      {
+        "timestamp_utc": "2026-10-07T19:30:00Z",
+        "timestamp_local": "2026-10-08T01:00:00+05:30",
+        "station_pm25": 79.5,
+        "cams_pm25": 76.1,
+        "bias_cams_minus_station": -3.4
+      },
+      {
+        "timestamp_utc": "2026-10-07T20:30:00Z",
+        "timestamp_local": "2026-10-08T02:00:00+05:30",
+        "station_pm25": 79.5,
+        "cams_pm25": 75.9,
+        "bias_cams_minus_station": -3.6
+      },
+      {
+        "timestamp_utc": "2026-10-07T21:30:00Z",
+        "timestamp_local": "2026-10-08T03:00:00+05:30",
+        "station_pm25": 82.1,
+        "cams_pm25": 75.2,
+        "bias_cams_minus_station": -6.9
+      },
+      {
+        "timestamp_utc": "2026-10-07T22:30:00Z",
+        "timestamp_local": "2026-10-08T04:00:00+05:30",
+        "station_pm25": 81.2,
+        "cams_pm25": 75.0,
+        "bias_cams_minus_station": -6.2
+      },
+      {
+        "timestamp_utc": "2026-10-07T23:30:00Z",
+        "timestamp_local": "2026-10-08T05:00:00+05:30",
+        "station_pm25": 83.1,
+        "cams_pm25": 63.8,
+        "bias_cams_minus_station": -19.3
+      },
+      {
+        "timestamp_utc": "2026-10-08T00:30:00Z",
+        "timestamp_local": "2026-10-08T06:00:00+05:30",
+        "station_pm25": 84.5,
+        "cams_pm25": 63.1,
+        "bias_cams_minus_station": -21.4
+      },
+      {
+        "timestamp_utc": "2026-10-08T01:30:00Z",
+        "timestamp_local": "2026-10-08T07:00:00+05:30",
+        "station_pm25": 82.4,
+        "cams_pm25": 63.6,
+        "bias_cams_minus_station": -18.8
+      },
+      {
+        "timestamp_utc": "2026-10-08T02:30:00Z",
+        "timestamp_local": "2026-10-08T08:00:00+05:30",
+        "station_pm25": 81.5,
+        "cams_pm25": 63.3,
+        "bias_cams_minus_station": -18.2
+      },
+      {
+        "timestamp_utc": "2026-10-08T03:30:00Z",
+        "timestamp_local": "2026-10-08T09:00:00+05:30",
+        "station_pm25": 81.0,
+        "cams_pm25": 64.5,
+        "bias_cams_minus_station": -16.5
+      },
+      {
+        "timestamp_utc": "2026-10-08T04:30:00Z",
+        "timestamp_local": "2026-10-08T10:00:00+05:30",
+        "station_pm25": 62.4,
+        "cams_pm25": 66.8,
+        "bias_cams_minus_station": 4.4
+      },
+      {
+        "timestamp_utc": "2026-10-08T05:30:00Z",
+        "timestamp_local": "2026-10-08T11:00:00+05:30",
+        "station_pm25": 46.4,
+        "cams_pm25": 72.9,
+        "bias_cams_minus_station": 26.5
+      },
+      {
+        "timestamp_utc": "2026-10-08T06:30:00Z",
+        "timestamp_local": "2026-10-08T12:00:00+05:30",
+        "station_pm25": 42.0,
+        "cams_pm25": 85.0,
+        "bias_cams_minus_station": 43.0
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:30:00Z",
+        "timestamp_local": "2026-10-08T13:00:00+05:30",
+        "station_pm25": 40.6,
+        "cams_pm25": 97.8,
+        "bias_cams_minus_station": 57.2
+      },
+      {
+        "timestamp_utc": "2026-10-08T08:30:00Z",
+        "timestamp_local": "2026-10-08T14:00:00+05:30",
+        "station_pm25": 39.1,
+        "cams_pm25": 109.9,
+        "bias_cams_minus_station": 70.8
+      },
+      {
+        "timestamp_utc": "2026-10-08T09:30:00Z",
+        "timestamp_local": "2026-10-08T15:00:00+05:30",
+        "station_pm25": 40.7,
+        "cams_pm25": 118.7,
+        "bias_cams_minus_station": 78.0
+      },
+      {
+        "timestamp_utc": "2026-10-08T10:30:00Z",
+        "timestamp_local": "2026-10-08T16:00:00+05:30",
+        "station_pm25": 39.5,
+        "cams_pm25": 105.7,
+        "bias_cams_minus_station": 66.2
+      },
+      {
+        "timestamp_utc": "2026-10-08T11:30:00Z",
+        "timestamp_local": "2026-10-08T17:00:00+05:30",
+        "station_pm25": 35.0,
+        "cams_pm25": 116.6,
+        "bias_cams_minus_station": 81.6
+      },
+      {
+        "timestamp_utc": "2026-10-08T12:30:00Z",
+        "timestamp_local": "2026-10-08T18:00:00+05:30",
+        "station_pm25": 34.5,
+        "cams_pm25": 97.6,
+        "bias_cams_minus_station": 63.1
+      },
+      {
+        "timestamp_utc": "2026-10-08T13:30:00Z",
+        "timestamp_local": "2026-10-08T19:00:00+05:30",
+        "station_pm25": 33.7,
+        "cams_pm25": 82.0,
+        "bias_cams_minus_station": 48.3
+      },
+      {
+        "timestamp_utc": "2026-10-08T14:30:00Z",
+        "timestamp_local": "2026-10-08T20:00:00+05:30",
+        "station_pm25": 35.8,
+        "cams_pm25": 73.3,
+        "bias_cams_minus_station": 37.5
+      },
+      {
+        "timestamp_utc": "2026-10-08T15:30:00Z",
+        "timestamp_local": "2026-10-08T21:00:00+05:30",
+        "station_pm25": 36.8,
+        "cams_pm25": 68.9,
+        "bias_cams_minus_station": 32.1
+      },
+      {
+        "timestamp_utc": "2026-10-08T16:30:00Z",
+        "timestamp_local": "2026-10-08T22:00:00+05:30",
+        "station_pm25": 37.5,
+        "cams_pm25": 66.4,
+        "bias_cams_minus_station": 28.9
+      },
+      {
+        "timestamp_utc": "2026-10-08T17:30:00Z",
+        "timestamp_local": "2026-10-08T23:00:00+05:30",
+        "station_pm25": 39.0,
+        "cams_pm25": 64.5,
+        "bias_cams_minus_station": 25.5
+      },
+      {
+        "timestamp_utc": "2026-10-08T18:30:00Z",
+        "timestamp_local": "2026-10-09T00:00:00+05:30",
+        "station_pm25": 42.1,
+        "cams_pm25": 61.0,
+        "bias_cams_minus_station": 18.9
+      },
+      {
+        "timestamp_utc": "2026-10-08T19:30:00Z",
+        "timestamp_local": "2026-10-09T01:00:00+05:30",
+        "station_pm25": 42.7,
+        "cams_pm25": 57.5,
+        "bias_cams_minus_station": 14.8
+      },
+      {
+        "timestamp_utc": "2026-10-08T20:30:00Z",
+        "timestamp_local": "2026-10-09T02:00:00+05:30",
+        "station_pm25": 44.1,
+        "cams_pm25": 54.1,
+        "bias_cams_minus_station": 10.0
+      },
+      {
+        "timestamp_utc": "2026-10-08T21:30:00Z",
+        "timestamp_local": "2026-10-09T03:00:00+05:30",
+        "station_pm25": 42.5,
+        "cams_pm25": 50.4,
+        "bias_cams_minus_station": 7.9
+      },
+      {
+        "timestamp_utc": "2026-10-08T22:30:00Z",
+        "timestamp_local": "2026-10-09T04:00:00+05:30",
+        "station_pm25": 42.9,
+        "cams_pm25": 45.8,
+        "bias_cams_minus_station": 2.9
+      },
+      {
+        "timestamp_utc": "2026-10-08T23:30:00Z",
+        "timestamp_local": "2026-10-09T05:00:00+05:30",
+        "station_pm25": 44.2,
+        "cams_pm25": 47.7,
+        "bias_cams_minus_station": 3.5
+      },
+      {
+        "timestamp_utc": "2026-10-09T00:30:00Z",
+        "timestamp_local": "2026-10-09T06:00:00+05:30",
+        "station_pm25": 44.7,
+        "cams_pm25": 45.8,
+        "bias_cams_minus_station": 1.1
+      },
+      {
+        "timestamp_utc": "2026-10-09T01:30:00Z",
+        "timestamp_local": "2026-10-09T07:00:00+05:30",
+        "station_pm25": 44.4,
+        "cams_pm25": 46.3,
+        "bias_cams_minus_station": 1.9
+      },
+      {
+        "timestamp_utc": "2026-10-09T02:30:00Z",
+        "timestamp_local": "2026-10-09T08:00:00+05:30",
+        "station_pm25": 47.4,
+        "cams_pm25": 48.7,
+        "bias_cams_minus_station": 1.3
+      },
+      {
+        "timestamp_utc": "2026-10-09T03:30:00Z",
+        "timestamp_local": "2026-10-09T09:00:00+05:30",
+        "station_pm25": 49.1,
+        "cams_pm25": 51.8,
+        "bias_cams_minus_station": 2.7
+      },
+      {
+        "timestamp_utc": "2026-10-09T04:30:00Z",
+        "timestamp_local": "2026-10-09T10:00:00+05:30",
+        "station_pm25": 49.0,
+        "cams_pm25": 55.9,
+        "bias_cams_minus_station": 6.9
+      },
+      {
+        "timestamp_utc": "2026-10-09T05:30:00Z",
+        "timestamp_local": "2026-10-09T11:00:00+05:30",
+        "station_pm25": 45.7,
+        "cams_pm25": 61.0,
+        "bias_cams_minus_station": 15.3
+      },
+      {
+        "timestamp_utc": "2026-10-09T06:30:00Z",
+        "timestamp_local": "2026-10-09T12:00:00+05:30",
+        "station_pm25": 43.2,
+        "cams_pm25": 71.0,
+        "bias_cams_minus_station": 27.8
+      },
+      {
+        "timestamp_utc": "2026-10-09T07:30:00Z",
+        "timestamp_local": "2026-10-09T13:00:00+05:30",
+        "station_pm25": 43.6,
+        "cams_pm25": 85.0,
+        "bias_cams_minus_station": 41.4
+      },
+      {
+        "timestamp_utc": "2026-10-09T08:30:00Z",
+        "timestamp_local": "2026-10-09T14:00:00+05:30",
+        "station_pm25": 39.7,
+        "cams_pm25": 100.8,
+        "bias_cams_minus_station": 61.1
+      },
+      {
+        "timestamp_utc": "2026-10-09T09:30:00Z",
+        "timestamp_local": "2026-10-09T15:00:00+05:30",
+        "station_pm25": 36.7,
+        "cams_pm25": 116.9,
+        "bias_cams_minus_station": 80.2
+      },
+      {
+        "timestamp_utc": "2026-10-09T10:30:00Z",
+        "timestamp_local": "2026-10-09T16:00:00+05:30",
+        "station_pm25": 34.5,
+        "cams_pm25": 115.3,
+        "bias_cams_minus_station": 80.8
+      },
+      {
+        "timestamp_utc": "2026-10-09T11:30:00Z",
+        "timestamp_local": "2026-10-09T17:00:00+05:30",
+        "station_pm25": 32.2,
+        "cams_pm25": 88.5,
+        "bias_cams_minus_station": 56.3
+      },
+      {
+        "timestamp_utc": "2026-10-09T12:30:00Z",
+        "timestamp_local": "2026-10-09T18:00:00+05:30",
+        "station_pm25": 31.6,
+        "cams_pm25": 73.3,
+        "bias_cams_minus_station": 41.7
+      },
+      {
+        "timestamp_utc": "2026-10-09T13:30:00Z",
+        "timestamp_local": "2026-10-09T19:00:00+05:30",
+        "station_pm25": 34.4,
+        "cams_pm25": 62.2,
+        "bias_cams_minus_station": 27.8
+      },
+      {
+        "timestamp_utc": "2026-10-09T14:30:00Z",
+        "timestamp_local": "2026-10-09T20:00:00+05:30",
+        "station_pm25": 34.6,
+        "cams_pm25": 49.8,
+        "bias_cams_minus_station": 15.2
+      },
+      {
+        "timestamp_utc": "2026-10-09T15:30:00Z",
+        "timestamp_local": "2026-10-09T21:00:00+05:30",
+        "station_pm25": 33.7,
+        "cams_pm25": 45.4,
+        "bias_cams_minus_station": 11.7
+      },
+      {
+        "timestamp_utc": "2026-10-09T16:30:00Z",
+        "timestamp_local": "2026-10-09T22:00:00+05:30",
+        "station_pm25": 35.0,
+        "cams_pm25": 43.7,
+        "bias_cams_minus_station": 8.7
+      },
+      {
+        "timestamp_utc": "2026-10-09T17:30:00Z",
+        "timestamp_local": "2026-10-09T23:00:00+05:30",
+        "station_pm25": 37.5,
+        "cams_pm25": 44.6,
+        "bias_cams_minus_station": 7.1
+      },
+      {
+        "timestamp_utc": "2026-10-09T18:30:00Z",
+        "timestamp_local": "2026-10-10T00:00:00+05:30",
+        "station_pm25": 39.4,
+        "cams_pm25": 44.4,
+        "bias_cams_minus_station": 5.0
+      },
+      {
+        "timestamp_utc": "2026-10-09T19:30:00Z",
+        "timestamp_local": "2026-10-10T01:00:00+05:30",
+        "station_pm25": 40.5,
+        "cams_pm25": 44.8,
+        "bias_cams_minus_station": 4.3
+      },
+      {
+        "timestamp_utc": "2026-10-09T20:30:00Z",
+        "timestamp_local": "2026-10-10T02:00:00+05:30",
+        "station_pm25": 42.4,
+        "cams_pm25": 44.1,
+        "bias_cams_minus_station": 1.7
+      },
+      {
+        "timestamp_utc": "2026-10-09T21:30:00Z",
+        "timestamp_local": "2026-10-10T03:00:00+05:30",
+        "station_pm25": 44.5,
+        "cams_pm25": 42.3,
+        "bias_cams_minus_station": -2.2
+      },
+      {
+        "timestamp_utc": "2026-10-09T22:30:00Z",
+        "timestamp_local": "2026-10-10T04:00:00+05:30",
+        "station_pm25": 45.4,
+        "cams_pm25": 39.6,
+        "bias_cams_minus_station": -5.8
+      },
+      {
+        "timestamp_utc": "2026-10-09T23:30:00Z",
+        "timestamp_local": "2026-10-10T05:00:00+05:30",
+        "station_pm25": 43.6,
+        "cams_pm25": 43.8,
+        "bias_cams_minus_station": 0.2
+      },
+      {
+        "timestamp_utc": "2026-10-10T00:30:00Z",
+        "timestamp_local": "2026-10-10T06:00:00+05:30",
+        "station_pm25": 43.8,
+        "cams_pm25": 39.6,
+        "bias_cams_minus_station": -4.2
+      },
+      {
+        "timestamp_utc": "2026-10-10T01:30:00Z",
+        "timestamp_local": "2026-10-10T07:00:00+05:30",
+        "station_pm25": 44.4,
+        "cams_pm25": 38.3,
+        "bias_cams_minus_station": -6.1
+      },
+      {
+        "timestamp_utc": "2026-10-10T02:30:00Z",
+        "timestamp_local": "2026-10-10T08:00:00+05:30",
+        "station_pm25": 43.3,
+        "cams_pm25": 37.1,
+        "bias_cams_minus_station": -6.2
+      },
+      {
+        "timestamp_utc": "2026-10-10T03:30:00Z",
+        "timestamp_local": "2026-10-10T09:00:00+05:30",
+        "station_pm25": 42.9,
+        "cams_pm25": 37.6,
+        "bias_cams_minus_station": -5.3
+      },
+      {
+        "timestamp_utc": "2026-10-10T04:30:00Z",
+        "timestamp_local": "2026-10-10T10:00:00+05:30",
+        "station_pm25": 43.6,
+        "cams_pm25": 38.9,
+        "bias_cams_minus_station": -4.7
+      },
+      {
+        "timestamp_utc": "2026-10-10T05:30:00Z",
+        "timestamp_local": "2026-10-10T11:00:00+05:30",
+        "station_pm25": 44.5,
+        "cams_pm25": 40.4,
+        "bias_cams_minus_station": -4.1
+      },
+      {
+        "timestamp_utc": "2026-10-10T06:30:00Z",
+        "timestamp_local": "2026-10-10T12:00:00+05:30",
+        "station_pm25": 42.5,
+        "cams_pm25": 44.1,
+        "bias_cams_minus_station": 1.6
+      },
+      {
+        "timestamp_utc": "2026-10-10T07:30:00Z",
+        "timestamp_local": "2026-10-10T13:00:00+05:30",
+        "station_pm25": 43.8,
+        "cams_pm25": 48.3,
+        "bias_cams_minus_station": 4.5
+      },
+      {
+        "timestamp_utc": "2026-10-10T08:30:00Z",
+        "timestamp_local": "2026-10-10T14:00:00+05:30",
+        "station_pm25": 43.7,
+        "cams_pm25": 51.1,
+        "bias_cams_minus_station": 7.4
+      },
+      {
+        "timestamp_utc": "2026-10-10T09:30:00Z",
+        "timestamp_local": "2026-10-10T15:00:00+05:30",
+        "station_pm25": 38.4,
+        "cams_pm25": 52.0,
+        "bias_cams_minus_station": 13.6
+      },
+      {
+        "timestamp_utc": "2026-10-10T10:30:00Z",
+        "timestamp_local": "2026-10-10T16:00:00+05:30",
+        "station_pm25": 33.3,
+        "cams_pm25": 50.1,
+        "bias_cams_minus_station": 16.8
+      },
+      {
+        "timestamp_utc": "2026-10-10T11:30:00Z",
+        "timestamp_local": "2026-10-10T17:00:00+05:30",
+        "station_pm25": 30.8,
+        "cams_pm25": 50.2,
+        "bias_cams_minus_station": 19.4
+      },
+      {
+        "timestamp_utc": "2026-10-10T12:30:00Z",
+        "timestamp_local": "2026-10-10T18:00:00+05:30",
+        "station_pm25": 33.0,
+        "cams_pm25": 37.8,
+        "bias_cams_minus_station": 4.8
+      },
+      {
+        "timestamp_utc": "2026-10-10T13:30:00Z",
+        "timestamp_local": "2026-10-10T19:00:00+05:30",
+        "station_pm25": 39.6,
+        "cams_pm25": 34.2,
+        "bias_cams_minus_station": -5.4
+      },
+      {
+        "timestamp_utc": "2026-10-10T14:30:00Z",
+        "timestamp_local": "2026-10-10T20:00:00+05:30",
+        "station_pm25": 41.1,
+        "cams_pm25": 33.5,
+        "bias_cams_minus_station": -7.6
+      },
+      {
+        "timestamp_utc": "2026-10-10T15:30:00Z",
+        "timestamp_local": "2026-10-10T21:00:00+05:30",
+        "station_pm25": 38.4,
+        "cams_pm25": 33.5,
+        "bias_cams_minus_station": -4.9
+      },
+      {
+        "timestamp_utc": "2026-10-10T16:30:00Z",
+        "timestamp_local": "2026-10-10T22:00:00+05:30",
+        "station_pm25": 45.2,
+        "cams_pm25": 33.3,
+        "bias_cams_minus_station": -11.9
+      },
+      {
+        "timestamp_utc": "2026-10-10T17:30:00Z",
+        "timestamp_local": "2026-10-10T23:00:00+05:30",
+        "station_pm25": 54.2,
+        "cams_pm25": 32.5,
+        "bias_cams_minus_station": -21.7
+      },
+      {
+        "timestamp_utc": "2026-10-10T18:30:00Z",
+        "timestamp_local": "2026-10-11T00:00:00+05:30",
+        "station_pm25": 56.1,
+        "cams_pm25": 30.9,
+        "bias_cams_minus_station": -25.2
+      },
+      {
+        "timestamp_utc": "2026-10-10T19:30:00Z",
+        "timestamp_local": "2026-10-11T01:00:00+05:30",
+        "station_pm25": 54.8,
+        "cams_pm25": 29.0,
+        "bias_cams_minus_station": -25.8
+      },
+      {
+        "timestamp_utc": "2026-10-10T20:30:00Z",
+        "timestamp_local": "2026-10-11T02:00:00+05:30",
+        "station_pm25": 52.1,
+        "cams_pm25": 27.0,
+        "bias_cams_minus_station": -25.1
+      },
+      {
+        "timestamp_utc": "2026-10-10T21:30:00Z",
+        "timestamp_local": "2026-10-11T03:00:00+05:30",
+        "station_pm25": 52.2,
+        "cams_pm25": 24.9,
+        "bias_cams_minus_station": -27.3
+      },
+      {
+        "timestamp_utc": "2026-10-10T22:30:00Z",
+        "timestamp_local": "2026-10-11T04:00:00+05:30",
+        "station_pm25": 53.1,
+        "cams_pm25": 23.0,
+        "bias_cams_minus_station": -30.1
+      },
+      {
+        "timestamp_utc": "2026-10-10T23:30:00Z",
+        "timestamp_local": "2026-10-11T05:00:00+05:30",
+        "station_pm25": 49.0,
+        "cams_pm25": 27.4,
+        "bias_cams_minus_station": -21.6
+      },
+      {
+        "timestamp_utc": "2026-10-11T00:30:00Z",
+        "timestamp_local": "2026-10-11T06:00:00+05:30",
+        "station_pm25": 50.9,
+        "cams_pm25": 25.6,
+        "bias_cams_minus_station": -25.3
+      },
+      {
+        "timestamp_utc": "2026-10-11T01:30:00Z",
+        "timestamp_local": "2026-10-11T07:00:00+05:30",
+        "station_pm25": 55.3,
+        "cams_pm25": 26.7,
+        "bias_cams_minus_station": -28.6
+      },
+      {
+        "timestamp_utc": "2026-10-11T02:30:00Z",
+        "timestamp_local": "2026-10-11T08:00:00+05:30",
+        "station_pm25": 56.4,
+        "cams_pm25": 29.5,
+        "bias_cams_minus_station": -26.9
+      },
+      {
+        "timestamp_utc": "2026-10-11T03:30:00Z",
+        "timestamp_local": "2026-10-11T09:00:00+05:30",
+        "station_pm25": 54.4,
+        "cams_pm25": 32.8,
+        "bias_cams_minus_station": -21.6
+      },
+      {
+        "timestamp_utc": "2026-10-11T04:30:00Z",
+        "timestamp_local": "2026-10-11T10:00:00+05:30",
+        "station_pm25": 53.3,
+        "cams_pm25": 36.2,
+        "bias_cams_minus_station": -17.1
+      },
+      {
+        "timestamp_utc": "2026-10-11T05:30:00Z",
+        "timestamp_local": "2026-10-11T11:00:00+05:30",
+        "station_pm25": 53.1,
+        "cams_pm25": 39.9,
+        "bias_cams_minus_station": -13.2
+      },
+      {
+        "timestamp_utc": "2026-10-11T06:30:00Z",
+        "timestamp_local": "2026-10-11T12:00:00+05:30",
+        "station_pm25": 49.1,
+        "cams_pm25": 46.9,
+        "bias_cams_minus_station": -2.2
+      },
+      {
+        "timestamp_utc": "2026-10-11T07:30:00Z",
+        "timestamp_local": "2026-10-11T13:00:00+05:30",
+        "station_pm25": 46.0,
+        "cams_pm25": 53.6,
+        "bias_cams_minus_station": 7.6
+      },
+      {
+        "timestamp_utc": "2026-10-11T08:30:00Z",
+        "timestamp_local": "2026-10-11T14:00:00+05:30",
+        "station_pm25": 43.9,
+        "cams_pm25": 59.1,
+        "bias_cams_minus_station": 15.2
+      },
+      {
+        "timestamp_utc": "2026-10-11T09:30:00Z",
+        "timestamp_local": "2026-10-11T15:00:00+05:30",
+        "station_pm25": 40.0,
+        "cams_pm25": 63.8,
+        "bias_cams_minus_station": 23.8
+      },
+      {
+        "timestamp_utc": "2026-10-11T10:30:00Z",
+        "timestamp_local": "2026-10-11T16:00:00+05:30",
+        "station_pm25": 37.8,
+        "cams_pm25": 66.1,
+        "bias_cams_minus_station": 28.3
+      },
+      {
+        "timestamp_utc": "2026-10-11T11:30:00Z",
+        "timestamp_local": "2026-10-11T17:00:00+05:30",
+        "station_pm25": 38.3,
+        "cams_pm25": 80.8,
+        "bias_cams_minus_station": 42.5
+      },
+      {
+        "timestamp_utc": "2026-10-11T12:30:00Z",
+        "timestamp_local": "2026-10-11T18:00:00+05:30",
+        "station_pm25": 37.0,
+        "cams_pm25": 70.5,
+        "bias_cams_minus_station": 33.5
+      },
+      {
+        "timestamp_utc": "2026-10-11T13:30:00Z",
+        "timestamp_local": "2026-10-11T19:00:00+05:30",
+        "station_pm25": 36.1,
+        "cams_pm25": 62.4,
+        "bias_cams_minus_station": 26.3
+      },
+      {
+        "timestamp_utc": "2026-10-11T14:30:00Z",
+        "timestamp_local": "2026-10-11T20:00:00+05:30",
+        "station_pm25": 38.1,
+        "cams_pm25": 56.6,
+        "bias_cams_minus_station": 18.5
+      },
+      {
+        "timestamp_utc": "2026-10-11T15:30:00Z",
+        "timestamp_local": "2026-10-11T21:00:00+05:30",
+        "station_pm25": 36.0,
+        "cams_pm25": 50.9,
+        "bias_cams_minus_station": 14.9
+      },
+      {
+        "timestamp_utc": "2026-10-11T16:30:00Z",
+        "timestamp_local": "2026-10-11T22:00:00+05:30",
+        "station_pm25": 34.3,
+        "cams_pm25": 45.8,
+        "bias_cams_minus_station": 11.5
+      },
+      {
+        "timestamp_utc": "2026-10-11T17:30:00Z",
+        "timestamp_local": "2026-10-11T23:00:00+05:30",
+        "station_pm25": 33.8,
+        "cams_pm25": 40.7,
+        "bias_cams_minus_station": 6.9
+      },
+      {
+        "timestamp_utc": "2026-10-11T18:30:00Z",
+        "timestamp_local": "2026-10-12T00:00:00+05:30",
+        "station_pm25": 33.0,
+        "cams_pm25": 35.7,
+        "bias_cams_minus_station": 2.7
+      },
+      {
+        "timestamp_utc": "2026-10-11T19:30:00Z",
+        "timestamp_local": "2026-10-12T01:00:00+05:30",
+        "station_pm25": 38.0,
+        "cams_pm25": 32.6,
+        "bias_cams_minus_station": -5.4
+      },
+      {
+        "timestamp_utc": "2026-10-11T20:30:00Z",
+        "timestamp_local": "2026-10-12T02:00:00+05:30",
+        "station_pm25": 37.5,
+        "cams_pm25": 31.0,
+        "bias_cams_minus_station": -6.5
+      },
+      {
+        "timestamp_utc": "2026-10-11T21:30:00Z",
+        "timestamp_local": "2026-10-12T03:00:00+05:30",
+        "station_pm25": 34.2,
+        "cams_pm25": 30.5,
+        "bias_cams_minus_station": -3.7
+      },
+      {
+        "timestamp_utc": "2026-10-11T22:30:00Z",
+        "timestamp_local": "2026-10-12T04:00:00+05:30",
+        "station_pm25": 34.0,
+        "cams_pm25": 30.2,
+        "bias_cams_minus_station": -3.8
+      },
+      {
+        "timestamp_utc": "2026-10-11T23:30:00Z",
+        "timestamp_local": "2026-10-12T05:00:00+05:30",
+        "station_pm25": 34.1,
+        "cams_pm25": 33.8,
+        "bias_cams_minus_station": -0.3
+      },
+      {
+        "timestamp_utc": "2026-10-12T00:30:00Z",
+        "timestamp_local": "2026-10-12T06:00:00+05:30",
+        "station_pm25": 33.8,
+        "cams_pm25": 34.0,
+        "bias_cams_minus_station": 0.2
+      },
+      {
+        "timestamp_utc": "2026-10-12T01:30:00Z",
+        "timestamp_local": "2026-10-12T07:00:00+05:30",
+        "station_pm25": 32.7,
+        "cams_pm25": 36.8,
+        "bias_cams_minus_station": 4.1
+      },
+      {
+        "timestamp_utc": "2026-10-12T02:30:00Z",
+        "timestamp_local": "2026-10-12T08:00:00+05:30",
+        "station_pm25": 32.9,
+        "cams_pm25": 41.1,
+        "bias_cams_minus_station": 8.2
+      },
+      {
+        "timestamp_utc": "2026-10-12T03:30:00Z",
+        "timestamp_local": "2026-10-12T09:00:00+05:30",
+        "station_pm25": 35.9,
+        "cams_pm25": 44.9,
+        "bias_cams_minus_station": 9.0
+      },
+      {
+        "timestamp_utc": "2026-10-12T04:30:00Z",
+        "timestamp_local": "2026-10-12T10:00:00+05:30",
+        "station_pm25": 39.9,
+        "cams_pm25": 48.8,
+        "bias_cams_minus_station": 8.9
+      },
+      {
+        "timestamp_utc": "2026-10-12T05:30:00Z",
+        "timestamp_local": "2026-10-12T11:00:00+05:30",
+        "station_pm25": 41.9,
+        "cams_pm25": 52.5,
+        "bias_cams_minus_station": 10.6
+      },
+      {
+        "timestamp_utc": "2026-10-12T06:30:00Z",
+        "timestamp_local": "2026-10-12T12:00:00+05:30",
+        "station_pm25": 47.2,
+        "cams_pm25": 56.5,
+        "bias_cams_minus_station": 9.3
+      },
+      {
+        "timestamp_utc": "2026-10-12T07:30:00Z",
+        "timestamp_local": "2026-10-12T13:00:00+05:30",
+        "station_pm25": 49.4,
+        "cams_pm25": 63.1,
+        "bias_cams_minus_station": 13.7
+      },
+      {
+        "timestamp_utc": "2026-10-12T08:30:00Z",
+        "timestamp_local": "2026-10-12T14:00:00+05:30",
+        "station_pm25": 51.3,
+        "cams_pm25": 65.4,
+        "bias_cams_minus_station": 14.1
+      },
+      {
+        "timestamp_utc": "2026-10-12T09:30:00Z",
+        "timestamp_local": "2026-10-12T15:00:00+05:30",
+        "station_pm25": 51.8,
+        "cams_pm25": 63.1,
+        "bias_cams_minus_station": 11.3
+      },
+      {
+        "timestamp_utc": "2026-10-12T10:30:00Z",
+        "timestamp_local": "2026-10-12T16:00:00+05:30",
+        "station_pm25": 57.0,
+        "cams_pm25": 56.3,
+        "bias_cams_minus_station": -0.7
+      },
+      {
+        "timestamp_utc": "2026-10-12T11:30:00Z",
+        "timestamp_local": "2026-10-12T17:00:00+05:30",
+        "station_pm25": 52.7,
+        "cams_pm25": 55.3,
+        "bias_cams_minus_station": 2.6
+      },
+      {
+        "timestamp_utc": "2026-10-12T12:30:00Z",
+        "timestamp_local": "2026-10-12T18:00:00+05:30",
+        "station_pm25": 46.4,
+        "cams_pm25": 50.1,
+        "bias_cams_minus_station": 3.7
+      },
+      {
+        "timestamp_utc": "2026-10-12T13:30:00Z",
+        "timestamp_local": "2026-10-12T19:00:00+05:30",
+        "station_pm25": 41.2,
+        "cams_pm25": 50.8,
+        "bias_cams_minus_station": 9.6
+      },
+      {
+        "timestamp_utc": "2026-10-12T14:30:00Z",
+        "timestamp_local": "2026-10-12T20:00:00+05:30",
+        "station_pm25": 37.8,
+        "cams_pm25": 53.0,
+        "bias_cams_minus_station": 15.2
+      },
+      {
+        "timestamp_utc": "2026-10-12T15:30:00Z",
+        "timestamp_local": "2026-10-12T21:00:00+05:30",
+        "station_pm25": 39.4,
+        "cams_pm25": 53.8,
+        "bias_cams_minus_station": 14.4
+      },
+      {
+        "timestamp_utc": "2026-10-12T16:30:00Z",
+        "timestamp_local": "2026-10-12T22:00:00+05:30",
+        "station_pm25": 40.3,
+        "cams_pm25": 53.1,
+        "bias_cams_minus_station": 12.8
+      },
+      {
+        "timestamp_utc": "2026-10-12T17:30:00Z",
+        "timestamp_local": "2026-10-12T23:00:00+05:30",
+        "station_pm25": 37.8,
+        "cams_pm25": 51.3,
+        "bias_cams_minus_station": 13.5
+      },
+      {
+        "timestamp_utc": "2026-10-12T18:30:00Z",
+        "timestamp_local": "2026-10-13T00:00:00+05:30",
+        "station_pm25": 37.6,
+        "cams_pm25": 48.4,
+        "bias_cams_minus_station": 10.8
+      },
+      {
+        "timestamp_utc": "2026-10-12T19:30:00Z",
+        "timestamp_local": "2026-10-13T01:00:00+05:30",
+        "station_pm25": 35.4,
+        "cams_pm25": 45.4,
+        "bias_cams_minus_station": 10.0
+      },
+      {
+        "timestamp_utc": "2026-10-12T20:30:00Z",
+        "timestamp_local": "2026-10-13T02:00:00+05:30",
+        "station_pm25": 34.3,
+        "cams_pm25": 41.9,
+        "bias_cams_minus_station": 7.6
+      },
+      {
+        "timestamp_utc": "2026-10-12T21:30:00Z",
+        "timestamp_local": "2026-10-13T03:00:00+05:30",
+        "station_pm25": 35.7,
+        "cams_pm25": 37.6,
+        "bias_cams_minus_station": 1.9
+      },
+      {
+        "timestamp_utc": "2026-10-12T22:30:00Z",
+        "timestamp_local": "2026-10-13T04:00:00+05:30",
+        "station_pm25": 36.0,
+        "cams_pm25": 33.5,
+        "bias_cams_minus_station": -2.5
+      },
+      {
+        "timestamp_utc": "2026-10-12T23:30:00Z",
+        "timestamp_local": "2026-10-13T05:00:00+05:30",
+        "station_pm25": 39.0,
+        "cams_pm25": 29.1,
+        "bias_cams_minus_station": -9.9
+      },
+      {
+        "timestamp_utc": "2026-10-13T00:30:00Z",
+        "timestamp_local": "2026-10-13T06:00:00+05:30",
+        "station_pm25": 44.0,
+        "cams_pm25": 27.6,
+        "bias_cams_minus_station": -16.4
+      },
+      {
+        "timestamp_utc": "2026-10-13T01:30:00Z",
+        "timestamp_local": "2026-10-13T07:00:00+05:30",
+        "station_pm25": 47.1,
+        "cams_pm25": 29.2,
+        "bias_cams_minus_station": -17.9
+      },
+      {
+        "timestamp_utc": "2026-10-13T02:30:00Z",
+        "timestamp_local": "2026-10-13T08:00:00+05:30",
+        "station_pm25": 49.2,
+        "cams_pm25": 31.7,
+        "bias_cams_minus_station": -17.5
+      },
+      {
+        "timestamp_utc": "2026-10-13T03:30:00Z",
+        "timestamp_local": "2026-10-13T09:00:00+05:30",
+        "station_pm25": 51.3,
+        "cams_pm25": 34.1,
+        "bias_cams_minus_station": -17.2
+      },
+      {
+        "timestamp_utc": "2026-10-13T04:30:00Z",
+        "timestamp_local": "2026-10-13T10:00:00+05:30",
+        "station_pm25": 54.2,
+        "cams_pm25": 36.8,
+        "bias_cams_minus_station": -17.4
+      },
+      {
+        "timestamp_utc": "2026-10-13T05:30:00Z",
+        "timestamp_local": "2026-10-13T11:00:00+05:30",
+        "station_pm25": 53.6,
+        "cams_pm25": 39.3,
+        "bias_cams_minus_station": -14.3
+      },
+      {
+        "timestamp_utc": "2026-10-13T06:30:00Z",
+        "timestamp_local": "2026-10-13T12:00:00+05:30",
+        "station_pm25": 49.5,
+        "cams_pm25": 44.6,
+        "bias_cams_minus_station": -4.9
+      },
+      {
+        "timestamp_utc": "2026-10-13T07:30:00Z",
+        "timestamp_local": "2026-10-13T13:00:00+05:30",
+        "station_pm25": 47.2,
+        "cams_pm25": 54.9,
+        "bias_cams_minus_station": 7.7
+      },
+      {
+        "timestamp_utc": "2026-10-13T08:30:00Z",
+        "timestamp_local": "2026-10-13T14:00:00+05:30",
+        "station_pm25": 45.5,
+        "cams_pm25": 59.6,
+        "bias_cams_minus_station": 14.1
+      },
+      {
+        "timestamp_utc": "2026-10-13T09:30:00Z",
+        "timestamp_local": "2026-10-13T15:00:00+05:30",
+        "station_pm25": 46.8,
+        "cams_pm25": 58.6,
+        "bias_cams_minus_station": 11.8
+      },
+      {
+        "timestamp_utc": "2026-10-13T10:30:00Z",
+        "timestamp_local": "2026-10-13T16:00:00+05:30",
+        "station_pm25": 43.1,
+        "cams_pm25": 53.4,
+        "bias_cams_minus_station": 10.3
+      },
+      {
+        "timestamp_utc": "2026-10-13T11:30:00Z",
+        "timestamp_local": "2026-10-13T17:00:00+05:30",
+        "station_pm25": 39.8,
+        "cams_pm25": 48.2,
+        "bias_cams_minus_station": 8.4
+      },
+      {
+        "timestamp_utc": "2026-10-13T12:30:00Z",
+        "timestamp_local": "2026-10-13T18:00:00+05:30",
+        "station_pm25": 40.3,
+        "cams_pm25": 48.7,
+        "bias_cams_minus_station": 8.4
+      },
+      {
+        "timestamp_utc": "2026-10-13T13:30:00Z",
+        "timestamp_local": "2026-10-13T19:00:00+05:30",
+        "station_pm25": 40.6,
+        "cams_pm25": 46.4,
+        "bias_cams_minus_station": 5.8
+      },
+      {
+        "timestamp_utc": "2026-10-13T14:30:00Z",
+        "timestamp_local": "2026-10-13T20:00:00+05:30",
+        "station_pm25": 42.3,
+        "cams_pm25": 44.8,
+        "bias_cams_minus_station": 2.5
+      },
+      {
+        "timestamp_utc": "2026-10-13T15:30:00Z",
+        "timestamp_local": "2026-10-13T21:00:00+05:30",
+        "station_pm25": 46.6,
+        "cams_pm25": 43.5,
+        "bias_cams_minus_station": -3.1
+      },
+      {
+        "timestamp_utc": "2026-10-13T16:30:00Z",
+        "timestamp_local": "2026-10-13T22:00:00+05:30",
+        "station_pm25": 51.4,
+        "cams_pm25": 43.8,
+        "bias_cams_minus_station": -7.6
+      },
+      {
+        "timestamp_utc": "2026-10-13T17:30:00Z",
+        "timestamp_local": "2026-10-13T23:00:00+05:30",
+        "station_pm25": 57.8,
+        "cams_pm25": 42.4,
+        "bias_cams_minus_station": -15.4
+      },
+      {
+        "timestamp_utc": "2026-10-13T18:30:00Z",
+        "timestamp_local": "2026-10-14T00:00:00+05:30",
+        "station_pm25": 62.1,
+        "cams_pm25": 40.9,
+        "bias_cams_minus_station": -21.2
+      }
+    ]
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "1": {
+    "lead_hours": 1,
+    "test_count": 3571,
+    "mae_persistence": 1.18,
+    "mae_7d_diurnal": 4.99,
+    "mae_blended": 2.63,
+    "mae_pooled_actual_weather": 1.98,
+    "mae_pooled_no_weather": 1.61,
+    "mae_pooled_nwp_forecast": 1.98,
+    "mae_per_horizon_model": 1.0,
+    "ci_per_horizon_vs_persistence": [
+      -0.25,
+      -0.12
+    ],
+    "ci_per_horizon_vs_7d_diurnal": [
+      -4.7,
+      -3.33
+    ],
+    "quantile_coverage_pct": 84.8,
+    "mae_pm25_gt_40": 3.16,
+    "count_gt_40": 252,
+    "mae_pm25_le_40": 0.84,
+    "count_le_40": 3319,
+    "monthly_mae": {
+      "August": {
+        "count": 744,
+        "mae_model": 0.6463440051845045,
+        "mae_persist": 0.7422043010752689,
+        "mean_pm25": 15.225940860215053
+      },
+      "July": {
+        "count": 744,
+        "mae_model": 0.822498493596256,
+        "mae_persist": 0.853494623655914,
+        "mean_pm25": 14.634543010752688
+      },
+      "June": {
+        "count": 720,
+        "mae_model": 0.8664424748330747,
+        "mae_persist": 1.0002777777777778,
+        "mean_pm25": 17.929166666666667
+      },
+      "May": {
+        "count": 308,
+        "mae_model": 0.736706117884077,
+        "mae_persist": 0.8402597402597403,
+        "mean_pm25": 14.51655844155844
+      },
+      "October": {
+        "count": 335,
+        "mae_model": 2.7433274652479334,
+        "mae_persist": 3.7495522388059697,
+        "mean_pm25": 50.16059701492538
+      },
+      "September": {
+        "count": 720,
+        "mae_model": 0.9792974340981319,
+        "mae_persist": 1.0820833333333333,
+        "mean_pm25": 18.336666666666666
+      }
+    }
+  },
+  "6": {
+    "lead_hours": 6,
+    "test_count": 3566,
+    "mae_persistence": 4.02,
+    "mae_7d_diurnal": 4.99,
+    "mae_blended": 3.63,
+    "mae_pooled_actual_weather": 3.46,
+    "mae_pooled_no_weather": 3.55,
+    "mae_pooled_nwp_forecast": 3.46,
+    "mae_per_horizon_model": 3.34,
+    "ci_per_horizon_vs_persistence": [
+      -1.05,
+      -0.39
+    ],
+    "ci_per_horizon_vs_7d_diurnal": [
+      -2.19,
+      -1.14
+    ],
+    "quantile_coverage_pct": 85.3,
+    "mae_pm25_gt_40": 9.81,
+    "count_gt_40": 252,
+    "mae_pm25_le_40": 2.84,
+    "count_le_40": 3314,
+    "monthly_mae": {
+      "August": {
+        "count": 744,
+        "mae_model": 1.7260877782003938,
+        "mae_persist": 2.348790322580645,
+        "mean_pm25": 15.187096774193549
+      },
+      "July": {
+        "count": 744,
+        "mae_model": 2.4444969763694835,
+        "mae_persist": 2.4575268817204297,
+        "mean_pm25": 14.678091397849462
+      },
+      "June": {
+        "count": 720,
+        "mae_model": 2.996570508228093,
+        "mae_persist": 3.3823611111111114,
+        "mean_pm25": 17.903472222222224
+      },
+      "May": {
+        "count": 308,
+        "mae_model": 2.8931828966938626,
+        "mae_persist": 3.1496753246753246,
+        "mean_pm25": 14.321428571428571
+      },
+      "October": {
+        "count": 330,
+        "mae_model": 9.600052201763068,
+        "mae_persist": 13.957878787878787,
+        "mean_pm25": 50.17545454545455
+      },
+      "September": {
+        "count": 720,
+        "mae_model": 3.575630102846493,
+        "mae_persist": 3.837083333333333,
+        "mean_pm25": 18.6175
+      }
+    }
+  },
+  "12": {
+    "lead_hours": 12,
+    "test_count": 3560,
+    "mae_persistence": 4.77,
+    "mae_7d_diurnal": 5.0,
+    "mae_blended": 4.12,
+    "mae_pooled_actual_weather": 4.28,
+    "mae_pooled_no_weather": 4.38,
+    "mae_pooled_nwp_forecast": 4.28,
+    "mae_per_horizon_model": 4.16,
+    "ci_per_horizon_vs_persistence": [
+      -1.0,
+      -0.3
+    ],
+    "ci_per_horizon_vs_7d_diurnal": [
+      -1.38,
+      -0.33
+    ],
+    "quantile_coverage_pct": 85.3,
+    "mae_pm25_gt_40": 12.67,
+    "count_gt_40": 252,
+    "mae_pm25_le_40": 3.51,
+    "count_le_40": 3308,
+    "monthly_mae": {
+      "August": {
+        "count": 744,
+        "mae_model": 1.9909250146078237,
+        "mae_persist": 2.8416666666666663,
+        "mean_pm25": 15.134274193548386
+      },
+      "July": {
+        "count": 744,
+        "mae_model": 3.034409752099412,
+        "mae_persist": 3.0306451612903227,
+        "mean_pm25": 14.758736559139784
+      },
+      "June": {
+        "count": 720,
+        "mae_model": 3.841823206450851,
+        "mae_persist": 4.006666666666667,
+        "mean_pm25": 17.865555555555556
+      },
+      "May": {
+        "count": 308,
+        "mae_model": 4.241773297294645,
+        "mae_persist": 3.9811688311688314,
+        "mean_pm25": 14.06525974025974
+      },
+      "October": {
+        "count": 324,
+        "mae_model": 12.204251357815778,
+        "mae_persist": 16.808024691358025,
+        "mean_pm25": 50.031790123456794
+      },
+      "September": {
+        "count": 720,
+        "mae_model": 4.219512419032125,
+        "mae_persist": 4.26375,
+        "mean_pm25": 19.005
+      }
+    }
+  },
+  "24": {
+    "lead_hours": 24,
+    "test_count": 3548,
+    "mae_persistence": 4.3,
+    "mae_7d_diurnal": 5.01,
+    "mae_blended": 4.15,
+    "mae_pooled_actual_weather": 4.72,
+    "mae_pooled_no_weather": 4.99,
+    "mae_pooled_nwp_forecast": 4.72,
+    "mae_per_horizon_model": 4.28,
+    "ci_per_horizon_vs_persistence": [
+      -0.24,
+      0.22
+    ],
+    "ci_per_horizon_vs_7d_diurnal": [
+      -1.25,
+      -0.22
+    ],
+    "quantile_coverage_pct": 81.4,
+    "mae_pm25_gt_40": 13.21,
+    "count_gt_40": 252,
+    "mae_pm25_le_40": 3.6,
+    "count_le_40": 3296,
+    "monthly_mae": {
+      "August": {
+        "count": 744,
+        "mae_model": 1.9918472222101398,
+        "mae_persist": 1.9670698924731183,
+        "mean_pm25": 15.070430107526882
+      },
+      "July": {
+        "count": 744,
+        "mae_model": 2.8928715237795877,
+        "mae_persist": 2.9504032258064514,
+        "mean_pm25": 14.894086021505375
+      },
+      "June": {
+        "count": 720,
+        "mae_model": 4.078753499382712,
+        "mae_persist": 3.503611111111111,
+        "mean_pm25": 17.761666666666667
+      },
+      "May": {
+        "count": 308,
+        "mae_model": 5.054575138899158,
+        "mae_persist": 4.134740259740259,
+        "mean_pm25": 13.807142857142855
+      },
+      "October": {
+        "count": 312,
+        "mae_model": 11.24964667226641,
+        "mae_persist": 12.946153846153846,
+        "mean_pm25": 49.34647435897436
+      },
+      "September": {
+        "count": 720,
+        "mae_model": 4.936724505850787,
+        "mae_persist": 5.229861111111111,
+        "mean_pm25": 19.912222222222223
+      }
+    }
+  },
+  "48": {
+    "lead_hours": 48,
+    "test_count": 3524,
+    "mae_persistence": 5.69,
+    "mae_7d_diurnal": 5.53,
+    "mae_blended": 5.12,
+    "mae_pooled_actual_weather": 5.93,
+    "mae_pooled_no_weather": 6.39,
+    "mae_pooled_nwp_forecast": 5.93,
+    "mae_per_horizon_model": 6.0,
+    "ci_per_horizon_vs_persistence": [
+      -0.23,
+      0.82
+    ],
+    "ci_per_horizon_vs_7d_diurnal": [
+      -0.12,
+      1.09
+    ],
+    "quantile_coverage_pct": 84.0,
+    "mae_pm25_gt_40": 16.93,
+    "count_gt_40": 252,
+    "mae_pm25_le_40": 5.15,
+    "count_le_40": 3272,
+    "monthly_mae": {
+      "August": {
+        "count": 744,
+        "mae_model": 3.4319891733287493,
+        "mae_persist": 2.4193548387096775,
+        "mean_pm25": 14.94744623655914
+      },
+      "July": {
+        "count": 744,
+        "mae_model": 3.466353623426598,
+        "mae_persist": 3.598790322580645,
+        "mean_pm25": 15.107795698924729
+      },
+      "June": {
+        "count": 720,
+        "mae_model": 5.766901496597741,
+        "mae_persist": 4.553888888888889,
+        "mean_pm25": 17.303055555555556
+      },
+      "May": {
+        "count": 308,
+        "mae_model": 7.641005637531385,
+        "mae_persist": 5.163311688311689,
+        "mean_pm25": 14.438961038961041
+      },
+      "October": {
+        "count": 288,
+        "mae_model": 14.527229891224108,
+        "mae_persist": 17.64131944444444,
+        "mean_pm25": 48.38784722222223
+      },
+      "September": {
+        "count": 720,
+        "mae_model": 7.368092993855731,
+        "mae_persist": 7.790555555555557,
+        "mean_pm25": 21.523472222222217
+      }
+    }
+  }
+}

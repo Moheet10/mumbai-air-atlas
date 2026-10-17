@@ -13,6 +13,7 @@ data_service = DataService()
 
 
 @router.get("/health", response_model=HealthResponse)
+@router.get("/api/health", response_model=HealthResponse)
 async def get_health():
     now_utc = datetime.now(timezone.utc).isoformat()
     return HealthResponse(
@@ -29,6 +30,11 @@ async def get_stations():
     return await data_service.get_stations()
 
 
+@router.get("/api/stations/{station_id}/history")
+async def get_station_history(station_id: str, days: int = Query(60, ge=7, le=90)):
+    return await data_service.get_station_history(station_id=station_id, days=days)
+
+
 @router.get("/api/current", response_model=CurrentConditionsResponse)
 async def get_current_conditions(
     station_id: Optional[str] = Query(None, description="Optional ID of specific station to inspect")
@@ -41,6 +47,14 @@ async def get_forecast(
     station_id: Optional[str] = Query(None, description="Optional ID of station")
 ):
     return await data_service.get_forecast(station_id=station_id)
+
+
+@router.get("/api/scorecard/live")
+async def get_live_scorecard(
+    station_id: Optional[str] = Query(None, description="Optional ID of station to score")
+):
+    from backend.app.services.forecast_logger import evaluate_live_scorecard
+    return evaluate_live_scorecard(station_id=station_id)
 
 
 @router.get("/api/model/metrics")

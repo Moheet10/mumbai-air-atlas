@@ -1,12 +1,13 @@
 :root {
   color-scheme: light;
   
-  /* Paper and Ink Palette */
+  /* Paper and Ink Palette (Day Edition) */
   --paper:   #F4EFE6;  /* page background */
   --paper-2: #EBE4D6;  /* panels, subtle fills */
   --ink:     #1B1A17;  /* primary text, chart lines */
   --ink-2:   #6B665C;  /* secondary text, axis labels */
   --rule:    #D9D2C3;  /* hairlines, gridlines */
+  --band-fill: rgba(27, 26, 23, 0.08); /* uncertainty band */
 
   /* CPCB AQI categories — the ONLY accent colors in the app */
   --aqi-good:         #4C8C6B;  /*   0–50  */
@@ -30,6 +31,40 @@
 
   /* Layout */
   --max-width: 1200px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Paper and Ink Palette (Night Edition) */
+  --paper:   #14130F;  /* dark page background */
+  --paper-2: #1D1B16;  /* panels, subtle fills */
+  --ink:     #EDE7DA;  /* primary text, chart lines */
+  --ink-2:   #9A9487;  /* secondary text, axis labels */
+  --rule:    #34312A;  /* hairlines, gridlines */
+  --band-fill: rgba(237, 231, 218, 0.10); /* uncertainty band */
+
+  /* Lightened AQI categories hitting >= 4.5:1 contrast on #14130F */
+  --aqi-good:         #5EA880;  /* 6.5:1 contrast */
+  --aqi-satisfactory: #B8CA78;  /* 10.4:1 contrast */
+  --aqi-moderate:    #ECC254;  /* 11.0:1 contrast */
+  --aqi-poor:        #E8893D;  /* 7.2:1 contrast */
+  --aqi-very-poor:   #E05343;  /* 4.9:1 contrast */
+  --aqi-severe:      #CF5A6C;  /* 4.7:1 contrast */
+}
+
+/* MapLibre popup restyling to match zero-radius editorial rules */
+.maplibregl-popup-content {
+  background-color: var(--paper-2) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 8px 12px !important;
+  color: var(--ink) !important;
+}
+.maplibregl-popup-tip {
+  border-top-color: var(--paper-2) !important;
+  border-bottom-color: var(--paper-2) !important;
 }
 
 *, *::before, *::after {

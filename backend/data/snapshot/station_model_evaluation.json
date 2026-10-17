@@ -1,0 +1,826 @@
+{
+  "execution_timestamp_utc": "2026-10-14T11:09:57.068703+00:00",
+  "n_stations": 24,
+  "site_groups": [
+    "vashi",
+    "byculla",
+    "mahape",
+    "sanpada",
+    "deonar",
+    "shivaji_nagar",
+    "kalamboli",
+    "andheri",
+    "bkc",
+    "airport",
+    "thane",
+    "malad",
+    "borivali",
+    "worli",
+    "bhayandar",
+    "kurla",
+    "mulund",
+    "ghatkopar",
+    "sion",
+    "chembur",
+    "kandivali"
+  ],
+  "evaluation": {
+    "forward_chaining": {
+      "Fold 1: Post-Monsoon (Oct-Nov 2025)": {
+        "h_1": {
+          "n_samples": 25037,
+          "alpha_blend": 0.7536,
+          "mae_model": 8.65,
+          "mae_persistence": 9.11,
+          "mae_blend": 11.66,
+          "mae_raw_cams": 22.38,
+          "mae_cams_bias": 18.1,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -0.46,
+          "ci_95_diff": [
+            -0.54,
+            -0.38
+          ],
+          "coverage_overall_pct": 79.1,
+          "top_decile_threshold": 87.2,
+          "top_decile_n": 2514,
+          "top_decile_mae_model": 41.9,
+          "top_decile_mae_persistence": 42.97,
+          "top_decile_mae_blend": 52.54,
+          "top_decile_mae_raw_cams": 79.19,
+          "top_decile_mae_cams_bias": 57.08,
+          "top_decile_coverage_pct": 75.3
+        },
+        "h_6": {
+          "n_samples": 24250,
+          "alpha_blend": 0.5023,
+          "mae_model": 16.49,
+          "mae_persistence": 19.58,
+          "mae_blend": 20.88,
+          "mae_raw_cams": 22.59,
+          "mae_cams_bias": 19.78,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -3.1,
+          "ci_95_diff": [
+            -3.74,
+            -2.6
+          ],
+          "coverage_overall_pct": 72.4,
+          "top_decile_threshold": 86.8,
+          "top_decile_n": 2429,
+          "top_decile_mae_model": 68.3,
+          "top_decile_mae_persistence": 68.77,
+          "top_decile_mae_blend": 86.3,
+          "top_decile_mae_raw_cams": 80.7,
+          "top_decile_mae_cams_bias": 61.46,
+          "top_decile_coverage_pct": 52.8
+        },
+        "h_12": {
+          "n_samples": 23761,
+          "alpha_blend": 0.4284,
+          "mae_model": 18.42,
+          "mae_persistence": 22.41,
+          "mae_blend": 22.94,
+          "mae_raw_cams": 22.49,
+          "mae_cams_bias": 20.6,
+          "best_baseline": "cams_bias",
+          "diff_vs_best_baseline": -2.24,
+          "ci_95_diff": [
+            -3.47,
+            -1.06
+          ],
+          "coverage_overall_pct": 70.4,
+          "top_decile_threshold": 86.0,
+          "top_decile_n": 2383,
+          "top_decile_mae_model": 76.47,
+          "top_decile_mae_persistence": 73.28,
+          "top_decile_mae_blend": 92.41,
+          "top_decile_mae_raw_cams": 78.7,
+          "top_decile_mae_cams_bias": 61.58,
+          "top_decile_coverage_pct": 37.7
+        },
+        "h_24": {
+          "n_samples": 23284,
+          "alpha_blend": 0.4552,
+          "mae_model": 17.76,
+          "mae_persistence": 18.9,
+          "mae_blend": 22.46,
+          "mae_raw_cams": 23.1,
+          "mae_cams_bias": 21.95,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -1.16,
+          "ci_95_diff": [
+            -2.17,
+            -0.15
+          ],
+          "coverage_overall_pct": 72.1,
+          "top_decile_threshold": 89.0,
+          "top_decile_n": 2330,
+          "top_decile_mae_model": 76.91,
+          "top_decile_mae_persistence": 65.33,
+          "top_decile_mae_blend": 88.63,
+          "top_decile_mae_raw_cams": 83.94,
+          "top_decile_mae_cams_bias": 68.21,
+          "top_decile_coverage_pct": 50.7
+        },
+        "h_48": {
+          "n_samples": 22854,
+          "alpha_blend": 0.3889,
+          "mae_model": 20.02,
+          "mae_persistence": 22.28,
+          "mae_blend": 24.28,
+          "mae_raw_cams": 22.33,
+          "mae_cams_bias": 22.94,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -2.29,
+          "ci_95_diff": [
+            -3.93,
+            -0.75
+          ],
+          "coverage_overall_pct": 70.1,
+          "top_decile_threshold": 88.1,
+          "top_decile_n": 2289,
+          "top_decile_mae_model": 84.18,
+          "top_decile_mae_persistence": 69.9,
+          "top_decile_mae_blend": 93.04,
+          "top_decile_mae_raw_cams": 77.7,
+          "top_decile_mae_cams_bias": 65.88,
+          "top_decile_coverage_pct": 42.0
+        }
+      },
+      "Fold 2: Winter (Dec 2025-Feb 2026)": {
+        "h_1": {
+          "n_samples": 29873,
+          "alpha_blend": 0.7229,
+          "mae_model": 5.56,
+          "mae_persistence": 6.08,
+          "mae_blend": 8.69,
+          "mae_raw_cams": 22.77,
+          "mae_cams_bias": 16.3,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -0.52,
+          "ci_95_diff": [
+            -0.58,
+            -0.45
+          ],
+          "coverage_overall_pct": 81.3,
+          "top_decile_threshold": 79.8,
+          "top_decile_n": 2993,
+          "top_decile_mae_model": 15.91,
+          "top_decile_mae_persistence": 16.87,
+          "top_decile_mae_blend": 27.35,
+          "top_decile_mae_raw_cams": 40.9,
+          "top_decile_mae_cams_bias": 32.66,
+          "top_decile_coverage_pct": 74.7
+        },
+        "h_6": {
+          "n_samples": 28898,
+          "alpha_blend": 0.545,
+          "mae_model": 11.74,
+          "mae_persistence": 15.83,
+          "mae_blend": 15.94,
+          "mae_raw_cams": 22.93,
+          "mae_cams_bias": 17.97,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -4.09,
+          "ci_95_diff": [
+            -4.54,
+            -3.65
+          ],
+          "coverage_overall_pct": 80.4,
+          "top_decile_threshold": 79.6,
+          "top_decile_n": 2901,
+          "top_decile_mae_model": 30.09,
+          "top_decile_mae_persistence": 34.36,
+          "top_decile_mae_blend": 47.87,
+          "top_decile_mae_raw_cams": 41.09,
+          "top_decile_mae_cams_bias": 35.75,
+          "top_decile_coverage_pct": 63.0
+        },
+        "h_12": {
+          "n_samples": 28085,
+          "alpha_blend": 0.4847,
+          "mae_model": 13.45,
+          "mae_persistence": 19.16,
+          "mae_blend": 18.1,
+          "mae_raw_cams": 22.4,
+          "mae_cams_bias": 18.81,
+          "best_baseline": "blend",
+          "diff_vs_best_baseline": -4.68,
+          "ci_95_diff": [
+            -5.52,
+            -3.86
+          ],
+          "coverage_overall_pct": 77.9,
+          "top_decile_threshold": 79.5,
+          "top_decile_n": 2818,
+          "top_decile_mae_model": 34.16,
+          "top_decile_mae_persistence": 41.34,
+          "top_decile_mae_blend": 55.63,
+          "top_decile_mae_raw_cams": 41.58,
+          "top_decile_mae_cams_bias": 38.34,
+          "top_decile_coverage_pct": 56.8
+        },
+        "h_24": {
+          "n_samples": 27219,
+          "alpha_blend": 0.5381,
+          "mae_model": 13.4,
+          "mae_persistence": 15.88,
+          "mae_blend": 16.16,
+          "mae_raw_cams": 22.47,
+          "mae_cams_bias": 20.5,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -2.45,
+          "ci_95_diff": [
+            -2.99,
+            -1.87
+          ],
+          "coverage_overall_pct": 76.5,
+          "top_decile_threshold": 79.6,
+          "top_decile_n": 2734,
+          "top_decile_mae_model": 34.23,
+          "top_decile_mae_persistence": 35.77,
+          "top_decile_mae_blend": 49.01,
+          "top_decile_mae_raw_cams": 42.03,
+          "top_decile_mae_cams_bias": 40.28,
+          "top_decile_coverage_pct": 59.7
+        },
+        "h_48": {
+          "n_samples": 26258,
+          "alpha_blend": 0.4454,
+          "mae_model": 15.16,
+          "mae_persistence": 19.76,
+          "mae_blend": 19.05,
+          "mae_raw_cams": 22.78,
+          "mae_cams_bias": 22.79,
+          "best_baseline": "blend",
+          "diff_vs_best_baseline": -3.96,
+          "ci_95_diff": [
+            -5.01,
+            -2.95
+          ],
+          "coverage_overall_pct": 75.8,
+          "top_decile_threshold": 79.9,
+          "top_decile_n": 2635,
+          "top_decile_mae_model": 40.31,
+          "top_decile_mae_persistence": 44.06,
+          "top_decile_mae_blend": 58.41,
+          "top_decile_mae_raw_cams": 42.75,
+          "top_decile_mae_cams_bias": 43.01,
+          "top_decile_coverage_pct": 51.5
+        }
+      },
+      "Fold 3: Pre-Monsoon (Mar-May 2026)": {
+        "h_1": {
+          "n_samples": 33039,
+          "alpha_blend": 0.7433,
+          "mae_model": 4.79,
+          "mae_persistence": 5.17,
+          "mae_blend": 6.58,
+          "mae_raw_cams": 12.51,
+          "mae_cams_bias": 10.15,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -0.38,
+          "ci_95_diff": [
+            -0.45,
+            -0.32
+          ],
+          "coverage_overall_pct": 77.6,
+          "top_decile_threshold": 50.3,
+          "top_decile_n": 3312,
+          "top_decile_mae_model": 15.59,
+          "top_decile_mae_persistence": 16.06,
+          "top_decile_mae_blend": 17.67,
+          "top_decile_mae_raw_cams": 39.27,
+          "top_decile_mae_cams_bias": 28.1,
+          "top_decile_coverage_pct": 71.7
+        },
+        "h_6": {
+          "n_samples": 31318,
+          "alpha_blend": 0.5518,
+          "mae_model": 9.06,
+          "mae_persistence": 11.77,
+          "mae_blend": 12.13,
+          "mae_raw_cams": 12.6,
+          "mae_cams_bias": 11.21,
+          "best_baseline": "cams_bias",
+          "diff_vs_best_baseline": -2.16,
+          "ci_95_diff": [
+            -2.8,
+            -1.59
+          ],
+          "coverage_overall_pct": 77.1,
+          "top_decile_threshold": 49.7,
+          "top_decile_n": 3141,
+          "top_decile_mae_model": 31.94,
+          "top_decile_mae_persistence": 34.88,
+          "top_decile_mae_blend": 33.94,
+          "top_decile_mae_raw_cams": 40.23,
+          "top_decile_mae_cams_bias": 32.23,
+          "top_decile_coverage_pct": 59.1
+        },
+        "h_12": {
+          "n_samples": 30835,
+          "alpha_blend": 0.4894,
+          "mae_model": 9.83,
+          "mae_persistence": 13.24,
+          "mae_blend": 13.42,
+          "mae_raw_cams": 12.45,
+          "mae_cams_bias": 11.85,
+          "best_baseline": "cams_bias",
+          "diff_vs_best_baseline": -2.02,
+          "ci_95_diff": [
+            -2.74,
+            -1.45
+          ],
+          "coverage_overall_pct": 76.7,
+          "top_decile_threshold": 49.3,
+          "top_decile_n": 3091,
+          "top_decile_mae_model": 34.9,
+          "top_decile_mae_persistence": 38.57,
+          "top_decile_mae_blend": 37.45,
+          "top_decile_mae_raw_cams": 41.17,
+          "top_decile_mae_cams_bias": 35.04,
+          "top_decile_coverage_pct": 53.6
+        },
+        "h_24": {
+          "n_samples": 30551,
+          "alpha_blend": 0.5445,
+          "mae_model": 9.7,
+          "mae_persistence": 11.89,
+          "mae_blend": 12.47,
+          "mae_raw_cams": 12.65,
+          "mae_cams_bias": 12.54,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -2.19,
+          "ci_95_diff": [
+            -2.65,
+            -1.77
+          ],
+          "coverage_overall_pct": 77.7,
+          "top_decile_threshold": 49.3,
+          "top_decile_n": 3058,
+          "top_decile_mae_model": 34.66,
+          "top_decile_mae_persistence": 37.95,
+          "top_decile_mae_blend": 36.21,
+          "top_decile_mae_raw_cams": 42.16,
+          "top_decile_mae_cams_bias": 36.7,
+          "top_decile_coverage_pct": 54.0
+        },
+        "h_48": {
+          "n_samples": 30175,
+          "alpha_blend": 0.4436,
+          "mae_model": 10.55,
+          "mae_persistence": 13.74,
+          "mae_blend": 13.89,
+          "mae_raw_cams": 12.58,
+          "mae_cams_bias": 13.33,
+          "best_baseline": "cams_bias",
+          "diff_vs_best_baseline": -2.78,
+          "ci_95_diff": [
+            -3.4,
+            -2.24
+          ],
+          "coverage_overall_pct": 76.7,
+          "top_decile_threshold": 50.0,
+          "top_decile_n": 3027,
+          "top_decile_mae_model": 36.53,
+          "top_decile_mae_persistence": 40.26,
+          "top_decile_mae_blend": 39.22,
+          "top_decile_mae_raw_cams": 41.31,
+          "top_decile_mae_cams_bias": 36.98,
+          "top_decile_coverage_pct": 48.7
+        }
+      },
+      "Fold 4: Monsoon (Jun-Sep 2026)": {
+        "h_1": {
+          "n_samples": 44931,
+          "alpha_blend": 0.7453,
+          "mae_model": 2.76,
+          "mae_persistence": 2.96,
+          "mae_blend": 5.79,
+          "mae_raw_cams": 7.24,
+          "mae_cams_bias": 4.88,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -0.2,
+          "ci_95_diff": [
+            -0.23,
+            -0.18
+          ],
+          "coverage_overall_pct": 77.6,
+          "top_decile_threshold": 27.7,
+          "top_decile_n": 4498,
+          "top_decile_mae_model": 7.3,
+          "top_decile_mae_persistence": 7.28,
+          "top_decile_mae_blend": 6.39,
+          "top_decile_mae_raw_cams": 18.41,
+          "top_decile_mae_cams_bias": 11.65,
+          "top_decile_coverage_pct": 65.8
+        },
+        "h_6": {
+          "n_samples": 43268,
+          "alpha_blend": 0.5401,
+          "mae_model": 4.59,
+          "mae_persistence": 5.87,
+          "mae_blend": 10.16,
+          "mae_raw_cams": 7.29,
+          "mae_cams_bias": 5.33,
+          "best_baseline": "cams_bias",
+          "diff_vs_best_baseline": -0.73,
+          "ci_95_diff": [
+            -0.87,
+            -0.58
+          ],
+          "coverage_overall_pct": 79.2,
+          "top_decile_threshold": 27.7,
+          "top_decile_n": 4340,
+          "top_decile_mae_model": 13.73,
+          "top_decile_mae_persistence": 14.99,
+          "top_decile_mae_blend": 10.49,
+          "top_decile_mae_raw_cams": 18.79,
+          "top_decile_mae_cams_bias": 12.93,
+          "top_decile_coverage_pct": 57.7
+        },
+        "h_12": {
+          "n_samples": 42507,
+          "alpha_blend": 0.4747,
+          "mae_model": 4.9,
+          "mae_persistence": 6.39,
+          "mae_blend": 11.45,
+          "mae_raw_cams": 7.27,
+          "mae_cams_bias": 5.59,
+          "best_baseline": "cams_bias",
+          "diff_vs_best_baseline": -0.69,
+          "ci_95_diff": [
+            -0.87,
+            -0.51
+          ],
+          "coverage_overall_pct": 79.7,
+          "top_decile_threshold": 27.6,
+          "top_decile_n": 4277,
+          "top_decile_mae_model": 14.78,
+          "top_decile_mae_persistence": 16.64,
+          "top_decile_mae_blend": 11.1,
+          "top_decile_mae_raw_cams": 19.01,
+          "top_decile_mae_cams_bias": 13.69,
+          "top_decile_coverage_pct": 56.9
+        },
+        "h_24": {
+          "n_samples": 41850,
+          "alpha_blend": 0.5304,
+          "mae_model": 4.81,
+          "mae_persistence": 5.57,
+          "mae_blend": 10.15,
+          "mae_raw_cams": 7.29,
+          "mae_cams_bias": 5.89,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -0.76,
+          "ci_95_diff": [
+            -0.87,
+            -0.65
+          ],
+          "coverage_overall_pct": 79.4,
+          "top_decile_threshold": 27.7,
+          "top_decile_n": 4223,
+          "top_decile_mae_model": 13.27,
+          "top_decile_mae_persistence": 13.57,
+          "top_decile_mae_blend": 9.58,
+          "top_decile_mae_raw_cams": 18.7,
+          "top_decile_mae_cams_bias": 13.65,
+          "top_decile_coverage_pct": 59.1
+        },
+        "h_48": {
+          "n_samples": 40411,
+          "alpha_blend": 0.4333,
+          "mae_model": 5.17,
+          "mae_persistence": 6.06,
+          "mae_blend": 11.71,
+          "mae_raw_cams": 7.23,
+          "mae_cams_bias": 6.16,
+          "best_baseline": "persistence",
+          "diff_vs_best_baseline": -0.89,
+          "ci_95_diff": [
+            -1.06,
+            -0.74
+          ],
+          "coverage_overall_pct": 79.0,
+          "top_decile_threshold": 27.6,
+          "top_decile_n": 4077,
+          "top_decile_mae_model": 14.08,
+          "top_decile_mae_persistence": 14.26,
+          "top_decile_mae_blend": 9.37,
+          "top_decile_mae_raw_cams": 18.6,
+          "top_decile_mae_cams_bias": 13.44,
+          "top_decile_coverage_pct": 56.6
+        }
+      }
+    },
+    "cams_ablation": {
+      "Fold 1: Post-Monsoon (Oct-Nov 2025)": {
+        "h_1": {
+          "mae_with_cams_future": 8.65,
+          "mae_without_cams_future": 8.67,
+          "delta_mae_ablation": 0.02,
+          "top_decile_mae_with": 41.9,
+          "top_decile_mae_without": 41.97
+        },
+        "h_6": {
+          "mae_with_cams_future": 16.49,
+          "mae_without_cams_future": 16.69,
+          "delta_mae_ablation": 0.19,
+          "top_decile_mae_with": 68.3,
+          "top_decile_mae_without": 69.38
+        },
+        "h_12": {
+          "mae_with_cams_future": 18.42,
+          "mae_without_cams_future": 19.24,
+          "delta_mae_ablation": 0.83,
+          "top_decile_mae_with": 76.47,
+          "top_decile_mae_without": 79.74
+        },
+        "h_24": {
+          "mae_with_cams_future": 17.76,
+          "mae_without_cams_future": 19.17,
+          "delta_mae_ablation": 1.41,
+          "top_decile_mae_with": 76.91,
+          "top_decile_mae_without": 81.02
+        },
+        "h_48": {
+          "mae_with_cams_future": 20.02,
+          "mae_without_cams_future": 21.83,
+          "delta_mae_ablation": 1.81,
+          "top_decile_mae_with": 84.18,
+          "top_decile_mae_without": 89.97
+        }
+      },
+      "Fold 2: Winter (Dec 2025-Feb 2026)": {
+        "h_1": {
+          "mae_with_cams_future": 5.56,
+          "mae_without_cams_future": 5.55,
+          "delta_mae_ablation": -0.01,
+          "top_decile_mae_with": 15.91,
+          "top_decile_mae_without": 15.87
+        },
+        "h_6": {
+          "mae_with_cams_future": 11.74,
+          "mae_without_cams_future": 11.81,
+          "delta_mae_ablation": 0.07,
+          "top_decile_mae_with": 30.09,
+          "top_decile_mae_without": 30.57
+        },
+        "h_12": {
+          "mae_with_cams_future": 13.45,
+          "mae_without_cams_future": 13.67,
+          "delta_mae_ablation": 0.22,
+          "top_decile_mae_with": 34.16,
+          "top_decile_mae_without": 34.83
+        },
+        "h_24": {
+          "mae_with_cams_future": 13.4,
+          "mae_without_cams_future": 14.33,
+          "delta_mae_ablation": 0.93,
+          "top_decile_mae_with": 34.23,
+          "top_decile_mae_without": 36.0
+        },
+        "h_48": {
+          "mae_with_cams_future": 15.16,
+          "mae_without_cams_future": 16.98,
+          "delta_mae_ablation": 1.82,
+          "top_decile_mae_with": 40.31,
+          "top_decile_mae_without": 44.19
+        }
+      },
+      "Fold 3: Pre-Monsoon (Mar-May 2026)": {
+        "h_1": {
+          "mae_with_cams_future": 4.79,
+          "mae_without_cams_future": 4.8,
+          "delta_mae_ablation": 0.0,
+          "top_decile_mae_with": 15.59,
+          "top_decile_mae_without": 15.64
+        },
+        "h_6": {
+          "mae_with_cams_future": 9.06,
+          "mae_without_cams_future": 9.13,
+          "delta_mae_ablation": 0.07,
+          "top_decile_mae_with": 31.94,
+          "top_decile_mae_without": 31.98
+        },
+        "h_12": {
+          "mae_with_cams_future": 9.83,
+          "mae_without_cams_future": 10.15,
+          "delta_mae_ablation": 0.32,
+          "top_decile_mae_with": 34.9,
+          "top_decile_mae_without": 34.58
+        },
+        "h_24": {
+          "mae_with_cams_future": 9.7,
+          "mae_without_cams_future": 10.18,
+          "delta_mae_ablation": 0.48,
+          "top_decile_mae_with": 34.66,
+          "top_decile_mae_without": 34.58
+        },
+        "h_48": {
+          "mae_with_cams_future": 10.55,
+          "mae_without_cams_future": 11.5,
+          "delta_mae_ablation": 0.94,
+          "top_decile_mae_with": 36.53,
+          "top_decile_mae_without": 36.71
+        }
+      },
+      "Fold 4: Monsoon (Jun-Sep 2026)": {
+        "h_1": {
+          "mae_with_cams_future": 2.76,
+          "mae_without_cams_future": 2.76,
+          "delta_mae_ablation": -0.0,
+          "top_decile_mae_with": 7.3,
+          "top_decile_mae_without": 7.31
+        },
+        "h_6": {
+          "mae_with_cams_future": 4.59,
+          "mae_without_cams_future": 4.59,
+          "delta_mae_ablation": -0.01,
+          "top_decile_mae_with": 13.73,
+          "top_decile_mae_without": 13.56
+        },
+        "h_12": {
+          "mae_with_cams_future": 4.9,
+          "mae_without_cams_future": 4.95,
+          "delta_mae_ablation": 0.05,
+          "top_decile_mae_with": 14.78,
+          "top_decile_mae_without": 14.72
+        },
+        "h_24": {
+          "mae_with_cams_future": 4.81,
+          "mae_without_cams_future": 4.9,
+          "delta_mae_ablation": 0.09,
+          "top_decile_mae_with": 13.27,
+          "top_decile_mae_without": 13.45
+        },
+        "h_48": {
+          "mae_with_cams_future": 5.17,
+          "mae_without_cams_future": 5.36,
+          "delta_mae_ablation": 0.19,
+          "top_decile_mae_with": 14.08,
+          "top_decile_mae_without": 14.13
+        }
+      }
+    },
+    "spatial_holdout": {
+      "h_1": {
+        "held_out_sites": [
+          "bkc",
+          "worli",
+          "deonar"
+        ],
+        "n_samples": 7886,
+        "alpha_blend": 0.7293,
+        "mae_model": 3.57,
+        "mae_without_cams_future": 3.56,
+        "mae_persistence": 3.77,
+        "mae_blend": 6.08,
+        "mae_raw_cams": 8.56,
+        "mae_cams_bias": 6.19,
+        "best_baseline": "persistence",
+        "diff_vs_best_baseline": -0.21,
+        "ci_95_diff": [
+          -0.25,
+          -0.17
+        ],
+        "coverage_overall_pct": 71.0,
+        "top_decile_threshold": 37.2,
+        "top_decile_n": 790,
+        "top_decile_mae_model": 7.91,
+        "top_decile_mae_without_cams": 7.88,
+        "top_decile_mae_persistence": 7.68,
+        "top_decile_mae_blend": 9.09,
+        "top_decile_mae_raw_cams": 20.29,
+        "top_decile_mae_cams_bias": 17.39,
+        "top_decile_coverage_pct": 63.3
+      },
+      "h_6": {
+        "held_out_sites": [
+          "bkc",
+          "worli",
+          "deonar"
+        ],
+        "n_samples": 7514,
+        "alpha_blend": 0.5276,
+        "mae_model": 5.92,
+        "mae_without_cams_future": 5.92,
+        "mae_persistence": 7.55,
+        "mae_blend": 10.37,
+        "mae_raw_cams": 8.69,
+        "mae_cams_bias": 6.69,
+        "best_baseline": "cams_bias",
+        "diff_vs_best_baseline": -0.77,
+        "ci_95_diff": [
+          -1.28,
+          -0.34
+        ],
+        "coverage_overall_pct": 71.4,
+        "top_decile_threshold": 36.7,
+        "top_decile_n": 752,
+        "top_decile_mae_model": 17.06,
+        "top_decile_mae_without_cams": 17.25,
+        "top_decile_mae_persistence": 17.92,
+        "top_decile_mae_blend": 16.56,
+        "top_decile_mae_raw_cams": 20.83,
+        "top_decile_mae_cams_bias": 18.76,
+        "top_decile_coverage_pct": 51.9
+      },
+      "h_12": {
+        "held_out_sites": [
+          "bkc",
+          "worli",
+          "deonar"
+        ],
+        "n_samples": 7293,
+        "alpha_blend": 0.4604,
+        "mae_model": 5.95,
+        "mae_without_cams_future": 6.01,
+        "mae_persistence": 7.81,
+        "mae_blend": 11.43,
+        "mae_raw_cams": 8.55,
+        "mae_cams_bias": 6.74,
+        "best_baseline": "cams_bias",
+        "diff_vs_best_baseline": -0.8,
+        "ci_95_diff": [
+          -1.18,
+          -0.4
+        ],
+        "coverage_overall_pct": 74.6,
+        "top_decile_threshold": 35.8,
+        "top_decile_n": 736,
+        "top_decile_mae_model": 17.8,
+        "top_decile_mae_without_cams": 18.13,
+        "top_decile_mae_persistence": 19.14,
+        "top_decile_mae_blend": 17.67,
+        "top_decile_mae_raw_cams": 19.99,
+        "top_decile_mae_cams_bias": 17.72,
+        "top_decile_coverage_pct": 52.2
+      },
+      "h_24": {
+        "held_out_sites": [
+          "bkc",
+          "worli",
+          "deonar"
+        ],
+        "n_samples": 7123,
+        "alpha_blend": 0.5128,
+        "mae_model": 5.76,
+        "mae_without_cams_future": 5.93,
+        "mae_persistence": 6.39,
+        "mae_blend": 10.19,
+        "mae_raw_cams": 8.62,
+        "mae_cams_bias": 7.28,
+        "best_baseline": "persistence",
+        "diff_vs_best_baseline": -0.64,
+        "ci_95_diff": [
+          -0.94,
+          -0.38
+        ],
+        "coverage_overall_pct": 77.0,
+        "top_decile_threshold": 36.8,
+        "top_decile_n": 717,
+        "top_decile_mae_model": 17.01,
+        "top_decile_mae_without_cams": 18.01,
+        "top_decile_mae_persistence": 17.72,
+        "top_decile_mae_blend": 16.3,
+        "top_decile_mae_raw_cams": 20.22,
+        "top_decile_mae_cams_bias": 19.87,
+        "top_decile_coverage_pct": 59.0
+      },
+      "h_48": {
+        "held_out_sites": [
+          "bkc",
+          "worli",
+          "deonar"
+        ],
+        "n_samples": 6887,
+        "alpha_blend": 0.4116,
+        "mae_model": 6.48,
+        "mae_without_cams_future": 6.77,
+        "mae_persistence": 7.52,
+        "mae_blend": 11.87,
+        "mae_raw_cams": 8.73,
+        "mae_cams_bias": 7.8,
+        "best_baseline": "persistence",
+        "diff_vs_best_baseline": -1.04,
+        "ci_95_diff": [
+          -1.51,
+          -0.54
+        ],
+        "coverage_overall_pct": 74.7,
+        "top_decile_threshold": 37.7,
+        "top_decile_n": 690,
+        "top_decile_mae_model": 18.92,
+        "top_decile_mae_without_cams": 20.77,
+        "top_decile_mae_persistence": 22.06,
+        "top_decile_mae_blend": 19.07,
+        "top_decile_mae_raw_cams": 20.81,
+        "top_decile_mae_cams_bias": 20.25,
+        "top_decile_coverage_pct": 55.8
+      }
+    }
+  }
+}

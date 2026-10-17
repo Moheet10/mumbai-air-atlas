@@ -23,7 +23,7 @@ MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "l
 ANOMALIES_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "anomalies.json")
 
 
-def detect_anomalies(db_path: str = DB_PATH, z_threshold: float = 2.0) -> list:
+def detect_anomalies(db_path: str = DB_PATH, z_threshold: float = 2.5) -> list:
     conn = sqlite3.connect(db_path)
     df = pd.read_sql_query(
         """
@@ -46,25 +46,27 @@ def detect_anomalies(db_path: str = DB_PATH, z_threshold: float = 2.0) -> list:
     df["z_score"] = (df["pm2_5"] - df["roll_mean_24"]) / df["roll_std_24"].replace(0, 1)
 
     # 2. Compute model predictions if model exists
-    y_pred = None
     if os.path.exists(MODEL_PATH):
         try:
             artifact = joblib.load(MODEL_PATH)
-            model = artifact["model"]
-            feature_cols = artifact["feature_cols"]
+            model = artifact.get("model_24h") or artifact.get("model")
+            feature_cols = artifact.get("feature_cols", [])
             featured_df, _ = build_features(df)
             valid_idx = featured_df.dropna(subset=feature_cols).index
-            preds = model.predict(featured_df.loc[valid_idx, feature_cols])
-            df.loc[valid_idx, "model_pred"] = preds
-            df["residual"] = np.abs(df["pm2_5"] - df["model_pred"])
+            if model and len(feature_cols) > 0:
+                preds = model.predict(featured_df.loc[valid_idx, feature_cols])
+                df.loc[valid_idx, "model_pred"] = preds
+                df["residual"] = np.abs(df["pm2_5"] - df["model_pred"])
+            else:
+                df["residual"] = 0
         except Exception:
             df["residual"] = 0
     else:
         df["residual"] = 0
 
-    # 3. Filter anomalous points
+    # 3. Filter anomalous points: Strictly requiring |z_score| >= z_threshold (default 2.5)
     anom_df = df[
-        (df["z_score"].abs() > z_threshold) | (df["residual"] > 25.0)
+        df["z_score"].abs() >= z_threshold
     ].copy()
 
     anomalies = []

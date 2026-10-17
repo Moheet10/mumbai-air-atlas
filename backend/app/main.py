@@ -1,16 +1,19 @@
 import os
 from dotenv import load_dotenv
+
+# Load local environment variables from .env before initializing router & services
+load_dotenv()
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.app.api.endpoints import router
-
-# Load local environment variables from .env if present
-load_dotenv()
 
 app = FastAPI(
     title="Mumbai Air Atlas API",
     description="Editorial-style air quality and meteorological intelligence API for Greater Mumbai.",
     version="0.1.0",
+    docs_url="/api/docs",
+    openapi_url="/api/openapi.json",
 )
 
 origins = [
@@ -32,12 +35,18 @@ app.add_middleware(
 app.include_router(router)
 
 
+@app.get("/docs", include_in_schema=False)
+def docs_redirect():
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/api/docs")
+
+
 # Mount static frontend build if present
 frontend_dist = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "dist"))
 if not os.path.exists(frontend_dist):
     frontend_dist = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "dist"))
 
-if os.path.exists(frontend_dist):
+if os.path.exists(frontend_dist) and not os.getenv("VERCEL"):
     from fastapi.staticfiles import StaticFiles
     app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="static")
 else:
@@ -46,8 +55,8 @@ else:
         return {
             "project": "Mumbai Air Atlas",
             "tagline": "The city's air, in motion.",
-            "documentation": "/docs",
-            "health": "/health",
+            "documentation": "/api/docs",
+            "health": "/api/health",
         }
 
 

@@ -8,6 +8,47 @@ interface StationListProps {
   onSelectStation: (stationId: string) => void;
 }
 
+const Sparkline: React.FC<{ data?: number[] }> = ({ data }) => {
+  if (!data || data.length < 2) {
+    return <div style={{ width: '72px', height: '22px', borderBottom: '1px dotted var(--rule)' }} />;
+  }
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  const range = max - min || 1;
+  const width = 72;
+  const height = 22;
+  const padding = 2;
+
+  const points = data
+    .map((val, i) => {
+      const x = padding + (i / (data.length - 1)) * (width - 2 * padding);
+      const y = height - padding - ((val - min) / range) * (height - 2 * padding);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(' ');
+
+  return (
+    <div
+      style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}
+      title={`7-Day Trailing PM2.5: min ${min.toFixed(0)}, max ${max.toFixed(0)} µg/m³`}
+    >
+      <svg width={width} height={height} style={{ overflow: 'visible' }}>
+        <polyline
+          fill="none"
+          stroke="var(--ink)"
+          strokeWidth="1.2"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
+          points={points}
+        />
+      </svg>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--ink-2)' }}>
+        7d
+      </span>
+    </div>
+  );
+};
+
 export const StationList: React.FC<StationListProps> = ({
   stations,
   selectedStationId,
@@ -32,12 +73,15 @@ export const StationList: React.FC<StationListProps> = ({
           fontSize: '11px',
           fontWeight: 600,
           color: 'var(--ink-2)',
-          display: 'flex',
-          justifyContent: 'space-between',
+          display: 'grid',
+          gridTemplateColumns: '1fr auto auto',
+          gap: '16px',
+          alignItems: 'center',
         }}
       >
         <span>STATION / LOCATION</span>
-        <span>PM2.5 / CATEGORY</span>
+        <span style={{ textAlign: 'center' }}>7-DAY TRAILING</span>
+        <span style={{ textAlign: 'right' }}>PM2.5 / CATEGORY</span>
       </div>
 
       {stations.map((s) => {
@@ -64,14 +108,15 @@ export const StationList: React.FC<StationListProps> = ({
               backgroundColor: isSelected ? 'var(--paper)' : 'transparent',
               borderLeft: isSelected ? '3px solid var(--ink)' : '3px solid transparent',
               cursor: 'pointer',
-              display: 'flex',
-              justifyContent: 'space-between',
+              display: 'grid',
+              gridTemplateColumns: '1fr auto auto',
+              gap: '16px',
               alignItems: 'center',
               outline: 'none',
               transition: 'background-color 150ms ease',
             }}
           >
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div
                 style={{
                   fontFamily: 'var(--font-editorial)',
@@ -79,6 +124,9 @@ export const StationList: React.FC<StationListProps> = ({
                   fontWeight: isSelected ? 600 : 500,
                   color: 'var(--ink)',
                   lineHeight: 1.2,
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
                 }}
               >
                 {s.name}
@@ -95,7 +143,9 @@ export const StationList: React.FC<StationListProps> = ({
               </div>
             </div>
 
-            <div style={{ textAlign: 'right', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Sparkline data={s.sparkline_7d} />
+
+            <div style={{ textAlign: 'right', display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
               <span
                 style={{
                   display: 'inline-block',

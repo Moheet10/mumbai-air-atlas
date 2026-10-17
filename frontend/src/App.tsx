@@ -6,13 +6,15 @@ import { StationList } from './components/StationList';
 import { ForecastChart } from './components/ForecastChart';
 import { WhatChanged } from './components/WhatChanged';
 import { ModelHonestyBox } from './components/ModelHonestyBox';
+import { CalendarHeatmap } from './components/CalendarHeatmap';
 import { DataFreshness } from './components/DataFreshness';
+import { FadeContent } from './components/FadeContent';
 import { Footer } from './components/Footer';
 import type { CurrentConditionsResponse, ForecastResponse, Station } from './types';
 import { getWindCompass } from './lib/aqi';
 import './styles/design-tokens.css';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = '';
 
 export const App: React.FC = () => {
   const [currentData, setCurrentData] = useState<CurrentConditionsResponse | null>(null);
@@ -26,6 +28,38 @@ export const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Theme state: defaults to prefers-color-scheme, persisted in localStorage
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('mumbai-air-theme');
+    if (saved === 'dark' || saved === 'light') return saved;
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('mumbai-air-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    if (!window.matchMedia) return;
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e: MediaQueryListEvent) => {
+      const saved = localStorage.getItem('mumbai-air-theme');
+      if (!saved) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    };
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
   // Fetch initial stations and current conditions
   useEffect(() => {
     async function loadInitial() {
@@ -35,19 +69,26 @@ export const App: React.FC = () => {
         const stRes = await fetch(`${API_BASE}/api/stations`);
         if (!stRes.ok) throw new Error(`HTTP ${stRes.status}`);
         const stData = await stRes.json();
-        setStations(stData.stations || []);
+        const stationList: Station[] = stData.stations || [];
+        setStations(stationList);
 
-        // 2. Fetch current conditions for default station
-        const curRes = await fetch(`${API_BASE}/api/current?station_id=${selectedStationId}`);
+        // Pick default station from live list (first active station, e.g. Bandra Kurla Complex)
+        const initialStationId = stationList.length > 0 ? stationList[0].id : selectedStationId;
+        setSelectedStationId(initialStationId);
+
+        // 2. Fetch current conditions and forecast in parallel for default station
+        const [curRes, fcRes] = await Promise.all([
+          fetch(`${API_BASE}/api/current?station_id=${initialStationId}`),
+          fetch(`${API_BASE}/api/forecast?station_id=${initialStationId}`),
+        ]);
         if (!curRes.ok) throw new Error(`HTTP ${curRes.status}`);
         const curData = await curRes.json();
         setCurrentData(curData);
 
-        // 3. Fetch forecast
-        const fcRes = await fetch(`${API_BASE}/api/forecast?station_id=${selectedStationId}`);
-        if (!fcRes.ok) throw new Error(`HTTP ${fcRes.status}`);
-        const fcData = await fcRes.json();
-        setForecastData(fcData);
+        if (fcRes.ok) {
+          const fcData = await fcRes.json();
+          setForecastData(fcData);
+        }
 
         // 4. Fetch model metrics & anomalies
         try {
@@ -95,13 +136,54 @@ export const App: React.FC = () => {
   };
 
   const selectedStation = stations.find((s) => s.id === selectedStationId) || stations[0];
+  const isSnapshot = currentData?.data_mode === 'snapshot';
+  const isSample = currentData?.data_mode === 'sample';
+  const snapshotDate = currentData?.snapshot_as_of || '14 Oct 2026';
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* Persistent Snapshot Banner */}
+      {isSnapshot && (
+        <div
+          style={{
+            backgroundColor: 'var(--paper-2)',
+            borderBottom: '1px solid var(--rule)',
+            padding: '6px 16px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            letterSpacing: '0.06em',
+            textAlign: 'center',
+            color: 'var(--ink)',
+          }}
+        >
+          SNAPSHOT: data as of {snapshotDate}, not live
+        </div>
+      )}
+
+      {/* Persistent DEMO DATA banner when running in sample mode */}
+      {isSample && (
+        <div
+          style={{
+            backgroundColor: 'var(--paper-2)',
+            borderBottom: '1px solid var(--rule)',
+            padding: '6px 16px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            letterSpacing: '0.06em',
+            textAlign: 'center',
+            color: 'var(--ink)',
+          }}
+        >
+          DEMO DATA &mdash; not live station readings
+        </div>
+      )}
+
       <Masthead
         lastUpdated={currentData?.generated_at}
         openaqStatus={currentData?.openaq_status}
         onOpenFreshness={() => setIsFreshnessOpen(true)}
+        theme={theme}
+        onToggleTheme={toggleTheme}
       />
 
       <DataFreshness
@@ -181,6 +263,8 @@ export const App: React.FC = () => {
                       stations={stations}
                       selectedStationId={selectedStationId}
                       onSelectStation={handleSelectStation}
+                      theme={theme}
+                      isSample={isSample}
                     />
                   ) : (
                     <StationList
@@ -213,7 +297,7 @@ export const App: React.FC = () => {
               <div className="station-detail-col" style={{ minWidth: 0 }}>
                 <div style={{ marginBottom: '20px' }}>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                    SELECTED FIELD INSTRUMENT
+                    {isSnapshot ? 'ARCHIVED CAAQMS STATION' : isSample ? 'SELECTED MONITORING NODE' : 'SELECTED FIELD INSTRUMENT'}
                   </div>
                   <h2 style={{ fontSize: '28px', fontFamily: 'var(--font-editorial)', margin: '4px 0 6px' }}>
                     {selectedStation?.name || 'Monitoring Station'}
@@ -252,8 +336,8 @@ export const App: React.FC = () => {
 
                 {/* Measured Pollutant Table */}
                 <div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '8px', textTransform: 'uppercase' }}>
-                    SPECIATED POLLUTANT DENSITY (µg/m³)
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '8px' }}>
+                    <span style={{ textTransform: 'uppercase' }}>SPECIATED POLLUTANT DENSITY</span> (µg/m³)
                   </div>
 
                   <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-mono)', fontSize: '13px' }}>
@@ -271,7 +355,7 @@ export const App: React.FC = () => {
                           {currentData?.primary_pm25.value?.toFixed(1) ?? '—'}
                         </td>
                         <td style={{ padding: '8px 0', textAlign: 'right', fontSize: '11px', color: 'var(--ink-2)' }}>
-                          {currentData?.primary_pm25.provenance === 'observed_sample' ? 'Sensor Baseline' : 'Sensor Observed'}
+                          {isSnapshot ? 'Archived Station Sensor' : isSample ? 'Synthetic Baseline' : 'Sensor Observed'}
                         </td>
                       </tr>
                       {currentData?.other_pollutants.map((p) => (
@@ -279,7 +363,7 @@ export const App: React.FC = () => {
                           <td style={{ padding: '8px 0' }}>{p.display_name.split(' (')[0]}</td>
                           <td style={{ padding: '8px 0', textAlign: 'right' }}>{p.value?.toFixed(1) ?? '—'}</td>
                           <td style={{ padding: '8px 0', textAlign: 'right', fontSize: '11px', color: 'var(--ink-2)' }}>
-                            {p.provenance === 'provider_forecast' ? 'CAMS Grid' : 'Sensor Observed'}
+                            {p.provenance === 'provider_forecast' ? 'CAMS Grid' : isSnapshot ? 'Archived Station Sensor' : isSample ? 'Synthetic Baseline' : 'Sensor Observed'}
                           </td>
                         </tr>
                       ))}
@@ -294,15 +378,35 @@ export const App: React.FC = () => {
         {/* 3. 48-Hour Forecast Horizon */}
         <section style={{ padding: '32px 0 40px', borderTop: '1px solid var(--rule)' }}>
           <div className="container">
-            <ForecastChart
-              observations={forecastData?.observations || []}
-              providerForecast={forecastData?.provider_forecast || []}
-              atlasModelForecast={forecastData?.atlas_model_forecast}
-              textSummary={
-                forecastData?.text_summary ||
-                'Diurnal inversion models suggest steady nocturnal accumulation followed by marine dispersion.'
-              }
-            />
+            <FadeContent>
+              <ForecastChart
+                observations={forecastData?.observations || []}
+                providerForecast={forecastData?.provider_forecast || []}
+                atlasModelForecast={forecastData?.atlas_model_forecast}
+                atlasModelLower={forecastData?.atlas_model_lower}
+                atlasModelUpper={forecastData?.atlas_model_upper}
+                textSummary={
+                  forecastData?.text_summary ||
+                  'Awaiting time-series forecast telemetry...'
+                }
+                isStationMode={Boolean(selectedStationId)}
+                stationReading={currentData?.primary_pm25.value}
+                stationName={selectedStation?.name}
+              />
+            </FadeContent>
+          </div>
+        </section>
+
+        {/* 3.5 Chronological Topography (60-Day Calendar Heatmap) */}
+        <section style={{ padding: '32px 0 40px', borderTop: '1px solid var(--rule)' }}>
+          <div className="container">
+            <FadeContent>
+              <CalendarHeatmap
+                stationId={selectedStationId}
+                stationName={selectedStation?.name || 'Monitoring Station'}
+                apiBase={API_BASE}
+              />
+            </FadeContent>
           </div>
         </section>
 
@@ -313,7 +417,9 @@ export const App: React.FC = () => {
 
         {/* 5. Model Honesty Box */}
         <section className="container">
-          <ModelHonestyBox metrics={modelMetrics} />
+          <FadeContent>
+            <ModelHonestyBox metrics={modelMetrics} />
+          </FadeContent>
         </section>
       </main>
 

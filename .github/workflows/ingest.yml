@@ -30,6 +30,7 @@ jobs:
         run: |
           python backend/ml/ingest.py
           python backend/ml/baseline.py
+          python backend/ml/run_seasonal_and_weather_evaluation.py
 
       - name: Commit and push updated database
         run: |

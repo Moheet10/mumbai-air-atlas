@@ -19,10 +19,10 @@ export const Footer: React.FC = () => {
               Data Provenance &amp; Attribution
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--ink-2)', lineHeight: 1.8 }}>
-              <li>&bull; Ground stations: CPCB / MPCB CAAQMS via OpenAQ v3 API</li>
-              <li>&bull; Grid forecast: Copernicus CAMS Atmospheric Ensemble (Open-Meteo)</li>
+              <li>&bull; Ground monitoring: OpenAQ v3 API (Demo mode: Synthetic sample directory)</li>
+              <li>&bull; Atmospheric model: Copernicus CAMS Numerical Grid (Open-Meteo)</li>
               <li>&bull; Surface meteorology: ECMWF IFS / GFS Diagnostics (Open-Meteo)</li>
-              <li>&bull; Cartography: &copy; OpenStreetMap contributors, &copy; CARTO</li>
+              <li>&bull; Cartography: &copy; OpenStreetMap contributors, OpenFreeMap vector basemap</li>
             </ul>
           </div>
 

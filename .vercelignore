@@ -1,0 +1,13 @@
+# Exclude large local data stores and caches from Vercel deployment
+backend/data/mumbai_air.db*
+backend/data/station_cache/
+backend/data/lgbm_model.pkl
+backend/data/forecast_log.csv
+backend/data/*.csv
+backend/tests/
+docs/
+tests/
+.pytest_cache/
+.git/
+*.pyc
+__pycache__/

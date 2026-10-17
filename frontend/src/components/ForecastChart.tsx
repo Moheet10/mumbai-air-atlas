@@ -5,14 +5,24 @@ interface ForecastChartProps {
   observations: TimelinePoint[];
   providerForecast: TimelinePoint[];
   atlasModelForecast?: TimelinePoint[];
+  atlasModelLower?: TimelinePoint[];
+  atlasModelUpper?: TimelinePoint[];
   textSummary: string;
+  isStationMode?: boolean;
+  stationReading?: number | null;
+  stationName?: string;
 }
 
 export const ForecastChart: React.FC<ForecastChartProps> = ({
   observations,
   providerForecast,
   atlasModelForecast,
+  atlasModelLower,
+  atlasModelUpper,
   textSummary,
+  isStationMode = false,
+  stationReading,
+  stationName,
 }) => {
   const [hoveredPoint, setHoveredPoint] = useState<{
     x: number;
@@ -51,6 +61,12 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
   if (atlasModelForecast) {
     values.push(...atlasModelForecast.map((p) => p.value ?? 0));
   }
+  if (atlasModelUpper) {
+    values.push(...atlasModelUpper.map((p) => p.value ?? 0));
+  }
+  if (stationReading != null) {
+    values.push(stationReading);
+  }
   const maxVal = Math.max(80, Math.ceil(Math.max(...values, 60) / 20) * 20);
   const minVal = 0;
 
@@ -70,36 +86,43 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
   // Generate SVG path for provider forecast
   const fcPathD = providerForecast
     .map((p, i) => {
-      const idx = obsCount - 1 + i;
+      const idx = obsCount === 0 ? i : obsCount - 1 + i;
       return `${i === 0 ? 'M' : 'L'} ${getX(idx)} ${getY(p.value ?? 0)}`;
     })
     .join(' ');
 
-  // Generate SVG path for Atlas model forecast (if available)
-  const atlasPathD = atlasModelForecast
-    ? atlasModelForecast
-        .map((p, i) => {
-          const idx = obsCount - 1 + i;
-          return `${i === 0 ? 'M' : 'L'} ${getX(idx)} ${getY(p.value ?? 0)}`;
-        })
-        .join(' ')
-    : '';
+  // Compute discrete station model forecast points at +1, +6, +12, +24, +48h
+  const leadHours = [1, 6, 12, 24, 48];
+  const stationPoints = (atlasModelForecast || []).map((pt, i) => {
+    let matchIdx = allPoints.findIndex((p) => p.timestamp_utc === pt.timestamp_utc);
+    if (matchIdx === -1) {
+      const lh = leadHours[i] || (i + 1);
+      matchIdx = obsCount === 0 ? Math.min(lh - 1, allPoints.length - 1) : Math.min(obsCount - 1 + lh, allPoints.length - 1);
+    }
+    const x = getX(matchIdx);
+    const y = getY(pt.value ?? 0);
+    const loVal = atlasModelLower && atlasModelLower[i] ? (atlasModelLower[i].value ?? pt.value ?? 0) : (pt.value ?? 0);
+    const hiVal = atlasModelUpper && atlasModelUpper[i] ? (atlasModelUpper[i].value ?? pt.value ?? 0) : (pt.value ?? 0);
+    const yLower = getY(loVal);
+    const yUpper = getY(hiVal);
+    const lh = leadHours[i] || (i + 1);
 
-  // Generate uncertainty band for provider forecast (+- 15% interval)
-  const upperPoints = providerForecast.map((p, i) => {
-    const idx = obsCount - 1 + i;
-    const v = (p.value ?? 0) * 1.18;
-    return `${getX(idx)},${getY(v)}`;
+    return {
+      x,
+      y,
+      yLower,
+      yUpper,
+      loVal,
+      hiVal,
+      leadHour: lh,
+      point: pt,
+    };
   });
-  const lowerPoints = providerForecast
-    .slice()
-    .reverse()
-    .map((p, i) => {
-      const idx = obsCount - 1 + (providerForecast.length - 1 - i);
-      const v = Math.max(0, (p.value ?? 0) * 0.82);
-      return `${getX(idx)},${getY(v)}`;
-    });
-  const uncertaintyD = `M ${upperPoints.join(' L ')} L ${lowerPoints.join(' L ')} Z`;
+
+  // Thin line connecting the 5 discrete forecast points (NO smoothing / interpolation)
+  const stationLineD = stationPoints.length > 0
+    ? stationPoints.map((sp, i) => `${i === 0 ? 'M' : 'L'} ${sp.x} ${sp.y}`).join(' ')
+    : '';
 
   // Y-axis ticks
   const yTicks = [0, 25, 50, 75, 100].filter((v) => v <= maxVal);
@@ -111,33 +134,46 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
         <div>
           <h3 style={{ fontSize: '20px', fontFamily: 'var(--font-editorial)', fontWeight: 500 }}>
-            48-Hour Particulate Horizon
+            {isStationMode && stationName
+              ? `${stationName.split(',')[0]} Forecast Horizon`
+              : 'Station Forecast Horizon'}
           </h3>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--ink-2)', marginTop: '2px' }}>
-            PM2.5 CONCENTRATION (µg/m³) &middot; SOLID: OBSERVED &middot; DASHED: CAMS GRID &middot; DOTTED: ATLAS MODEL
+            {`STATION MODEL FORECAST AT +1, +6, +12, +24, +48H WITH 80% INTERVALS · DASHED: REGIONAL CAMS GRID FORECAST`}
           </div>
         </div>
 
         {/* Legend */}
         <div style={{ display: 'flex', gap: '16px', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ display: 'inline-block', width: '18px', height: '2px', backgroundColor: 'var(--ink)' }} />
-            <span>OBSERVED</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ display: 'inline-block', width: '18px', height: '2px', borderTop: '2px dashed var(--ink)' }} />
-            <span>CAMS FORECAST</span>
-          </div>
-          {atlasModelForecast && (
+          {stationReading != null && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ display: 'inline-block', width: '18px', height: '2px', borderTop: '2px dotted var(--ink)' }} />
-              <span style={{ fontWeight: 600, color: 'var(--ink)' }}>ATLAS MODEL</span>
+              <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#D32F2F', border: '1px solid var(--ink)' }} />
+              <span style={{ color: '#D32F2F', fontWeight: 600 }}>STATION READING ({stationReading.toFixed(1)} µg/m³)</span>
+            </div>
+          )}
+          {observations.length > 0 && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ display: 'inline-block', width: '18px', height: '2px', backgroundColor: 'var(--ink)' }} />
+              <span>OBSERVED</span>
             </div>
           )}
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ display: 'inline-block', width: '14px', height: '8px', backgroundColor: 'rgba(27, 26, 23, 0.12)' }} />
-            <span>UNCERTAINTY BAND</span>
+            <span style={{ display: 'inline-block', width: '18px', height: '2px', borderTop: '2px dashed var(--ink)' }} />
+            <span>CAMS GRID FORECAST</span>
           </div>
+          {stationPoints.length > 0 && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ display: 'inline-block', width: '18px', height: '1.5px', backgroundColor: 'var(--ink)' }} />
+              <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', border: '1.5px solid var(--ink)', backgroundColor: 'var(--paper)', marginLeft: '-12px' }} />
+              <span style={{ fontWeight: 600, color: 'var(--ink)', marginLeft: '6px' }}>FORECAST (+1, +6, +12, +24, +48h)</span>
+            </div>
+          )}
+          {stationPoints.length > 0 && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ display: 'inline-block', width: '8px', height: '12px', borderLeft: '1.5px solid var(--ink)', borderRight: '1.5px solid var(--ink)', opacity: 0.7 }} />
+              <span>80% INTERVAL (q10–q90)</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -174,18 +210,17 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
             );
           })}
 
-          {/* Uncertainty Band */}
-          <path d={uncertaintyD} fill="rgba(27, 26, 23, 0.12)" />
-
-          {/* Observed Line (Solid) */}
-          <path
-            d={obsPathD}
-            fill="none"
-            stroke="var(--ink)"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+          {/* Observed Line (Solid) - only drawn when observations exist */}
+          {observations.length > 0 && obsPathD && (
+            <path
+              d={obsPathD}
+              fill="none"
+              stroke="var(--ink)"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          )}
 
           {/* Provider Forecast Line (Dashed) */}
           <path
@@ -198,18 +233,74 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
             strokeLinejoin="round"
           />
 
-          {/* Atlas Model Forecast Line (Dotted) */}
-          {atlasPathD && (
+          {/* Station Model Forecast Line (Thin connecting line, NO smoothing) */}
+          {stationLineD && (
             <path
-              d={atlasPathD}
+              d={stationLineD}
               fill="none"
               stroke="var(--ink)"
-              strokeWidth="2"
-              strokeDasharray="2 3"
+              strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
           )}
+
+          {/* Station Model Discrete Points & Uncertainty Interval Bars */}
+          {stationPoints.map((sp, idx) => (
+            <g key={idx}>
+              {/* Vertical interval error bar (q10 to q90) */}
+              <line
+                x1={sp.x}
+                y1={sp.yUpper}
+                x2={sp.x}
+                y2={sp.yLower}
+                stroke="var(--ink)"
+                strokeWidth="1.4"
+                opacity="0.75"
+              />
+              {/* Upper tick cap */}
+              <line
+                x1={sp.x - 4}
+                y1={sp.yUpper}
+                x2={sp.x + 4}
+                y2={sp.yUpper}
+                stroke="var(--ink)"
+                strokeWidth="1.4"
+                opacity="0.75"
+              />
+              {/* Lower tick cap */}
+              <line
+                x1={sp.x - 4}
+                y1={sp.yLower}
+                x2={sp.x + 4}
+                y2={sp.yLower}
+                stroke="var(--ink)"
+                strokeWidth="1.4"
+                opacity="0.75"
+              />
+              {/* Discrete forecast point dot */}
+              <circle
+                cx={sp.x}
+                cy={sp.y}
+                r="3.5"
+                fill="var(--paper)"
+                stroke="var(--ink)"
+                strokeWidth="2"
+              />
+              {/* Lead hour badge */}
+              <text
+                x={sp.x}
+                y={sp.yUpper - 6}
+                textAnchor="middle"
+                className="font-mono"
+                fontSize="9"
+                fontWeight="600"
+                fill="var(--ink-2)"
+              >
+                +{sp.leadHour}h
+              </text>
+            </g>
+          ))}
 
           {/* "NOW" Vertical Hairline Rule */}
           <line
@@ -226,11 +317,45 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
             textAnchor="middle"
             className="font-mono"
             fontSize="10"
+
             fill="var(--ink)"
             fontWeight="600"
           >
             NOW
           </text>
+
+          {/* Selected Physical Station Reading (Plotted at NOW) */}
+          {stationReading != null && (
+            <g>
+              <circle
+                cx={nowX}
+                cy={getY(stationReading)}
+                r="5.5"
+                fill="#D32F2F"
+                stroke="var(--paper)"
+                strokeWidth="2"
+              />
+              <circle
+                cx={nowX}
+                cy={getY(stationReading)}
+                r="9"
+                fill="none"
+                stroke="#D32F2F"
+                strokeWidth="1.2"
+                strokeDasharray="2 2"
+              />
+              <text
+                x={nowX + 12}
+                y={getY(stationReading) + 4}
+                className="font-mono"
+                fontSize="11"
+                fontWeight="700"
+                fill="#D32F2F"
+              >
+                {stationReading.toFixed(1)} µg/m³ ({stationName ? stationName.split(',')[0] : 'Station'})
+              </text>
+            </g>
+          )}
 
           {/* X-axis tick labels */}
           {allPoints.map((p, idx) => {
@@ -278,6 +403,27 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
             );
           })}
 
+          {/* Interactive hover targets for station forecast points */}
+          {stationPoints.map((sp, idx) => (
+            <circle
+              key={`st-hover-${idx}`}
+              cx={sp.x}
+              cy={sp.y}
+              r="8"
+              fill="transparent"
+              style={{ cursor: 'pointer' }}
+              onMouseEnter={() =>
+                setHoveredPoint({
+                  x: sp.x,
+                  y: sp.y,
+                  point: sp.point,
+                  type: `Station Model (+${sp.leadHour}h [q10: ${sp.loVal.toFixed(1)}, q90: ${sp.hiVal.toFixed(1)}])`,
+                })
+              }
+              onMouseLeave={() => setHoveredPoint(null)}
+            />
+          ))}
+
           {hoveredPoint && (
             <g pointerEvents="none">
               <circle
@@ -320,6 +466,14 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
           </div>
         </div>
       )}
+
+      {/* Observation availability notice */}
+      {observations.length === 0 && (
+        <div style={{ marginTop: '10px', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)' }}>
+          Historical station sensor telemetry pending; displaying regional CAMS grid forecast and discrete station model points (+1, +6, +12, +24, +48h).
+        </div>
+      )}
+
 
       {/* Editorial Text Summary */}
       <div style={{ marginTop: '16px', borderTop: '1px solid var(--rule)', paddingTop: '12px' }}>

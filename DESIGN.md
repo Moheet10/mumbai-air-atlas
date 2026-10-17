@@ -4,10 +4,11 @@ This file is the source of truth for all visual decisions. AI agents: read it be
 
 ## Direction
 
-Editorial data journalism. It should feel like a page from a newspaper's data desk, not a SaaS dashboard. Calm, dense with information, typographic first. One theme only (light). No dark mode.
+Editorial data journalism. It should feel like a page from a newspaper's data desk, not a SaaS dashboard. Calm, dense with information, typographic first. Two editions: Day edition (default on light systems) and Night edition (default on dark systems via `prefers-color-scheme`, switchable via mono text toggle "Day / Night"). Both share the identical editorial identity: zero radius, no shadows, no gradients, hairline rules.
 
 ## Color tokens
 
+### Day Edition (:root)
 ```css
 :root {
   --paper:   #F4EFE6;  /* page background */
@@ -15,6 +16,7 @@ Editorial data journalism. It should feel like a page from a newspaper's data de
   --ink:     #1B1A17;  /* primary text, chart lines */
   --ink-2:   #6B665C;  /* secondary text, axis labels */
   --rule:    #D9D2C3;  /* hairlines, gridlines */
+  --band-fill: rgba(27, 26, 23, 0.08); /* uncertainty band */
 
   /* CPCB AQI categories — the ONLY accent colors in the app */
   --aqi-good:         #4C8C6B;  /*   0–50  */
@@ -26,10 +28,31 @@ Editorial data journalism. It should feel like a page from a newspaper's data de
 }
 ```
 
+### Night Edition ([data-theme="dark"])
+```css
+[data-theme="dark"] {
+  --paper:   #14130F;  /* dark page background */
+  --paper-2: #1D1B16;  /* panels, subtle fills */
+  --ink:     #EDE7DA;  /* primary text, chart lines */
+  --ink-2:   #9A9487;  /* secondary text, axis labels */
+  --rule:    #34312A;  /* hairlines, gridlines */
+  --band-fill: rgba(237, 231, 218, 0.10); /* uncertainty band */
+
+  /* Lightened AQI categories hitting >= 4.5:1 contrast against #14130F */
+  --aqi-good:         #5EA880;  /* 6.5:1 contrast */
+  --aqi-satisfactory: #B8CA78;  /* 10.4:1 contrast */
+  --aqi-moderate:    #ECC254;  /* 11.0:1 contrast */
+  --aqi-poor:        #E8893D;  /* 7.2:1 contrast */
+  --aqi-very-poor:   #E05343;  /* 4.9:1 contrast */
+  --aqi-severe:      #CF5A6C;  /* 4.7:1 contrast */
+}
+```
+
 Rules:
 - Color is data. Never use the AQI colors decoratively. Everything else is paper, ink, and rules.
-- Forecast uncertainty bands: `--ink` at 12% opacity.
+- Forecast uncertainty bands: `--band-fill` token.
 - Interactive elements (links, buttons): ink text with an underline. No filled colored buttons.
+- Basemap: MapLibre GL with native Carto Positron (Day edition) and Carto Dark Matter (Night edition) with native PMTiles protocol support. Eliminates direct OpenStreetMap public tile queries and removes all CSS filter hacks.
 
 ## Typography
 
@@ -60,10 +83,15 @@ Do not use Inter, Poppins, Space Grotesk, Roboto, or system-ui defaults.
 
 ## Motion
 
-- Default: none. Page loads without entrance animations.
-- Allowed: 150ms opacity/underline transitions on hover; chart line drawing in once on first load (600ms, ease-out); the hero number counting up once.
-- Respect `prefers-reduced-motion`.
-- ReactBits and other effect libraries: do not use them for this project except for the hero number count-up if needed. Flashy animated components fight the editorial direction.
+- Default: none. Page loads without decorative entrance animations.
+- Allowed: 150ms opacity/underline transitions on hover; chart line drawing in once on first load (600ms, ease-out).
+- Respect `prefers-reduced-motion` strictly across all animated elements (renders static final state instantly without blur, opacity, or transform animations).
+- ReactBits policy: Restrict strictly to components that support content comprehension without decorative excess. Flashy animations (particles, cursor trails, 3D tilt cards, glow borders, auroras) remain permanently banned.
+- Approved ReactBits components (Zero-Dependency Port):
+  - `Count Up`: Hero AQI integer in `<HeroAQI />` counts up once from 0 to current reading on initial load (1.2s, cubic ease-out via pure `requestAnimationFrame`). Tabular numbers preserved.
+  - `Blur Text`: Applied strictly and exclusively to the hero plain-English sentence (`summarySentence` in `<HeroAQI />`). Staggered word unblurring (`filter: blur(8px) -> blur(0px)`, `opacity: 0 -> 1`, `translateY(6px) -> 0`) using pure CSS keyframes with 45ms per-word stagger. Immediate static render if `prefers-reduced-motion` is active.
+  - `Fade Content`: Applied strictly to primary data sections: the 48-Hour Forecast Horizon (`<ForecastChart />`), the 60-Day Calendar Heatmap (`<CalendarHeatmap />`), and the Model Scorecard (`<ModelHonestyBox />`). Uses browser-native `IntersectionObserver` with single-trigger unobserve and smooth cubic ease-out transition (`opacity: 0 -> 1`, `translateY(16px) -> 0`). Immediate render if `prefers-reduced-motion` is active.
+  - Dependency constraint: Absolute zero external animation runtimes (`motion`, `framer-motion`, `gsap` forbidden and omitted from `package.json`). All motion implemented via vanilla React hooks, native CSS keyframes, and browser IntersectionObserver.
 
 ## Icons and imagery
 

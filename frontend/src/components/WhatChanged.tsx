@@ -44,6 +44,8 @@ export const WhatChanged: React.FC<WhatChangedProps> = ({ data, anomalies }) => 
       ? anomalies[anomalies.length - 1]
       : null;
 
+
+
   return (
     <div style={{ padding: '24px 0', borderTop: '1px solid var(--rule)' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '12px' }}>
@@ -60,15 +62,14 @@ export const WhatChanged: React.FC<WhatChangedProps> = ({ data, anomalies }) => 
         <span className="font-mono">{Math.abs(delta).toFixed(1)} µg/m³</span> (<span className="font-mono">{pct}%</span>).{' '}
         Surface wind diagnostics show velocity at <span className="font-mono">{windSpeed} km/h</span> from{' '}
         <span className="font-mono">{data.weather.wind_direction_deg.toFixed(0)}° {windDir}</span> alongside ambient temperatures of{' '}
-        <span className="font-mono">{temp}°C</span> and relative humidity of <span className="font-mono">{humidity}%</span>.{' '}
-        This observed shift corresponds with standard nocturnal boundary layer cooling over the Salsette peninsula.
+        <span className="font-mono">{temp}°C</span> and relative humidity of <span className="font-mono">{humidity}%</span>.
       </p>
 
       {anomalies && anomalies.length > 0 && activeAnomaly && (
         <div style={{ backgroundColor: 'var(--paper-2)', border: '1px solid var(--rule)', padding: '16px 20px', marginTop: '12px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 600, color: 'var(--ink)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-              ATMOSPHERIC ANOMALY EVENT &middot; {activeAnomaly.timestamp_local}
+              HISTORICAL ANOMALY ARCHIVE &middot; RECORDED {activeAnomaly.timestamp_local}
             </span>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)' }}>
               ROLLING Z-SCORE: <span style={{ fontWeight: 600, color: 'var(--ink)' }}>{activeAnomaly.z_score.toFixed(2)}</span>

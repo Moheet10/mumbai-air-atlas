@@ -1,5 +1,7 @@
 import type { CurrentConditionsResponse } from '../types';
 import { calculatePM25AQI, getWindCompass } from '../lib/aqi';
+import { CountUp } from './CountUp';
+import { BlurText } from './BlurText';
 
 interface HeroAQIProps {
   data: CurrentConditionsResponse | null;
@@ -21,13 +23,19 @@ export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading }) => {
     );
   }
 
+  const isSnapshot = data.data_mode === 'snapshot';
+  const isSample = data.data_mode === 'sample' || data.primary_pm25.is_sample;
   const pm25 = data.primary_pm25.value ?? 45.0;
   const { aqi, category } = calculatePM25AQI(pm25);
   const locationName = data.selected_station ? data.selected_station.name : data.location_name;
   const windDir = getWindCompass(data.weather.wind_direction_deg);
 
   // Generate plain, dry, editorial sentence
-  const summarySentence = `${locationName} recorded PM2.5 at ${pm25.toFixed(1)} µg/m³ with ${data.weather.temperature_c.toFixed(1)}°C and ${data.weather.wind_speed_kmh.toFixed(1)} km/h winds from the ${windDir}, placing local air in the ${category.label} band.`;
+  const summarySentence = isSnapshot
+    ? `${locationName} recorded PM2.5 at ${pm25.toFixed(1)} µg/m³ with ${data.weather.temperature_c.toFixed(1)}°C and ${data.weather.wind_speed_kmh.toFixed(1)} km/h winds from the ${windDir}, placing particulate density in the ${category.label} sub-index band (frozen snapshot archive as of 14 Oct 2026).`
+    : isSample
+    ? `${locationName} simulated PM2.5 baseline at ${pm25.toFixed(1)} µg/m³ with ${data.weather.temperature_c.toFixed(1)}°C and ${data.weather.wind_speed_kmh.toFixed(1)} km/h winds from the ${windDir}, placing local air in the ${category.label} sub-index band (official CPCB AQI requires 24h average).`
+    : `${locationName} reported PM2.5 at ${pm25.toFixed(1)} µg/m³ with ${data.weather.temperature_c.toFixed(1)}°C and ${data.weather.wind_speed_kmh.toFixed(1)} km/h winds from the ${windDir}, placing current particulate density in the ${category.label} sub-index band (official CPCB AQI requires 24h average).`;
 
   return (
     <section style={{ padding: '56px 0 40px', borderBottom: '1px solid var(--rule)' }}>
@@ -41,10 +49,12 @@ export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading }) => {
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--ink)' }}>
             DATA ORIGIN:{' '}
             <span style={{ fontWeight: 600, borderBottom: '1px solid var(--ink)' }}>
-              {data.primary_pm25.provenance === 'observed'
+              {isSnapshot
+                ? 'FROZEN ARCHIVE SNAPSHOT (14 OCT 2026)'
+                : isSample
+                ? 'SYNTHETIC BASELINE (DEMO MODE)'
+                : data.primary_pm25.provenance === 'observed'
                 ? 'PHYSICAL GROUND SENSOR (OPENAQ)'
-                : data.primary_pm25.provenance === 'observed_sample'
-                ? 'CAAQMS MONITOR (CALIBRATED FIELD BASELINE)'
                 : 'COPERNICUS CAMS MODEL GRID'}
             </span>
           </div>
@@ -62,7 +72,7 @@ export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading }) => {
               color: 'var(--ink)',
             }}
           >
-            {aqi}
+            <CountUp to={aqi} from={0} duration={1.2} />
           </div>
 
           <div>
@@ -81,8 +91,8 @@ export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading }) => {
               </span>
             </div>
             
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', color: 'var(--ink-2)', marginTop: '4px' }}>
-              INDIAN CPCB AQI &middot; PM2.5: {pm25.toFixed(1)} µg/m³ &middot; PM10:{' '}
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--ink-2)', marginTop: '4px' }}>
+              INSTANTANEOUS PM2.5 SUB-INDEX (CPCB BREAKPOINTS) &middot; PM2.5: {pm25.toFixed(1)} µg/m³ &middot; PM10:{' '}
               {data.other_pollutants.find(p => p.parameter === 'pm10')?.value?.toFixed(1) ?? '—'} µg/m³
             </div>
           </div>
@@ -99,11 +109,11 @@ export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading }) => {
             marginBottom: '16px',
           }}
         >
-          {summarySentence}
+          <BlurText text={summarySentence} />
         </p>
 
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--ink-2)' }}>
-          OBSERVED AT {data.primary_pm25.timestamp_local} &middot; SOURCE: {data.primary_pm25.source_name}
+          {isSample ? 'SAMPLE TIMESTAMP' : 'RECORDED AT'} {data.primary_pm25.timestamp_local} &middot; SOURCE: {data.primary_pm25.source_name}
         </div>
       </div>
     </section>

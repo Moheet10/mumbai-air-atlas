@@ -1,0 +1,49 @@
+{
+  "as_of_date_utc": "2026-10-13T18:30:00Z",
+  "as_of_date_label": "14 Oct 2026",
+  "station_count": 5,
+  "stations": [
+    {
+      "id": "3409482",
+      "name": "Bandra Kurla Complex, Mumbai - IITM",
+      "area": "Bandra Kurla Complex",
+      "agency": "IITM",
+      "lat": 19.0657,
+      "lon": 72.8687
+    },
+    {
+      "id": "11606",
+      "name": "Borivali East, Mumbai - MPCB",
+      "area": "Borivali East",
+      "agency": "MPCB",
+      "lat": 19.229,
+      "lon": 72.857
+    },
+    {
+      "id": "11611",
+      "name": "Malad West, Mumbai - MPCB",
+      "area": "Malad West",
+      "agency": "MPCB",
+      "lat": 19.186,
+      "lon": 72.8485
+    },
+    {
+      "id": "6959",
+      "name": "Worli, Mumbai - MPCB",
+      "area": "Worli",
+      "agency": "MPCB",
+      "lat": 19.0178,
+      "lon": 72.8173
+    },
+    {
+      "id": "3409483",
+      "name": "Chembur, Mumbai - IITM",
+      "area": "Chembur",
+      "agency": "IITM",
+      "lat": 19.0622,
+      "lon": 72.897
+    }
+  ],
+  "total_station_hours": 9248,
+  "total_cams_hours": 2179
+}

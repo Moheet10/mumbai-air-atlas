@@ -8,6 +8,7 @@ class ProvenanceType(str, Enum):
     PROVIDER_FORECAST = "provider_forecast"
     ATLAS_MODEL = "atlas_model"
     OBSERVED_SAMPLE = "observed_sample"
+    SNAPSHOT = "snapshot"
 
 
 class Coordinates(BaseModel):
@@ -33,12 +34,13 @@ class Station(BaseModel):
     area: str
     agency: str
     coordinates: Coordinates
-    status: str = "active"  # "active" | "stale" | "sample" | "offline"
+    status: str = "active"  # "active" | "stale" | "sample" | "offline" | "snapshot"
     latest_pm25: Optional[float] = None
     latest_pm10: Optional[float] = None
     latest_timestamp: Optional[str] = None
     provenance: ProvenanceType
     is_sample: bool = False
+    sparkline_7d: Optional[List[float]] = None
 
 
 class WeatherContext(BaseModel):
@@ -61,8 +63,11 @@ class CurrentConditionsResponse(BaseModel):
     comparison_previous_period: Optional[Dict[str, Any]] = None
     other_pollutants: List[PollutantReading] = []
     weather: WeatherContext
-    openaq_status: str  # "connected" | "missing_key" | "rate_limited" | "error"
+    openaq_status: str  # "connected" | "missing_key" | "rate_limited" | "error" | "snapshot"
     openaq_message: str
+    data_mode: str = "snapshot"  # "live" | "snapshot" | "sample"
+    snapshot_as_of: Optional[str] = None
+    db_stale: bool = False
     selected_station: Optional[Station] = None
     generated_at: str
 
@@ -82,9 +87,15 @@ class ForecastResponse(BaseModel):
     station_id: Optional[str] = None
     parameter: str = "pm2_5"
     unit: str = "µg/m³"
+    data_mode: str = "snapshot"  # "live" | "snapshot" | "sample"
+    snapshot_as_of: Optional[str] = None
+    db_stale: bool = False
+    db_age_hours: Optional[float] = None
     observations: List[TimelinePoint] = []
     provider_forecast: List[TimelinePoint] = []
     atlas_model_forecast: Optional[List[TimelinePoint]] = None
+    atlas_model_lower: Optional[List[TimelinePoint]] = None
+    atlas_model_upper: Optional[List[TimelinePoint]] = None
     text_summary: str
     provider_model_name: str = "Copernicus CAMS Atmospheric Ensemble (via Open-Meteo)"
     generated_at: str

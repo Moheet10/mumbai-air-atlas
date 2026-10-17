@@ -64,16 +64,20 @@ export const DataFreshness: React.FC<DataFreshnessProps> = ({
             <span style={{ fontWeight: 600 }}>OpenAQ v3 Ground Sensor API:</span>
             <span>
               {openaqStatus === 'connected' ? (
-                <span style={{ color: 'var(--aqi-good)', fontWeight: 600 }}>CONNECTED (LIVE SENSORS)</span>
+                <span style={{ color: 'var(--aqi-good)', fontWeight: 600 }}>CONNECTED (GROUND SENSORS)</span>
+              ) : openaqStatus === 'snapshot' ? (
+                <span style={{ color: 'var(--ink)', fontWeight: 600 }}>SNAPSHOT ARCHIVE (14 OCT 2026)</span>
               ) : (
-                <span style={{ color: 'var(--ink)' }}>BASELINE FIELD NETWORK (NO KEY)</span>
+                <span style={{ color: 'var(--ink)' }}>SAMPLE DIRECTORY (NO API KEY)</span>
               )}
             </span>
           </div>
           <p style={{ fontFamily: 'var(--font-editorial)', fontSize: '14px', color: 'var(--ink-2)', margin: 0 }}>
             {openaqStatus === 'connected'
-              ? 'Active X-API-Key detected. Ingesting raw sub-hourly continuous telemetry directly from Maharashtra Pollution Control Board.'
-              : 'Operating in reproducible field baseline mode. Displays verified CAAQMS Mumbai monitoring coordinates and calibrated baseline values without fabricating unverified live numbers.'}
+              ? 'Active X-API-Key detected. Ingesting raw sub-hourly continuous telemetry directly from physical monitoring stations.'
+              : openaqStatus === 'snapshot'
+              ? 'Operating in snapshot mode with 5 authentic CAAQMS monitoring stations frozen as of 14 Oct 2026. Zero external signup or credentials required to clone and run.'
+              : 'Operating in sample demo mode without an OpenAQ API key. Displays nominal Mumbai monitoring coordinates without fabricating live station telemetry.'}
           </p>
         </div>
 
