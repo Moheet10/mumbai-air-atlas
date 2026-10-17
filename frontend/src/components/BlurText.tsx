@@ -16,7 +16,7 @@ interface BlurTextProps {
  */
 export const BlurText: React.FC<BlurTextProps> = ({
   text,
-  delay = 45,
+  delay = 14,
   className = '',
   style = {},
 }) => {
@@ -56,12 +56,11 @@ export const BlurText: React.FC<BlurTextProps> = ({
           style={{
             display: 'inline-block',
             whiteSpace: 'pre',
-            filter: 'blur(8px)',
             opacity: 0,
-            transform: 'translateY(6px)',
-            animation: 'editorialBlurIn 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards',
-            animationDelay: `${index * delay}ms`,
-            willChange: 'filter, opacity, transform',
+            transform: 'translateY(3px)',
+            animation: 'editorialFadeIn 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            animationDelay: `${Math.min(index * delay, 300)}ms`,
+            willChange: 'opacity, transform',
           }}
         >
           {word}
@@ -69,14 +68,12 @@ export const BlurText: React.FC<BlurTextProps> = ({
         </span>
       ))}
       <style>{`
-        @keyframes editorialBlurIn {
+        @keyframes editorialFadeIn {
           0% {
-            filter: blur(8px);
             opacity: 0;
-            transform: translateY(6px);
+            transform: translateY(3px);
           }
           100% {
-            filter: blur(0px);
             opacity: 1;
             transform: translateY(0);
           }

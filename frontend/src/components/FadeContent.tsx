@@ -20,9 +20,9 @@ interface FadeContentProps {
 export const FadeContent: React.FC<FadeContentProps> = ({
   children,
   blur = false,
-  duration = 600,
+  duration = 500,
   delay = 0,
-  threshold = 0.1,
+  threshold = 0.01,
   className = '',
   style = {},
 }) => {
@@ -49,7 +49,7 @@ export const FadeContent: React.FC<FadeContentProps> = ({
     const currentElem = domRef.current;
     if (!currentElem) return;
 
-    // Native IntersectionObserver with single-trigger unobserve
+    // Native IntersectionObserver with pre-fetch margin
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -61,7 +61,7 @@ export const FadeContent: React.FC<FadeContentProps> = ({
       },
       {
         threshold,
-        rootMargin: '0px 0px -40px 0px',
+        rootMargin: '120px 0px 120px 0px',
       }
     );
 
