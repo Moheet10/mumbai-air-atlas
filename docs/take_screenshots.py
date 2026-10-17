@@ -51,16 +51,12 @@ def take_shots():
         print('Captured docs/screenshots/hero_night.png')
 
         # 3. Component screenshots (Night theme)
-        # Hide sticky header & top banner during individual component captures so they never obscure cards
+        # Make header static so it stays at page top and never overlaps scrolled sections
         driver.execute_script("""
             const header = document.querySelector('header');
-            if (header) header.style.display = 'none';
-            const banners = document.querySelectorAll('div');
-            banners.forEach(b => {
-                if (b.innerText && b.innerText.includes('SNAPSHOT:')) {
-                    b.style.display = 'none';
-                }
-            });
+            if (header) {
+                header.style.position = 'static';
+            }
         """)
         time.sleep(1)
 
