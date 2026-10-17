@@ -8,9 +8,10 @@ import { Thermometer, Droplets, Wind } from 'lucide-react';
 interface HeroAQIProps {
   data: CurrentConditionsResponse | null;
   loading: boolean;
+  theme?: 'light' | 'dark';
 }
 
-export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading }) => {
+export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading, theme = 'light' }) => {
   if (loading || !data) {
     return (
       <section style={{ padding: '64px 0 40px', borderBottom: '1px solid var(--rule)' }}>
@@ -52,19 +53,21 @@ export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading }) => {
         overflow: 'hidden',
       }}
     >
-      {/* Subtle Atmospheric Radial Aura */}
+      {/* Subtle Atmospheric Radial Aura: richer depth in Day mode, luminous glow in Night mode */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
           top: '-120px',
           right: '5%',
-          width: '560px',
-          height: '420px',
+          width: '580px',
+          height: '440px',
           borderRadius: '50%',
-          background: `radial-gradient(circle, ${category.colorHex} 0%, transparent 68%)`,
-          opacity: 0.12,
-          filter: 'blur(60px)',
+          background: theme === 'dark'
+            ? `radial-gradient(circle, ${category.colorHex} 0%, transparent 68%)`
+            : `radial-gradient(circle, ${category.colorHex} 0%, transparent 64%)`,
+          opacity: theme === 'dark' ? 0.25 : 0.22,
+          filter: theme === 'dark' ? 'blur(64px)' : 'blur(50px)',
           pointerEvents: 'none',
           zIndex: 0,
         }}
@@ -178,7 +181,9 @@ export const HeroAQI: React.FC<HeroAQIProps> = ({ data, loading }) => {
                     height: '12px',
                     borderRadius: '2px',
                     backgroundColor: category.colorHex,
-                    boxShadow: `0 0 10px ${category.colorHex}88`,
+                    boxShadow: theme === 'dark'
+                      ? `0 0 14px ${category.colorHex}, 0 0 24px ${category.colorHex}66`
+                      : `0 1px 4px rgba(27, 26, 23, 0.28), 0 0 10px ${category.colorHex}99`,
                   }}
                 />
                 <span

@@ -132,7 +132,7 @@ export const WindRoseWidget: React.FC<WindRoseWidgetProps> = ({
             <polygon
               points="23,38 20,23 26,23"
               fill="var(--ink)"
-              opacity="0.3"
+              opacity="0.45"
             />
             {/* Center Pivot Pin */}
             <circle cx="23" cy="23" r="2.5" fill="var(--paper)" stroke="var(--ink)" strokeWidth="1.5" />

@@ -146,11 +146,16 @@ export const App: React.FC = () => {
 
   return (
     <ClickSpark
-      sparkColor={theme === 'dark' ? '#E0B341' : '#D9772B'}
-      sparkCount={7}
-      sparkSize={11}
-      sparkRadius={26}
-      glow={0.3}
+      sparkColor={
+        theme === 'dark'
+          ? ['#FFF9C4', '#FFE082', '#FFD54F', '#FFFFFF']
+          : ['#8C2D04', '#B45309', '#1E1B18', '#78350F']
+      }
+      sparkCount={8}
+      sparkSize={theme === 'dark' ? 13 : 11}
+      sparkRadius={28}
+      sparkWidth={theme === 'dark' ? 2.2 : 2.0}
+      glow={theme === 'dark' ? 0.75 : 0.15}
       ring={true}
     >
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -233,7 +238,7 @@ export const App: React.FC = () => {
             windSpeedKmh={currentData?.weather.wind_speed_kmh}
             windDirectionDeg={currentData?.weather.wind_direction_deg}
           />
-          <HeroAQI data={currentData} loading={loading} />
+          <HeroAQI data={currentData} loading={loading} theme={theme} />
         </div>
 
         {/* 2. Main Asymmetrical Stage: Map & Station Detail */}
@@ -311,8 +316,10 @@ export const App: React.FC = () => {
                             width: '6px',
                             height: '6px',
                             borderRadius: '50%',
-                            backgroundColor: '#4C8C6B',
-                            boxShadow: '0 0 6px #4C8C6B',
+                            backgroundColor: theme === 'dark' ? '#6EE7B7' : '#265C3E',
+                            boxShadow: theme === 'dark'
+                              ? '0 0 8px rgba(110, 231, 183, 0.9), 0 0 16px rgba(110, 231, 183, 0.4)'
+                              : '0 0 6px rgba(38, 92, 62, 0.7), 0 1px 2px rgba(0, 0, 0, 0.25)',
                             display: 'inline-block',
                           }}
                         />
@@ -341,6 +348,7 @@ export const App: React.FC = () => {
                 {/* Surface Meteorology Summary using SpotlightCard */}
                 {currentData && (
                   <SpotlightCard
+                    theme={theme}
                     style={{
                       marginBottom: '20px',
                       padding: '16px 20px',
@@ -369,7 +377,7 @@ export const App: React.FC = () => {
                 )}
 
                 {/* Measured Pollutant Table inside SpotlightCard */}
-                <SpotlightCard style={{ padding: '16px 20px', backgroundColor: 'var(--paper-2)' }}>
+                <SpotlightCard theme={theme} style={{ padding: '16px 20px', backgroundColor: 'var(--paper-2)' }}>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-2)', marginBottom: '10px', letterSpacing: '0.04em' }}>
                     <span style={{ textTransform: 'uppercase' }}>SPECIATED POLLUTANT DENSITY</span> (µg/m³)
                   </div>

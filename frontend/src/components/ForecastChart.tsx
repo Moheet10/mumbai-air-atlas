@@ -263,8 +263,7 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
           {ribbonD && (
             <path
               d={ribbonD}
-              fill="var(--ink)"
-              fillOpacity="0.08"
+              fill="var(--band-fill)"
               stroke="none"
             />
           )}

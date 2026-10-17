@@ -2,13 +2,15 @@ import React, { useRef, useState, useEffect } from 'react';
 
 export interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement> {
   spotlightColor?: string;
+  theme?: 'light' | 'dark';
   className?: string;
   children?: React.ReactNode;
   style?: React.CSSProperties;
 }
 
 export const SpotlightCard: React.FC<SpotlightCardProps> = ({
-  spotlightColor = 'rgba(255, 255, 255, 0.08)',
+  spotlightColor,
+  theme = 'light',
   className = '',
   children,
   style = {},
@@ -17,6 +19,13 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   const cardRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState<number>(0);
+
+  // Calibrated spotlight glow: darkened warm burnish in Day mode, luminous radiant halo in Night mode
+  const activeSpotlight =
+    spotlightColor ||
+    (theme === 'dark'
+      ? 'rgba(255, 245, 220, 0.20)'
+      : 'rgba(130, 105, 75, 0.22)');
 
   useEffect(() => {
     const card = cardRef.current;
@@ -63,7 +72,7 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
           pointerEvents: 'none',
           opacity,
           transition: 'opacity 0.25s ease',
-          background: `radial-gradient(420px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 70%)`,
+          background: `radial-gradient(420px circle at ${position.x}px ${position.y}px, ${activeSpotlight}, transparent 70%)`,
           zIndex: 1,
         }}
       />

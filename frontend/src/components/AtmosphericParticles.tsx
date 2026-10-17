@@ -60,20 +60,21 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
     const baseVx = Math.sin(windRad) * windSpeedFactor;
     const baseVy = -Math.cos(windRad) * windSpeedFactor;
 
-    // Default particulate color
+    // Particulate color: Dark & distinct in Day mode, Luminous & radiant in Night mode
+    const isDark = theme === 'dark';
     const defaultParticleColor =
-      color || (theme === 'dark' ? 'rgba(237, 231, 218, 0.35)' : 'rgba(27, 26, 23, 0.22)');
+      color || (isDark ? 'rgba(255, 248, 230, 0.95)' : 'rgba(20, 18, 14, 0.85)');
 
-    // Generate particulate array
+    // Generate particulate array with boosted contrast and presence
     const particles: Particle[] = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       vx: baseVx + (Math.random() - 0.5) * 0.25,
       vy: baseVy + (Math.random() - 0.5) * 0.25,
-      size: 1 + Math.random() * 2.4, // tiny 1-3px particulate specks (PM2.5)
-      baseAlpha: 0.12 + Math.random() * 0.32,
-      alpha: 0.2,
-      pulseSpeed: 0.01 + Math.random() * 0.02,
+      size: isDark ? (1.2 + Math.random() * 2.6) : (1.4 + Math.random() * 2.8), // PM2.5 atmospheric specks
+      baseAlpha: isDark ? (0.45 + Math.random() * 0.45) : (0.40 + Math.random() * 0.45),
+      alpha: 0.5,
+      pulseSpeed: 0.012 + Math.random() * 0.02,
       pulsePhase: Math.random() * Math.PI * 2,
     }));
 
@@ -102,7 +103,7 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
           p.x += p.vx;
           p.y += p.vy;
           p.pulsePhase += p.pulseSpeed;
-          p.alpha = p.baseAlpha + Math.sin(p.pulsePhase) * 0.08;
+          p.alpha = p.baseAlpha + Math.sin(p.pulsePhase) * 0.12;
 
           // Mouse gentle repel
           const dx = p.x - mouseX;
@@ -122,12 +123,19 @@ export const AtmosphericParticles: React.FC<AtmosphericParticlesProps> = ({
         }
 
         ctx.fillStyle = defaultParticleColor;
-        ctx.globalAlpha = Math.max(0.04, Math.min(0.65, p.alpha));
+        ctx.globalAlpha = Math.max(0.15, Math.min(0.95, p.alpha));
+        if (isDark) {
+          ctx.shadowColor = 'rgba(255, 235, 175, 0.4)';
+          ctx.shadowBlur = 3;
+        } else {
+          ctx.shadowBlur = 0;
+        }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
       }
 
+      ctx.shadowBlur = 0;
       ctx.globalAlpha = 1.0;
       if (!reduceMotion) {
         animId = requestAnimationFrame(render);
