@@ -14,6 +14,7 @@ import type { CurrentConditionsResponse, ForecastResponse, Station } from './typ
 import { getWindCompass } from './lib/aqi';
 import { AtmosphericParticles } from './components/AtmosphericParticles';
 import { SpotlightCard } from './components/SpotlightCard';
+import { SplashScreen } from './components/SplashScreen';
 import './styles/design-tokens.css';
 
 const API_BASE = '';
@@ -144,6 +145,9 @@ export const App: React.FC = () => {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* Editorial Air Atlas Splash Screen */}
+      <SplashScreen isReady={!loading && currentData !== null} />
+
       {/* Persistent Snapshot Banner */}
       {isSnapshot && (
         <div

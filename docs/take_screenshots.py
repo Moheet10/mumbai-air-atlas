@@ -36,8 +36,11 @@ def take_shots():
         time.sleep(1)
         driver.execute_script("localStorage.setItem('mumbai-air-theme', 'light');")
         driver.refresh()
+        time.sleep(0.5)  # Capture splash screen during its active sequence
+        driver.save_screenshot('docs/screenshots/splash_screen.png')
+        print('Captured docs/screenshots/splash_screen.png')
         WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CLASS_NAME, 'data-num')))
-        time.sleep(2.5)  # Allow count-up and blur text animations to settle
+        time.sleep(2.5)  # Allow splash fadeout, count-up and blur text animations to settle
         
         # Save hero day
         driver.save_screenshot('docs/screenshots/hero_day.png')
