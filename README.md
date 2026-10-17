@@ -1,12 +1,13 @@
 # Mumbai Air Atlas
 
-> **The city's air, in motion.**  
-> A coastal meteorological instrument and physical particulate forecasting system tracking atmospheric dynamics across Greater Mumbai.
+Mumbai Air Atlas is a dashboard and forecast model for PM2.5 in Mumbai, built from OpenAQ monitor readings, CAMS model output and weather forecasts. It forecasts at +1, +6, +12, +24 and +48 hours and shows where it beats simple baselines and where it doesn't.
 
 [![Python: 3.11+](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
 [![TypeScript: 5.0+](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://typescriptlang.org)
 [![FastAPI: 0.110+](https://img.shields.io/badge/FastAPI-0.110+-teal.svg)](https://fastapi.tiangolo.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**Live demo:** [https://mumbai-air-atlas.vercel.app](https://mumbai-air-atlas.vercel.app)
 
 ![Mumbai Air Atlas Day and Night Edition Social Preview](docs/screenshots/social_preview_1280x640.png)
 
@@ -14,12 +15,12 @@
 
 ## Zero-Configuration Clone-and-Run
 
-Mumbai Air Atlas is completely self-contained. The repository includes a **frozen 90-day physical snapshot archive** (`backend/data/snapshot/`) and pre-trained station-target gradient-boosted models (`station_models.pkl`, 5.3 MB). **No API keys, accounts, or signups are required to clone and run.**
+Mumbai Air Atlas is completely self-contained. The repository includes a **frozen 90-day physical snapshot archive** (`backend/data/snapshot/`) and pre-trained station-target gradient-boosted models (`backend/data/station_models.pkl`, 5.3 MB). **No API keys, accounts, or signups are required to clone and run.**
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/your-username/mumbai-air-atlas.git
-cd "Weather Prediction"
+git clone https://github.com/Moheet10/mumbai-air-atlas.git
+cd mumbai-air-atlas
 
 # 2. Install dependencies
 pip install -r backend/requirements.txt
@@ -53,7 +54,7 @@ Mumbai Air Atlas is an open-source environmental instrument and meteorological d
 
 ### Chronological Topography (60-Day Diurnal Heatmap)
 ![60-Day Calendar Heatmap](docs/screenshots/calendar_heatmap.png)
-*Hour-of-day ($00\text{h}\dots 23\text{h}$ IST) by date matrix colored by official CPCB AQI breakpoints, revealing seasonal shifts and nighttime thermal inversion buildups.*
+*Hour-of-day ($00\text{h}\dots 23\text{h}$ IST) by date matrix colored by official CPCB AQI breakpoints, revealing seasonal shifts and diurnal pollution patterns.*
 
 ### Empirical Scorecard & Model Diagnostics
 ![Model Scorecard](docs/screenshots/scorecard.png)
@@ -63,7 +64,7 @@ Mumbai Air Atlas is an open-source environmental instrument and meteorological d
 
 ## 2. Visual Direction & Design Philosophy
 
-Mumbai Air Atlas rejects generic SaaS templates (dark neon glows, 3D tilt cards, gradient text) in favor of the aesthetic of **long-form data journalism meets a coastal field instrument** (see `DESIGN.md`):
+Mumbai Air Atlas rejects generic SaaS templates (dark neon glows, 3D tilt cards, gradient text) in favor of the aesthetic of **long-form data journalism** (see `DESIGN.md`):
 
 - **Dual Edition Surfaces:**
   - **Day Edition:** Warm newsprint tones (`--paper: #F4EFE6`, `--paper-2: #EBE4D6`, `--ink: #1B1A17`, `--rule: #D9D2C3`).
@@ -72,7 +73,7 @@ Mumbai Air Atlas rejects generic SaaS templates (dark neon glows, 3D tilt cards,
   - **Newsreader** (serif) for headlines, narrative analysis, and diurnal context.
   - **IBM Plex Mono** for coordinates, sensor telemetry, sparklines, and tabular metrics.
 - **Cartography:** High-performance vector tile rendering via MapLibre GL with dedicated web worker bundling.
-- **Scientific Honesty Above All:** Zero border-radius, zero gradients, hairlines only. The UI strictly discloses data provenance, separates physical station targets from model grids, and reports where the model loses.
+- **Honest Reporting:** Zero border-radius, zero gradients, hairlines only. The UI strictly discloses data provenance, separates physical station targets from model grids, and reports where the model loses.
 
 ---
 
@@ -80,26 +81,26 @@ Mumbai Air Atlas rejects generic SaaS templates (dark neon glows, 3D tilt cards,
 
 ```mermaid
 flowchart TD
-    subgraph Data Sources
-        OA[OpenAQ v3 Ground Sensor API\nPhysical CAAQMS Stations]
-        OM_AQ[Open-Meteo Air Quality\nCopernicus CAMS 0.4° Atmospheric Grid]
-        OM_W[Open-Meteo Weather\nECMWF IFS / GFS Surface Meteorology]
-        SNAP[Committed 90-Day Snapshot\nbackend/data/snapshot/snapshot.db]
+    subgraph DataSources["Data Sources"]
+        OA["OpenAQ v3 Ground Sensor API<br/>Physical CAAQMS Stations"]
+        OM_AQ["Open-Meteo Air Quality<br/>Copernicus CAMS 0.4° Atmospheric Grid"]
+        OM_W["Open-Meteo Weather<br/>ECMWF IFS / GFS Surface Meteorology"]
+        SNAP["Committed 90-Day Snapshot<br/>backend/data/snapshot/snapshot.db"]
     end
 
-    subgraph Backend Pipeline [FastAPI Backend]
-        DATA[Data Service & Mode Resolver\nbackend/app/services/data_service.py]
-        MODEL[Station-Target LightGBM Regressors\nbackend/data/station_models.pkl]
-        API[FastAPI REST Service\nbackend/app/main.py]
+    subgraph BackendPipeline["FastAPI Backend"]
+        DATA["Data Service & Mode Resolver<br/>backend/app/services/data_service.py"]
+        MODEL["Station-Target LightGBM Regressors<br/>backend/data/station_models.pkl"]
+        API["FastAPI REST Service<br/>backend/app/main.py"]
     end
 
-    subgraph Frontend [React + Vite + TypeScript]
-        HERO[Hero AQI with CountUp]
-        MAP[MapLibre GL Vector Basemap]
-        SPARK[Station Directory with 7-Day Sparklines]
-        CHART[5-Point Discrete Forecast Chart with Interval Bars]
-        HEAT[60-Day Diurnal Calendar Heatmap]
-        SCORE[Scorecard: Forward Folds & Spatial Holdout]
+    subgraph FrontendApp["React + Vite + TypeScript"]
+        HERO["Hero AQI with CountUp"]
+        MAP["MapLibre GL Vector Basemap"]
+        SPARK["Station Directory with 7-Day Sparklines"]
+        CHART["5-Point Discrete Forecast Chart with Interval Bars"]
+        HEAT["60-Day Diurnal Calendar Heatmap"]
+        SCORE["Scorecard: Forward Folds & Spatial Holdout"]
     end
 
     OA --> DATA
@@ -138,6 +139,8 @@ The station forecasting pipeline is evaluated on physical station targets across
 | **$+48\text{h}$** | 119,698 | **11.55 $\mu\text{g/m}^3$** | 14.10 | 16.27 | 14.82 | **76.0%** |
 | *↳ Top-10% Tail* | 12,030 | *38.82 $\mu\text{g/m}^3$* | *37.92* | *43.90* | *35.82* | *50.7%* |
 
+*Note on baselines:* The diurnal blend uses climatology fitted on the training window, which makes it a weak baseline when tested in other seasons (e.g. 7.74 vs 5.37 $\mu\text{g/m}^3$ at +1h).
+
 ---
 
 ### Table 2: Clean Spatial Holdout ($N = 7,886$ hours, Unseen Stations)
@@ -154,7 +157,7 @@ The station forecasting pipeline is evaluated on physical station targets across
 ---
 
 ### Feature Ablation: Does Weather and CAMS Matter?
-- **Weather Features:** Removing surface weather inputs costs approximately $0.3\dots 0.7\,\mu\text{g/m}^3$ MAE (~5% relative). Weather awareness provides steady physical regularization across land-sea breeze inversions, though persistence and local lags remain the primary driver at short lead times.
+- **Weather Features:** Removing surface weather inputs costs approximately $0.3\dots 0.7\,\mu\text{g/m}^3$ MAE (~5% relative). Weather awareness provides modest physical regularization (~5% relative error reduction), though persistence and local lags remain the primary driver at short lead times.
 - **Future CAMS Dispersion ($c_{t+h}$):** Dropping future CAMS changes nowcast MAE ($+1\text{h}\dots +6\text{h}$) by $\le 0.07\,\mu\text{g/m}^3$. At extended horizons ($+24\text{h}\dots +48\text{h}$), dropping CAMS increases MAE by $+0.9\dots 1.8\,\mu\text{g/m}^3$, confirming synoptic guidance adds value once autocorrelation fades.
 
 ---
@@ -163,7 +166,7 @@ The station forecasting pipeline is evaluated on physical station targets across
 
 > [!IMPORTANT]
 > 1. **Single Continuous Winter of Station Telemetry:** Due to an external data gap in OpenAQ between November 1, 2022 and February 17, 2025 where zero CPCB/MPCB records exist across Mumbai, exactly **ONE continuous winter (Winter 2025–2026)** is present in modern station records. Multi-winter station-target validation cannot be asserted until additional seasons elapse.
-> 2. **Top-10% Tail Degradation & Under-Coverage:** During extreme episodic pollution events (the top 10% highest pollution hours), model MAE increases significantly ($32\dots 39\,\mu\text{g/m}^3$ pooled), and empirical 80% interval coverage drops to $51\dots 58\%$. Tree ensembles cannot extrapolate beyond training leaves, leading to conservative predictions during unprecedented spikes.
+> 2. **Top-10% Tail Degradation & Under-Coverage:** In the top 10% highest pollution hours (Table 1), the model beats the best baseline only at +1h (17.83 vs 18.36 $\mu\text{g/m}^3$ persistence). At +6h and +12h, CAMS+bias is better (32.03 vs 32.25 and 33.55 vs 35.77 $\mu\text{g/m}^3$). At +24h, persistence is better (34.29 vs 35.22 $\mu\text{g/m}^3$). At +48h, both persistence (37.92) and CAMS+bias (35.82) beat the model (38.82 $\mu\text{g/m}^3$). Empirical 80% interval coverage drops to $51\dots 58\%$ in this tail. Tree ensembles likely struggle because they cannot predict values outside the range seen in training leaves during unprecedented spikes.
 > 3. **Input Distribution Mismatch (Reanalysis vs Operational Forecasts):** During historical model training and evaluation, CAMS concentrations and weather covariates are drawn from reanalysis archives. At live inference, inputs are supplied by forward-running operational NWP forecasts (Open-Meteo), which inherently carry higher variance and forecast uncertainty.
 > 4. **Instantaneous AQI Sub-Index:** The displayed Air Quality Index is an **instantaneous PM2.5 sub-index** using official CPCB breakpoints calculated on hourly concentrations. Official statutory CPCB AQI mandates a 24-hour time-weighted average.
 > 5. **Unvalidated Physical Sensors:** OpenAQ measurements reflect raw telemetered CAAQMS readings from statutory agencies (CPCB/MPCB/IITM) without independent laboratory cross-calibration, drift corrections, or zero-audits.
@@ -187,4 +190,4 @@ python docs/take_screenshots.py
 
 ## License
 
-MIT License. Designed and developed with scientific rigor for Greater Mumbai.
+Released under the [MIT License](LICENSE).
