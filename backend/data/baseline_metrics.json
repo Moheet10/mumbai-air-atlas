@@ -2,19 +2,19 @@
   "model_name": "Naive Persistence Baseline",
   "description": "Predicts current value equals value from 24 hours prior (diurnal cycle)",
   "split_method": "Chronological (80% train, 20% held-out test)",
-  "total_records": 336,
-  "test_records": 68,
-  "test_period_start": "2026-10-11T04:00",
-  "test_period_end": "2026-10-13T23:00",
+  "total_records": 17736,
+  "test_records": 3548,
+  "test_period_start": "2026-05-16T04:00",
+  "test_period_end": "2026-10-10T23:00",
   "target_variable": "pm2_5 (\u00b5g/m\u00b3)",
   "baseline_24h": {
-    "mae": 10.02,
-    "rmse": 12.01,
+    "mae": 4.1,
+    "rmse": 6.69,
     "unit": "\u00b5g/m\u00b3"
   },
   "baseline_1h": {
-    "mae": 3.6,
-    "rmse": 4.44,
+    "mae": 1.1,
+    "rmse": 2.03,
     "unit": "\u00b5g/m\u00b3"
   }
 }
