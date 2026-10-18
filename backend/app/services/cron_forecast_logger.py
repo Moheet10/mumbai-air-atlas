@@ -31,11 +31,25 @@ async def run_scheduled_logging():
     print(f"Rounded issue_time: {issue_time_rounded}")
 
     # 2. Get list of active stations
-    conn = sqlite3.connect(DB_PATH)
-    cur = conn.cursor()
-    cur.execute("SELECT DISTINCT station_id FROM station_hourly WHERE timestamp_utc >= '2025-02-01' ORDER BY station_id")
-    station_ids = [row[0] for row in cur.fetchall()]
-    conn.close()
+    station_ids = []
+    if os.path.exists(DB_PATH):
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cur = conn.cursor()
+            cur.execute("SELECT DISTINCT station_id FROM station_hourly WHERE timestamp_utc >= '2025-02-01' ORDER BY station_id")
+            station_ids = [row[0] for row in cur.fetchall()]
+            conn.close()
+        except Exception as e:
+            print(f"Database station query bypassed: {e}")
+
+    # Fallback to stations provided by DataService (snapshot or live OpenAQ)
+    if not station_ids:
+        try:
+            st_data = await data_service.get_stations()
+            stations_list = st_data.get("stations", [])
+            station_ids = [str(s.id if hasattr(s, "id") else s["id"]) for s in stations_list]
+        except Exception as e:
+            print(f"DataService fallback warning: {e}")
 
     # Also log regional grid
     all_targets = ["mumbai_grid"] + station_ids
